@@ -1,0 +1,145 @@
+<div class="main contents">
+    <div class="container">
+        <h1>13.lambda作成</h1>
+
+        <h2>作業手順</h2>
+        <ol>
+            <li>AWSマネジメントコンソールから「IAM」をクリックする</li>
+            <img src="/13-1_lambda作成/13-1_lambda作成①.png">
+            <li>ナビゲーションペインから、「ポリシー」をクリックする</li>
+            <img src="/13-1_lambda作成/13-1_lambda作成②.png">
+            <li>「ポリシーの作成」をクリックする</li>
+            <img src="/13-1_lambda作成/13-1_lambda作成③.jpeg">
+            <li>「ポリシーの作成」から「JSON」タブをクリックする</li>
+            <img src="/13-1_lambda作成/13-1_lambda作成④.png">
+            <li>JSONに以下を貼り付け、右下の「次のステップ：タグ」をクリックする</li>
+            <pre>
+            {
+                "Version": "2012-10-17",
+                "Statement": [
+                    {
+                        "Effect": "Allow",
+                        "Action": [
+                            "logs:CreateLogGroup",
+                            "logs:CreateLogStream",
+                            "logs:PutLogEvents"
+                        ],
+                        "Resource": "arn:aws:logs:*:*:*"
+                    },
+                    {
+                        "Effect": "Allow",
+                        "Action": [
+                            "ec2:Start*",
+                            "ec2:Stop*",
+                            "ec2:Describe*"
+                        ],
+                        "Resource": "*"
+                    }
+                ]
+            }
+            </pre>
+            <img src="/13-1_lambda作成/13-1_lambda作成⑤.png">
+            <li>右下の「次のステップ：確認」をクリックする</li>
+            <img src="/13-1_lambda作成/13-1_lambda作成⑥.png">
+            <li>名前に「Start-Stop-Policy」を入力し、右下の「ポリシーの作成」をクリックする</li>
+            <img src="/13-1_lambda作成/13-1_lambda作成⑦.png">
+            <li>「Start-Stop-Policy」が作成されたことを確認後、「ロール」をクリックする</li>
+            <img src="/13-1_lambda作成/13-1_lambda作成⑧.jpeg">
+            <li>「ロールの作成」をクリックする</li>
+            <img src="/13-1_lambda作成/13-1_lambda作成⑨.png">
+            <li>「ロールの作成」で「Lambda」を選択し、右下の「次のステップ：アクセス権限」を選択</li>
+            <img src="/13-1_lambda作成/13-1_lambda作成10.png">
+            <li>「Start-Stop-Policy」を選択し、右下の「次のステップ：タグ」をクリックする</li>
+            <img src="/13-1_lambda作成/13-1_lambda作成11.png">
+            <li>「タグの追加」は特に設定せず、右下の「次のステップ：確認」をクリックする</li>
+            <img src="/13-1_lambda作成/13-1_lambda作成12.png">
+            <li>ロール名に「Start-Stop-Role」を入力し、右下の「ロールの作成」をクリックする</li>
+            <img src="/13-1_lambda作成/13-1_lambda作成13-1.png">
+            <li>「Start-Stop-Role」が作成されていることを確認する</li>
+            <li>AWSマネジメントコンソールから「Lambda」をクリックする</li>
+            <img src="/13-1_lambda作成/13-1_lambda作成14.png">
+            <li>右上の「関数の作成」をクリックする</li>
+            <img src="/13-1_lambda作成/13-1_lambda作成15.png">
+            <li>「関数の作成」で以下を設定し、右下の「関数の作成」をクリックする</li>
+
+            <table border="1" style="border-collapse: collapse">
+                <tr>
+                    <th>項目</th>
+                    <th>設定値</th>
+                </tr>
+                <tr>
+                    <td>関数名</td>
+                    <td>EC2-Stop</td>
+                </tr>
+                <tr>
+                    <td>ランタイム</td>
+                    <td>Python3.8</td>
+                </tr>
+                <tr>
+                    <td>既存のロール</td>
+                    <td>Start-Stop-Role</td>
+                </tr>
+            </table>
+            <img src="/13-1_lambda作成/13-1_lambda作成16-1.png">
+            <img src="/13-1_lambda作成/13-1_lambda作成16-2.png">
+            <li>AWSマネジメントコンソール上から「EC2」をクリックする</li>
+            <img src="/13-1_lambda作成/13-1_lambda作成17.png">
+            <li>「インスタンスID」をコピーする</li>
+            <img src="/13-1_lambda作成/13-1_lambda作成18.png">
+            <li>AWSマネジメントコンソール上から「Lambda」をクリックする</li>
+            <img src="/13-1_lambda作成/13-1_lambda作成19.png">
+            <li>前手順で作成した関数「EC2-Stop」をクリックする</li>
+            <img src="/13-1_lambda作成/13-1_lambda作成20.png">
+            <li>「コード」タブへ移動後、以下コードを入力し、「Deploy」をクリックする</li>
+            <img src="/13-1_lambda作成/13-1_lambda作成21.png">
+
+            <pre>
+            import boto3
+            region = ‘ap-northeast-1'
+            instances = ['i-XXXXXXXXXX']
+            ec2 = boto3.client('ec2', region_name=region)
+            def lambda_handler(event, context):
+                ec2.stop_instances(InstanceIds=instances)
+                print('stopped your instances: ' + str(instances))
+            </pre>
+            <li>※3行目：インスタンスIDを自身で作成した「インスタンスID」に書き換える</li>
+            <img src="/13-1_lambda作成/13-1_lambda作成22.png">
+            <li>「Changes deployed」が表示されることを確認する</li>
+            <img src="/13-1_lambda作成/13-1_lambda作成23.png">
+            <li>AWSマネジメントコンソール上から「CloudWatch」をクリックする</li>
+            <img src="/13-1_lambda作成/13-1_lambda作成24.png">
+            <li>ナビゲーションペインから「ルール」を選択し、「ルールの作成」をクリックする</li>
+            <img src="/13-1_lambda作成/13-1_lambda作成25.png">
+            <li>以下の通り設定後、右下の「設定の詳細」をクリックする</li>
+            <pre>
+            ・スケジュール
+            ・次の一定の速度：１日
+            ・Cron式：日本時間 -9で設定が必要
+            （現在時刻が14:20分の場合）0 6 * * ? *    ※15:00にEC2停止する
+            （現在時刻が15:40分の場合）0 7 * * ? * 　※16:00にEC2停止する
+            （現在時刻が20:40分の場合）0 12 * * ? * 　※21:00にEC2停止する
+            ・ターゲット：Lambda関数
+            ・関数：EC2-Stop
+            </pre>
+            <img src="/13-1_lambda作成/13-1_lambda作成26.png">
+            <li>名前に「EC2-STop-Rule」を入力し、右下の「ルールの作成」をクリックする</li>
+            <img src="/13-1_lambda作成/13-1_lambda作成27.png">
+            <li>正常に作成されたことを確認する</li>
+            <h3>EC2停止時刻の確認手順</h3>
+            <li>AWSマネジメントコンソール上から「EC2」を開く</li>
+            <img src="/13-1_lambda作成/13-1_lambda作成28.png">
+            <li>「インスタンス（すべての状態）」をクリックする</li>
+            <img src="/13-1_lambda作成/13-1_lambda作成29.png">
+            <li>EC2インスタンスが「停止済み」であることを確認する</li>
+            <img src="/13-1_lambda作成/13-1_lambda作成30.png">
+        </ol>
+
+        <h2>解説</h2>
+        <p>Lambda：サーバーレスコンピューティングサービス</p>
+        <p>サーバーレス：予め用意されたサーバー実行環境でプログラムを実行するサービス</p>
+        <p>CloudWatch Events：AWSリソースの変更を実行するサービス</p>
+    </div>
+</div>
+
+
+

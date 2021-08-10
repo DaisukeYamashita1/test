@@ -1,0 +1,41 @@
+<div class="main users-new">
+    <div class="container">
+        <div class="form-heading">新規ユーザー登録</div>
+        <div class="form users-form">
+            <div class="form-body">
+
+                <% @user.errors.full_messages.each do |message| %>
+                    <div class="form-error">
+                        <%= message %>
+                    </div>
+                <% end %>
+
+                <%= form_tag("/users/create") do %>
+                <!--form_with(名前月ルーティング)-->
+                    <p>メールアドレス</p>
+                    <input name="email" value="<%= @user.email %>">
+                    <p>パスワード</p>
+                    <input type="password" name="password" value="<%= @user.password %>">
+                    <p>利用規約</p>
+                    <div class="tos">
+<p>
+第1条（定義）
+本サービスまたは「AWS教育プラットフォーム」とは、本コースにおいて当社から提供されるすべてのサービスのことをいい、インターネット上の求人やニュース情報の配信、さらにはプログラミング学習や就職・転職の支援に関連するサービスの総称を指すものとします。
+登録申請者とは、当社の本コースに申込を行ったすべての個人を指します。
+ユーザーとは、前項の登録申請者のうち、当社が登録を許諾し、登録が完了して本サービスを利用中の個人を指します。
+メンターとは、登録申請者またはユーザーに対して、転職・就職、IT技術および当社サービスに関わることの指導を行う全ての当社従業員（業務委託を含む）を指します。
+</p>
+                    </div>
+                    <div class="agreement-check">
+                        <div class="agreement-checkbox">
+                            <input type="checkbox" name="agreement" value="ok">
+                        </div><p>私は利用規約に同意しました</p>
+                    </div>
+                    <br>
+                    <input type="submit" value="新規登録">
+                    <% end %>
+
+            </div>
+        </div>
+    </div>
+</div>

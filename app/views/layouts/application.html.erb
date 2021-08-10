@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AWS教育プラットフォーム</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+    <header>
+
+      <div class="header-logo">
+        <% if @current_user %>
+          <%= link_to("AWS教育プラットフォーム", "/") %>
+        <% else %>
+          <%= link_to("AWS教育プラットフォーム", "/") %>
+        <% end %>
+      </div>
+
+      <ul class="header-menus">
+
+        <% if @current_user %>
+        <!--名前つきルーティング-->
+          <li><%= link_to(@current_user.email, "/users/#{@current_user.id}") %></li>
+          <li><%= link_to("ログアウト", "/logout",{method: "post"}) %></li>
+          <li><%= link_to("運営会社", "https://strategy-jp.com/") %></li>
+        <% else %>
+          <li><%= link_to("運営会社", "https://strategy-jp.com/") %></li>
+          <li><%= link_to("新規登録", "/signup") %></li>
+          <li><%= link_to("ログイン", "/login") %></li>
+        <% end %>
+      </ul>
+
+    </header>
+
+    <% if flash[:notice] %>
+      <div class="flash">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+
+    <%= yield %>
+
+  </body>
+</html>

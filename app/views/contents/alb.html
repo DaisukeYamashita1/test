@@ -1,0 +1,93 @@
+<div class="main contents">
+    <div class="container">
+        <h1>9.ALBの作成</h1>
+
+        <h2>作業手順</h2>
+        <ol>
+            <li>AWSマネジメントコンソール上で、「EC2」を開く</li>
+                <img src="/9-1_ALB作成/9-1_ALB作成①.png">
+            <li>「ターゲットグループ」を選択し、「ターゲットグループの作成」をクリックする</li>
+                <img src="/9-1_ALB作成/9-1_ALB作成②.png">
+            <li>「ターゲットグループの作成」で以下を設定し、右下の「作成」をクリックする</li>
+
+                <table border="1" style="border-collapse: collapse">
+                    <tr>
+                        <th>項目</th>
+                        <th>設定値</th>
+                    </tr>
+                    <tr>
+                        <td>ターゲットグループ名</td>
+                        <td>wordpress-target-group</td>
+                    </tr>
+                    <tr>
+                        <td>VPC</td>
+                        <td>test-VPC</td>
+                    </tr>
+                </table>
+                <img src="/9-1_ALB作成/9-1_ALB作成③.png">
+            <li>「アクション」から「インスタンス/ip ターゲットの登録と登録解除」</li>
+                <img src="/9-1_ALB作成/9-1_ALB作成④-1.png">
+            <li>「testEC2」を選択後、「登録済に追加」をクリックし、右下の「保存」をクリックする</li>
+                <img src="/9-1_ALB作成/9-1_ALB作成④-2.png">
+
+            <li>「ロードバランサー」を選択し、「ロードバランサーの作成」をクリックする</li>
+                <img src="/9-1_ALB作成/9-1_ALB作成④-3.png">
+                
+            <li>「ロードバランサーの種類の選択」で「Application Load Balancer」欄の「作成」を選択</li>
+                <img src="/9-1_ALB作成/9-1_ALB作成⑤.png">
+            <li>「ロードバランサーの設定」で以下を設定する</li>
+
+            <table border="1" style="border-collapse: collapse">
+                <tr>
+                    <th>項目</th>
+                    <th>設定値</th>
+                </tr>
+                <tr>
+                    <td>名前</td>
+                    <td>wordpress-ALB</td>
+                </tr>
+                <tr>
+                    <td>VPC</td>
+                    <td>test-VPC</td>
+                </tr>
+                <tr>
+                    <td>アベイラビリティーゾーン</td>
+                    <td>ap-northeast-1a ap-northeast-1c</td>
+                </tr>
+            </table>
+            <li>PublicSubnetを選択</li>
+                <img src="/9-1_ALB作成/9-1_ALB作成⑥-1.png">
+                <img src="/9-1_ALB作成/9-1_ALB作成⑥-2.png">
+
+            <li>「セキュリティ設定の構成」で右下の「セキュリティグループの設定」をクリックする</li>
+                <img src="/9-1_ALB作成/9-1_ALB作成⑦.png">
+            <li>「セキュリティグループの設定」で「SGforALB」を設定し、「ルーティングの設定」を選択</li>
+                <img src="/9-1_ALB作成/9-1_ALB作成⑧.png">
+            <li>「ルーティングの設定」で以下を設定し、右下の「ターゲットの登録」をクリックする</li>
+                <p>名前：wordpress-target-group</p>
+                <img src="/9-1_ALB作成/9-1_ALB作成⑨.png">
+            <li>「登録済みターゲット」を確認後、「次の手順：確認」をクリックする</li>
+                <img src="/9-1_ALB作成/9-1_ALB作成10.png">
+            <li>「手順6: 確認」で、設定を一通り確認後、右下の「確認」をクリックする</li>
+                <img src="/9-1_ALB作成/9-1_ALB作成11.png">
+            <li>ロードバランサーが正常に作成されていることを確認後、右下の「閉じる」を選択する</li>
+                <img src="/9-1_ALB作成/9-1_ALB作成12.png">
+            <li>「ロードバランサー」> 「説明」タブから「DNS名」をコピーする</li>
+                <img src="/9-1_ALB作成/9-1_ALB作成13.png">
+            <li>ブラウザ上からALBのDNS名にアクセスし、以下画面が表示されることを確認する</li>
+                <img src="/9-1_ALB作成/9-1_ALB作成14.png">
+        </ol>
+
+        <h2>解説</h2>
+            <p>ロードバランサー：アルゴリズムによってWebサイトへのアクセスを振り分ける機能</p>
+            <p>NLB：レイヤー4（TCP）に対応したロードバランサー</p>
+            <p>ALB：レイヤー7（HTTP, HTTPS）に対応したロードバランサー</p>
+            <p>CLB：レイヤー4（TCP）, レイヤー7（HTTP, HTTPS）に対応したロードバランサー</p>
+            <p>ターゲットグループ：ロードバランサーによって、トラフィックをルーティングする対象</p>
+            <p>ヘルスチェック：ロードバランサーがサーバーの稼働状況をチェックすること</p>
+    </div>
+</div>
+
+・解説
+
+

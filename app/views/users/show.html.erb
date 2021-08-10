@@ -1,0 +1,13 @@
+<div class="main user-show">
+    <div class="container">
+        <div class="user">
+        <% if @user.id == @current_user.id %>
+            <h1>Myページ</h1>
+            <h2><%= @user.email %></h2>
+            <%= link_to("パスワードを変更", "/users/#{@user.id}/edit") %>
+        <% else %>
+            <h1>草www</h1>
+        <% end %>
+        </div>
+    </div>
+</div>
