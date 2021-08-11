@@ -6,9 +6,9 @@
         <h3>VPC,Subnet,RouteTable,InternetGatewayの作成</h3>
         <ol>
             <li>AWSマネジメントコンソール上から、「CloudFormation」を開く</li>
-            <img src="/15-1_CloudFormation/15-1_CloudFormation①.png">
+            <img src="/18_CFn/CFn01.png">
             <li>「スタックの作成」をクリックする</li>
-            <img src="/15-1_CloudFormation/15-1_CloudFormation②.png">
+            <img src="/18_CFn/CFn02.png">
             <li>ローカルPCのテキストエディタにて、CloudFormationテンプレートを作成する</li>
             <p>テンプレート名：VPC.yml</p>
 
@@ -174,37 +174,37 @@
             <li>・テンプレートの準備完了</li>
             <li>・テンプレートのファイルアップロード</li>
             <li>・ファイルの選択：「VPC.yml」を選択</li>
-            <img src="/15-1_CloudFormation/15-1_CloudFormation③.png">
+            <img src="/18_CFn/CFn03.png">
             <li>スタックの名前を「StackForVPC」として、右下の「次へ」をクリックする</li>
-            <img src="/15-1_CloudFormation/15-1_CloudFormation④-1.png">
-            <img src="/15-1_CloudFormation/15-1_CloudFormation④-2.png">
+            <img src="/18_CFn/CFn04.png">
+            <img src="/18_CFn/CFn05.png">
             <li>「スタックオプションの設定」にて、デフォルト設定のまま右下の「次へ」をクリックする</li>
-            <img src="/15-1_CloudFormation/15-1_CloudFormation⑤-1.png">
-            <img src="/15-1_CloudFormation/15-1_CloudFormation⑤-2.png">
+            <img src="/18_CFn/CFn06.png">
+            <img src="/18_CFn/CFn07.png">
             <li>設定内容を確認後、右下の「スタックの作成」をクリックする</li>
-            <img src="/15-1_CloudFormation/15-1_CloudFormation⑥-1.png">
-            <img src="/15-1_CloudFormation/15-1_CloudFormation⑥-2.png">
-            <img src="/15-1_CloudFormation/15-1_CloudFormation⑥-3.png">
-            <img src="/15-1_CloudFormation/15-1_CloudFormation⑥-4.png">
+            <img src="/18_CFn/CFn08.png">
+            <img src="/18_CFn/CFn09.png">
+            <img src="/18_CFn/CFn10.png">
+            <img src="/18_CFn/CFn11.png">
             <li>作成した「StackForVPC」のステータスが「CREATE_IN_PROGRESS」であることを確認</li>
-            <img src="/15-1_CloudFormation/15-1_CloudFormation⑦.png">
+            <img src="/18_CFn/CFn12.png">
             <li>ナビゲーションペインから「スタック」を選択し、「CREATE_COMPLETE」を確認する</li>
-            <img src="/15-1_CloudFormation/15-1_CloudFormation⑧.png">
+            <img src="/18_CFn/CFn13.png">
             <li>AWSマネジメントコンソールから、「VPC」をクリックする</li>
-            <img src="/15-1_CloudFormation/15-1_CloudFormation⑨.png">
+            <img src="/18_CFn/CFn14.png">
             <li>ナビゲーションペインから「VPC」を選択し、VPCが作成されていることを確認する</li>
-            <img src="/15-1_CloudFormation/15-1_CloudFormation10.png">
+            <img src="/18_CFn/CFn15.png">
             <li>ナビゲーションペインから「サブネット」を選択し、サブネットが作成されていることを確認</li>
-            <img src="/15-1_CloudFormation/15-1_CloudFormation11.png">
+            <img src="/18_CFn/CFn16.png">
             <li>※ CloudFormationスタック作成後の構成図</li>
         </ol>
 
         <h3>SecurityGroupの作成</h3>
         <ol>
             <li>AWSマネジメントコンソールから、「CloudFormation」をクリックする</li>
-            <img src="/15-1_CloudFormation/15-1_CloudFormation12.png">
+            <img src="/18_CFn/CFn17.png">
             <li>右上の「スタックの作成」から「新しいリソースを使用（標準）」をクリックする</li>
-            <img src="/15-1_CloudFormation/15-1_CloudFormation13.png">
+            <img src="/18_CFn/CFn18.png">
             <li>※CloudFormationテンプレートを作成する</li>
             <li>テンプレート名：SecurityGroup.yml</li>
 
@@ -273,28 +273,28 @@ Outputs:
             <li>・テンプレートの準備完了</li>
             <li>・テンプレートのファイルアップロード</li>
             <li>・ファイルの選択：「SecurityGroup.yml」を選択</li>
-            <img src="/15-1_CloudFormation/15-1_CloudFormation14.png">
+            <img src="/18_CFn/CFn19.png">
             <li>スタック名に「StackForSecurityGroup」を入力し、右下の「次へ」をクリックする</li>
-            <img src="/15-1_CloudFormation/15-1_CloudFormation15.png">
+            <img src="/18_CFn/CFn20.png">
             <li>「スタックオプションの設定」にて、デフォルト設定のまま右下の「次へ」をクリックする</li>
-            <img src="/15-1_CloudFormation/15-1_CloudFormation16-1.png">
-            <img src="/15-1_CloudFormation/15-1_CloudFormation16-2.png">
+            <img src="/18_CFn/CFn21.png">
+            <img src="/18_CFn/CFn22.png">
             <li>設定内容を確認後、右下の「スタックの作成」をクリックする</li>
-            <img src="/15-1_CloudFormation/15-1_CloudFormation17-1.png">
-            <img src="/15-1_CloudFormation/15-1_CloudFormation17-2.png">
-            <img src="/15-1_CloudFormation/15-1_CloudFormation17-3.png">
-            <img src="/15-1_CloudFormation/15-1_CloudFormation17-4.png">
+            <img src="/18_CFn/CFn23.png">
+            <img src="/18_CFn/CFn24.png">
+            <img src="/18_CFn/CFn25.png">
+            <img src="/18_CFn/CFn26.png">
             <li>ステータスが「CREATE_IN_PROGRESS」であることを確認する</li>
-            <img src="/15-1_CloudFormation/15-1_CloudFormation18.png">
+            <img src="/18_CFn/CFn27.png">
             <li>ナビゲーションペインから「スタック」を選択し、「CREATE_COMPLETE」を確認する</li>
-            <img src="/15-1_CloudFormation/15-1_CloudFormation19.png">
+            <img src="/18_CFn/CFn28.png">
             <li>※ CloudFormationスタック作成後の構成図</li>
         </ol>
 
         <h3>EC2の作成</h3>
         <ol>
             <li>「スタックの作成」から「新しいリソースを使用（標準）」をクリックする</li>
-            <img src="/15-1_CloudFormation/15-1_CloudFormation20.png">
+            <img src="/18_CFn/CFn29.png">
             <li>※CloudFormationテンプレートを作成する</li>
             <li>テンプレート名：EC2.yml</li>
             <pre>
@@ -346,17 +346,17 @@ Outputs:
             <li>・テンプレートの準備完了</li>
             <li>・テンプレートのファイルアップロード</li>
             <li>・ファイルの選択：「EC2.yml」を選択</li>
-            <img src="/15-1_CloudFormation/15-1_CloudFormation21.png">
+            <img src="/18_CFn/CFn30.png">
             <li>スタック名に「StackForEC2」を入力後、右下の「次へ」をクリックする</li>
-            <img src="/15-1_CloudFormation/15-1_CloudFormation22.png">
+            <img src="/18_CFn/CFn31.png">
             <li>「スタックオプションの設定」にて、デフォルト設定のまま右下の「次へ」をクリックする</li>
-            <img src="/15-1_CloudFormation/15-1_CloudFormation23-1.png">
-            <img src="/15-1_CloudFormation/15-1_CloudFormation23-2.png">
+            <img src="/18_CFn/CFn32.png">
+            <img src="/18_CFn/CFn33.png">
             <li>設定内容を確認後、右下の「スタックの作成」をクリックする</li>
-            <img src="/15-1_CloudFormation/15-1_CloudFormation24-1.png">
-            <img src="/15-1_CloudFormation/15-1_CloudFormation24-2.png">
-            <img src="/15-1_CloudFormation/15-1_CloudFormation24-3.png">
-            <img src="/15-1_CloudFormation/15-1_CloudFormation24-4.png">
+            <img src="/18_CFn/CFn34.png">
+            <img src="/18_CFn/CFn35.png">
+            <img src="/18_CFn/CFn36.png">
+            <img src="/18_CFn/CFn37.png">
             <li>ステータスが「CREATE_IN_PROGRESS」であることを確認する</li>
             <li>ステータスが「CREATE_COMPLETE」であることを確認する</li>
 

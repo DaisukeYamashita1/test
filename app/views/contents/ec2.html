@@ -6,13 +6,13 @@
         <h3>EC2インスタンス作成</h3>
         <ol>
             <li>AWSマネジメントコンソールから、「EC2」を選択する</li>
-                <img src="/5-1_EC2作成/5-1_EC2作成①.png">
+                <img src="/8_EC2/EC201.png">
             <li>ナビゲーションペインから「EC2ダッシュボード」を選択し、「インスタンスの作成」を選択</li>
-                <img src="/5-1_EC2作成/5-1_EC2作成②.png">
+                <img src="/8_EC2/EC202.png">
             <li>Amazon マシンイメージ（AMI）にて「Amazon Linux 2 AMI」を選択する</li>
-                <img src="/5-1_EC2作成/5-1_EC2作成③.png">
+                <img src="/8_EC2/EC203.png">
             <li>「インスタンスタイプの選択」において、「t2.micro」を選択し、「次のステップ」を選択</li>
-                <img src="/5-1_EC2作成/5-1_EC2作成④.png">
+                <img src="/8_EC2/EC204.png">
             <li>「インスタンスの詳細の設定」で以下の通り設定する</li>
             
             <table border="1" style="border-collapse: collapse">
@@ -43,13 +43,13 @@
                 </tr>
             </table>
             <p>※上記以外の設定はデフォルトのまま</p>
-                <img src="/5-1_EC2作成/5-1_EC2作成⑤-1.png">
-                <img src="/5-1_EC2作成/5-1_EC2作成⑤-2.png">
-                <img src="/5-1_EC2作成/5-1_EC2作成⑤-3.png">
-                <img src="/5-1_EC2作成/5-1_EC2作成⑤-4.png">
+                <img src="/8_EC2/EC205.png">
+                <img src="/8_EC2/EC206.png">
+                <img src="/8_EC2/EC207.png">
+                <img src="/8_EC2/EC208.png">
 
             <li>「ストレージの追加」については、デフォルト設定で、右下の「次のステップ」を選択する</li>
-                <img src="/5-1_EC2作成/5-1_EC2作成⑥.png">
+                <img src="/8_EC2/EC209.png">
             <li>「タグの追加」について、以下を設定し、右下の「次のステップ」をクリックする</li>
             <table border="1" style="border-collapse: collapse">
                 <tr>
@@ -61,42 +61,42 @@
                     <td>testEC2</td>
                 </tr>
             </table>
-                <img src="/5-1_EC2作成/5-1_EC2作成⑥.png">
+                <img src="/8_EC2/EC210.png">
             <li>「セキュリティグループの設定」で以下を設定し、右下の「確認と作成」をクリックする</li>
                 <p> セキュリティグループの割り当て：既存のセキュリティグループを選択する</p>
                 <p> 「SGforEC2」にチェックを選択する</p>
-                <img src="/5-1_EC2作成/5-1_EC2作成⑦.png">
+                <img src="/8_EC2/EC211.png">
             <li>「インスタンス作成の確認」で設定内容を確認し、右下の「起動」をクリックする</li>
-                <img src="/5-1_EC2作成/5-1_EC2作成⑧.png">
+                <img src="/8_EC2/EC212.png">
             <li>「新しいキーペアの作成」を選択後、キーペア名に「EC2-key」を入力。「キーペアのダウンロード」をクリックする</li>
-                <img src="/5-1_EC2作成/5-1_EC2作成⑨-1.png">
-                <img src="/5-1_EC2作成/5-1_EC2作成⑨-2.png">
+                <img src="/8_EC2/EC213.png">
+                <img src="/8_EC2/EC214.png">
             <li>「キーペアのダウンロード」完了後、「インスタンスの作成」をクリックする</li>
-                <img src="/5-1_EC2作成/5-1_EC2作成10.png">
+                <img src="/8_EC2/EC215.png">
             <li>画面右下の「インスタンスの表示」をクリックする</li>
-                <img src="/5-1_EC2作成/5-1_EC2作成11.png">
+                <img src="/8_EC2/EC216.png">
             <li>「testEC2」が正常に作成され、ステータスが「running」であることを確認する</li>
-                <img src="/5-1_EC2作成/5-1_EC2作成12.png">
-                <img src="/5-1_EC2作成/5-1_EC2作成13.png">
+                <img src="/8_EC2/EC217.png">
+                <img src="/8_EC2/EC218.png">
         </ol>
         <h3>ElasticIPアドレスの割り当て</h3>
         <ol>
             <li>AWSマネジメントコンソールから、「EC2」を選択する</li>
-                <img src="/5-2_Elastic IP作成/5-2_Elastic IP作成①.png">
+                <img src="/6_EIP/EIP01.png">
             <li>ナビゲーションペインより「Elastic IP」を選択し、「新しいアドレスの割り当て」をクリック</li>
-                <img src="/5-2_Elastic IP作成/5-2_Elastic IP作成②.png">
+                <img src="/6_EIP/EIP02.png">
             <li>「ap-northeast-1」が選択されていることを確認し、右下の「割り当て」を選択する</li>
-                <img src="/5-2_Elastic IP作成/5-2_Elastic IP作成③.png">
+                <img src="/6_EIP/EIP03.png">
             <li>「新しいアドレスのリクエストが成功しました」の表示を確認し、「閉じる」をクリック</li>
-                <img src="/5-2_Elastic IP作成/5-2_Elastic IP作成④.png">
+                <img src="/6_EIP/EIP04.png">
             <li>「アクション」から「アドレスの関連付け」をクリックする</li>
-                <img src="/5-2_Elastic IP作成/5-2_Elastic IP作成⑤.png">
+                <img src="/6_EIP/EIP05.png">
             <li>リソースタイプに「インスタンス」を選択後、インスタンスに「testEC2」を選択する</li>
-                <img src="/5-2_Elastic IP作成/5-2_Elastic IP作成⑥.png">
+                <img src="/6_EIP/EIP06.png">
             <li>インスタンスの選択完了後、画面右下の「関連付け」をクリックする</li>
-                <img src="/5-2_Elastic IP作成/5-2_Elastic IP作成⑦.png">
+                <img src="/6_EIP/EIP07.png">
             <li>「新しいアドレスの関連付けが成功しました」の表示を確認後、「閉じる」をクリックする</li>
-                <img src="/5-2_Elastic IP作成/5-2_Elastic IP作成⑧.png">
+                <img src="/6_EIP/EIP08.png">
         </ol>
 
         <h2>解説</h2>

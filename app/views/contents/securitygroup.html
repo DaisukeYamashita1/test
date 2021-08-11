@@ -6,9 +6,9 @@
         <h3>4.1.EC2インスタンス用SecurityGroup（以下SG）の作成</h3>
         <ol>
             <li>AWSマネジメントコンソール上から「EC2」開く</li>
-                <img src="/4-1_セキュリティグループ作成/4-1_セキュリティグループ作成①.png">
+                <img src="/7_SecurityGroup/SG01.png">
             <li>ナビゲーションペインから「セキュリティグループ」を選択し、「セキュリティグループの作成」をクリックする</li>
-                <img src="/4-1_セキュリティグループ作成/4-1_セキュリティグループ作成②.png">
+                <img src="/7_SecurityGroup/SG02.png">
             <li>「セキュリティグループ名の作成」で以下を設定後、「ルールの追加」をクリックする</li>
 
                 <table border="1" style="border-collapse: collapse">
@@ -29,7 +29,7 @@
                         <td>test-VPC</td>
                     </tr>
                 </table>
-                    <img src="/4-1_セキュリティグループ作成/4-1_セキュリティグループ作成③.png">
+                    <img src="/7_SecurityGroup/SG03.png">
 
             <li>「ルールの追加」より、以下2点ルールを追加し、右下の「作成」をクリックする</li>
 
@@ -57,10 +57,10 @@
                     </tr>
                 </table>
 
-                <img src="/4-1_セキュリティグループ作成/4-1_セキュリティグループ作成④.png">
+                <img src="/7_SecurityGroup/SG04.png">
 
             <li>「SGforEC2」が作成されたことを確認</li>
-            <img src="/4-1_セキュリティグループ作成/4-1_セキュリティグループ作成⑤.png">
+            <img src="/7_SecurityGroup/SG05.png">
         </ol>
 
         <h3>4.2.RDSインスタンス用SGの作成</h3>
@@ -88,7 +88,7 @@
                     </tr>
                 </table>
 
-                <img src="/4-1_セキュリティグループ作成/4-1_セキュリティグループ作成⑥.png">
+                <img src="/7_SecurityGroup/SG06.png">
 
             <li>「ルールの追加」より、以下1点ルールを追加し、右下の「作成」をクリックする</li>
 
@@ -109,10 +109,10 @@
                     </tr>
                 </table>
 
-                <img src="/4-1_セキュリティグループ作成/4-1_セキュリティグループ作成⑦.png">
+                <img src="/7_SecurityGroup/SG07.png">
 
             <li>「SGforRDS」が正常に作成されたことを確認</li>
-            <img src="/4-1_セキュリティグループ作成/4-1_セキュリティグループ作成⑧.jpeg">
+            <img src="/7_SecurityGroup/SG08.png">
         </ol>
 
         <h3>4.3.ALB用SGの作成</h3>
@@ -140,7 +140,7 @@
                         <td>test-VPC</td>
                     </tr>
                 </table>
-                <img src="/4-1_セキュリティグループ作成/4-1_セキュリティグループ作成⑨.png">
+                <img src="/7_SecurityGroup/SG09.png">
 
             <li>「ルールの追加」より、以下2点ルールを追加し、右下の「作成」をクリックする</li>
 
@@ -161,10 +161,10 @@
                 </tr>
             </table>
 
-            <img src="/4-1_セキュリティグループ作成/4-1_セキュリティグループ作成10.png">
+            <img src="/7_SecurityGroup/SG10.png">
 
             <li>「SGforALB」が正常に作成されたことを確認する</li>
-            <img src="/4-1_セキュリティグループ作成/4-1_セキュリティグループ作成11.png">
+            <img src="/7_SecurityGroup/SG11.png">
         </ol>
 
         <h2>解説</h2>
