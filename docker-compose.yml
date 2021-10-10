@@ -1,0 +1,26 @@
+version: '3.3'
+
+services:
+  db:
+    image: nouchka/sqlite3:latest
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./db:/root/db/
+
+  web:
+    build: .
+    command: /bin/sh -c "while sleep 1000; do :; done"
+    volumes:
+      - .:/srv/aws-educate:cached
+      - rbenv_dir:/usr/local/rbenv
+    ports:
+      - 3000:3000
+    stdin_open: true
+    tty: true
+    depends_on:
+      - db
+
+volumes:
+  rbenv_dir:
+    driver: local
