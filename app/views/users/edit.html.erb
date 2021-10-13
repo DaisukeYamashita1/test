@@ -10,12 +10,12 @@
             </div>
         <% end %>
         
-        <%= form_tag("/users/#{@user.id}/update") do %>
+        <%= form_with url: "/users/#{@user.public_uid}/update" do |f| %>
             <p>新しいパスワード</p>
-            <input type="password" name="password">
-            <input type="submit" value="保存">
-
+            <%= f.text_field :password %>         
+            <%= f.submit value="保存"%>
         <% end %>
+        
         </div>
     </div>
     </div>

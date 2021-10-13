@@ -10,14 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_12_062016) do
+ActiveRecord::Schema.define(version: 2021_10_11_044613) do
 
   create_table "users", force: :cascade do |t|
-    t.text "email"
     t.text "password"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "agreement"
+    t.text "user_name"
+    t.string "public_uid"
+    t.index ["public_uid"], name: "index_users_on_public_uid", unique: true
   end
 
 end

@@ -10,12 +10,11 @@
                     </div>
                 <% end %>
 
-                <%= form_tag("/users/create") do %>
-                <!--form_with(名前月ルーティング)-->
-                    <p>メールアドレス</p>
-                    <input name="email" value="<%= @user.email %>">
+                <%= form_with model:@user, url: "/users/create" do |f| %>
+                    <p>ユーザー名</p>
+                    <%= f.text_field :user_name %>
                     <p>パスワード</p>
-                    <input type="password" name="password" value="<%= @user.password %>">
+                    <%= f.text_field :password %>         
                     <p>利用規約</p>
                     <div class="tos">
 <p>
@@ -264,11 +263,11 @@
                     </div>
                     <div class="agreement-check">
                         <div class="agreement-checkbox">
-                            <input type="checkbox" name="agreement" value="ok">
+                        <%= f.check_box :agreement, {}, "ok", "" %>         
                         </div><p>私は利用規約に同意しました</p>
                     </div>
                     <br>
-                    <input type="submit" value="新規登録">
+                    <%= f.submit value="新規登録"%>
                     <% end %>
 
             </div>

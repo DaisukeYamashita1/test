@@ -19,7 +19,6 @@ Rails.application.routes.draw do
   get '/contents/cfn' => '/contents/cfn'
   get '/contents/others' => '/contents/others'
 
-  #
   get '/' => 'contents#top'
   get 'top' => 'contents#top'
   get 'contents/top' => 'contents#top'
@@ -30,14 +29,12 @@ Rails.application.routes.draw do
 
   post "users/:id/update" => "users#update"
 
-  # idを表示するのがまずい
   get "users/:id/edit" => "users#edit"
 
   post "users/create" => "users#create"
 
   get "/signup" => "users#new"
 
-  # idを表示するのがまずい
   # resources resource onlyオプションで制御
   get "users/:id" => "users#show"
 

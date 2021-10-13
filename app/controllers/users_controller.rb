@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
     # myページ表示
     def show
-        @user = User.find_by(id: params[:id])
+        @user = User.find_by(public_uid: params[:id])
     end
 
     # 新規ユーザ登録
@@ -20,11 +20,7 @@ class UsersController < ApplicationController
     # user.attribute = params
     # bootstrap で任せる　rails-bootstrap というgemがある
     def create
-        @user = User.new(
-        email: params[:email],
-        password: params[:password],
-        agreement: params[:agreement]
-        )
+        @user = User.new(user_params)
         # form class 
         if @user.agreement == "ok"
             # 利用規約に同意したら（チェックがあれば）ユーザ作成
@@ -44,24 +40,23 @@ class UsersController < ApplicationController
 
     # ユーザパスワード変更
     def edit
-        @user = User.find_by(id: params[:id])
+        @user = User.find_by(public_uid: params[:id])
     end
 
     # パスワード更新ボタンをクリックしたとき
     def update
-        @user = User.find_by(id: params[:id])
+        @user = User.find_by(public_uid: params[:id])
         @user.password = params[:password]
         @user.agreement = "ok"
 
         if @user.save
             flash[:notice] = "パスワードを更新しました"
-            redirect_to("/users/#{@user.id}")
+            redirect_to("/users/#{@user.public_uid}")
         else
             render("users/edit")
         end
         # rescueを使った書き方
     end
-
 
     # ログインフォーム用
     def login_form
@@ -69,14 +64,14 @@ class UsersController < ApplicationController
 
     # ログイン処理
     def login
-        @user = User.find_by(email: params[:email], password: params[:password])
+        @user = User.find_by(user_name: params[:user_name], password: params[:password])
         if @user
             session[:user_id] = @user.id
             flash[:notice] = "ログインしました"
             redirect_to("/top")
         else
-            @error_message = "Incorrect email address or password"
-            @email = params[:email]
+            @error_message = "Incorrect username or password"
+            @user_name = params[:user_name]
             @password = params[:password]
             render("users/login_form")
         end
@@ -90,10 +85,14 @@ class UsersController < ApplicationController
     end
     
     def ensure_correct_user
-        if @current_user.id != params[:id].to_i
+        if @current_user.public_uid != params[:id]
             flash[:notice] = "権限がありません"
             redirect_to("/posts/index")
         end
     end
 
+    private
+    def user_params
+        params.require(:user).permit(:user_name, :password, :agreement)
+    end
 end

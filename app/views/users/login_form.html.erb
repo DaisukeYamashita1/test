@@ -10,12 +10,12 @@
           </div>
         <% end %>
 
-        <%= form_tag("/login") do %>
-          <p>メールアドレス</p>
-          <input name="email" value="<%= @email %>">
+        <%= form_with url: login_path do |f| %>
+          <p>ユーザー名</p>
+          <%= f.text_field :user_name %>
           <p>パスワード</p>
-          <input type="password" name="password" value="<%= @password %>">
-          <input type="submit" value="ログイン">
+          <%= f.text_field :password %>          
+          <%= f.submit value="ログイン"%>
         <% end %>
       </div>
     </div>
