@@ -56,3 +56,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # id を表示させない
 gem 'public_uid'
+
+# エラーメッセージ日本語化
+gem 'rails-i18n'

@@ -70,7 +70,7 @@ class UsersController < ApplicationController
             flash[:notice] = "ログインしました"
             redirect_to("/top")
         else
-            @error_message = "Incorrect username or password"
+            @error_message = "ユーザー名 または パスワードが違います"
             @user_name = params[:user_name]
             @password = params[:password]
             render("users/login_form")

@@ -18,5 +18,9 @@ module SpAwsEducate
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # エラーメッセージ日本語化
+    config.i18n.default_locale = :ja
+    config.active_model.i18n_customize_full_message = true
   end
 end

@@ -25,11 +25,20 @@
       <ul class="header-menus">
 
         <% if @current_user %>
-          <li><%= link_to(@current_user.user_name, "/users/#{@current_user.public_uid}") %></li>
+          <li>ログイン中ユーザー：<%= @current_user.user_name %></li>
+          <li><%= link_to("マイページ", "/users/#{@current_user.public_uid}") %></li>
           <li><%= link_to("ログアウト", logout_path,{method: "post"}) %></li>
-          <li><%= link_to("運営会社", "https://strategy-jp.com/") %></li>
+          <li>
+            <%= link_to "https://strategy-jp.com/", target: :_blank do %>
+              <span>運営会社</span><i class="fas fa-external-link-alt"></i>
+            <% end %>
+          </li>
         <% else %>
-          <li><%= link_to("運営会社", "https://strategy-jp.com/") %></li>
+          <li>
+            <%= link_to "https://strategy-jp.com/", target: :_blank do %>
+              <span>運営会社</span><i class="fas fa-external-link-alt"></i>
+            <% end %>
+          </li>
           <li><%= link_to("新規登録", signup_path) %></li>
           <li><%= link_to("ログイン", login_path) %></li>
         <% end %>

@@ -2,7 +2,7 @@
     <div class="container">
         <div class="user">
         <% if @user.id == @current_user.id %>
-            <h1>Myページ</h1>
+            <h1>マイページ</h1>
             <h2><%= @user.user_name %></h2>
             <%= link_to("パスワードを変更", "/users/#{@user.public_uid}/edit") %>
         <% else %>
