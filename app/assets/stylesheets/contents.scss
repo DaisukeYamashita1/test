@@ -239,10 +239,68 @@
     font-size: 14px;
   }
 
-  .contents {
+  .external--link {
     a::after {
     font-family: "Font Awesome 5 Free";
     content: "　"+"\f35d";
     font-weight: 900;
     }
   }
+
+  a.btn {
+    display: inline-block;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 100vh;   
+    margin-left: 50px;    
+    margin-right: 50px;    
+  }
+
+  a.btn--orange {
+    color: #fff;
+    background-color: #eb6100;
+    border-bottom: 5px solid #b84c00;
+  }
+  a.btn--orange:hover {  
+    margin-top: 3px;
+    color: #fff;
+    background: #f56500;
+    border-bottom: 2px solid #b84c00;
+  }
+
+  a.btn--green {
+    color: #fff;
+    background-color: #2ca559;
+    border-bottom: 5px solid #00662d;
+  }
+
+  a.btn--green:hover {
+    margin-top: 3px;
+    color: #fff;
+    background: #2ca559;    
+    border-bottom: 2px solid #00662d;
+  }
+
+  a.btn--shadow {
+    -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+  }
+
+  .button {
+    text-align: center;
+    padding-top: 50px;
+  }
+
+  .agreement-document {
+    color: blue;
+    text-decoration: none;
+    border-bottom: dotted 2px blue;
+  }
+
+  .agreement-document:hover {
+    color: black;
+    border-bottom: dotted 2px black;
+  }
+

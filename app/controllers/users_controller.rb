@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
     # ↓を別コントローラに分けて、そいつを継承して作ればいちいち書かなくてよい
     before_action :authenticate_user, {only: [:index, :show, :edit, :update]}
-    before_action :forbid_login_user, {only: [:new, :create, :login_form, :login]}
+    before_action :forbid_login_user, {only: [:new, :create, :login_form, :login, :agreement]}
     before_action :ensure_correct_user, {only: [:edit, :update]}
 
     # myページ表示
@@ -13,6 +13,10 @@ class UsersController < ApplicationController
     # 新規ユーザ登録
     def new
         @user = User.new
+    end
+
+    #利用規約
+    def agreement
     end
 
     # 新規ユーザ作成

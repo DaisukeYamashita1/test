@@ -35,6 +35,9 @@ Rails.application.routes.draw do
 
   get "/signup" => "users#new"
 
+  #利用規約
+  get "/agreement" => "users#agreement"
+
   # resources resource onlyオプションで制御
   get "users/:id" => "users#show"
 
