@@ -8,7 +8,10 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
+require('jquery')
 require('./password_hide')
+require('./general')
+require('./lightbox')
 
 Rails.start()
 Turbolinks.start()

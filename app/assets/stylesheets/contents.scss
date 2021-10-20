@@ -7,6 +7,12 @@
     font: 100%/1.5 'Avenir Next', 'Hiragino Sans', sans-serif;
     line-height: 1.7;
     letter-spacing: 1px;
+    height: 100%;
+  }
+
+  body {
+    height: 100%;
+    margin: 0;
   }
   
   ul, li {
@@ -90,6 +96,14 @@
     color: white;
     font-size: 22px;
     line-height: 64px;
+  }
+
+  .header-logo li {
+    float: right;
+    line-height: 64px;
+    font-size: 13px;
+    color: white;
+    padding-right: 15px;
   }
   
   .header-logo a{
@@ -304,3 +318,56 @@
     border-bottom: dotted 2px black;
   }
 
+  #pagetop{
+    position: fixed;
+    right: 15px;
+    bottom: 60px;
+    z-index: 1;
+  }  
+  #pagetop a {
+    display: block;
+    font-size: 0;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    background: #7db4e6;
+    border-radius: 50%;
+    line-height: 50px;
+  }  
+
+  .fa-chevron-up  {
+    font-size: 20px;
+    color:#fff;
+    line-height: 50px;
+    z-index: 10;
+  }
+
+  nav{
+    background-color:#ccc;
+    position: absolute;
+    height:100%;
+    width:35%;
+    z-index: 99;
+    margin-top: 64px;
+  }
+
+  /* 目次 */
+  .contents1 {
+    margin-left: 0px;
+  }
+  .contents2 {
+    margin-left: 15px;
+  }
+  .contents3 {
+    margin-left: 30px;
+  }
+  .contents4 {
+    margin-left: 45px;
+  }
+  .contents5 { 
+    margin-left: 60px;
+  }
+  .contents6 {
+    margin-left: 75px;
+  }  
+  

@@ -1,9 +1,4 @@
-class UsersController < ApplicationController
-
-    # ↓を別コントローラに分けて、そいつを継承して作ればいちいち書かなくてよい
-    before_action :authenticate_user, {only: [:index, :show, :edit, :update]}
-    before_action :forbid_login_user, {only: [:new, :create, :login_form, :login, :agreement]}
-    before_action :ensure_correct_user, {only: [:edit, :update]}
+class UsersController < BeforeActionController
 
     # myページ表示
     def show
@@ -56,10 +51,10 @@ class UsersController < ApplicationController
         if @user.save
             flash[:notice] = "パスワードを更新しました"
             redirect_to("/users/#{@user.public_uid}")
-        else
+        else    
             render("users/edit")
         end
-        # rescueを使った書き方
+
     end
 
     # ログインフォーム用
@@ -88,12 +83,6 @@ class UsersController < ApplicationController
         redirect_to("/login")
     end
     
-    def ensure_correct_user
-        if @current_user.public_uid != params[:id]
-            flash[:notice] = "権限がありません"
-            redirect_to("/posts/index")
-        end
-    end
 
     private
     def user_params
