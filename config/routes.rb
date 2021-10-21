@@ -19,24 +19,28 @@ Rails.application.routes.draw do
   get '/contents/cfn' => '/contents/cfn'
   get '/contents/others' => '/contents/others'
 
+  #resources 
+  #レンダーにする
+  #コンテンツテーブルのコンテンツ名
+
   get '/' => 'contents#top'
   get 'top' => 'contents#top'
   get 'contents/top' => 'contents#top'
 
-  get "/login" => "users#login_form"
-  post "login" => "users#login"
+  get "/login" => "non_users#login_form"
+  post "login" => "non_users#login"
   post "logout" => "users#logout"
 
   post "users/:id/update" => "users#update"
 
   get "users/:id/edit" => "users#edit"
 
-  post "users/create" => "users#create"
+  post "non_users/create" => "non_users#create"
 
-  get "/signup" => "users#new"
+  get "/signup" => "non_users#new"
 
   #利用規約
-  get "/agreement" => "users#agreement"
+  get "/agreement" => "non_users#agreement"
 
   # resources resource onlyオプションで制御
   get "users/:id" => "users#show"

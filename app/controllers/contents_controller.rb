@@ -1,6 +1,4 @@
-class ContentsController < ApplicationController
-
-  before_action :authenticate_user
+class ContentsController < LoginController
 
   def top
   end

@@ -1,29 +1,16 @@
 class ApplicationController < ActionController::Base
 
-    before_action :set_current_user   
+  # 例外処理
+  rescue_from ActiveRecord::RecordNotFound, with: :render_404
+  rescue_from ActionController::RoutingError, with: :render_404
+  rescue_from Exception, with: :render_500
 
-    def set_current_user
-        @current_user = User.find_by(id: session[:user_id])
-    end
+  def render_404
+    render template: 'errors/error_404', status: 404, layout: 'application', content_type: 'text/html'
+  end
 
-    def authenticate_user
-        if @current_user == nil
-            flash[:notice] = "ログインが必要です"
-            redirect_to("/login")
-        end
-    end
-
-    # 例外処理
-    rescue_from ActiveRecord::RecordNotFound, with: :render_404
-    rescue_from ActionController::RoutingError, with: :render_404
-    rescue_from Exception, with: :render_500
-
-    def render_404
-      render template: 'errors/error_404', status: 404, layout: 'application', content_type: 'text/html'
-    end
-
-    def render_500
-      #render template: 'errors/error_500', status: 500, layout: 'application', content_type: 'text/html'
-    end
+  def render_500
+    #render template: 'errors/error_500', status: 500, layout: 'application', content_type: 'text/html'
+  end
 
 end
