@@ -14,11 +14,11 @@
     <header>
       <ul class="header-logo">
         <% if @current_user %>
-          <li><%= link_to("Elemental-Lab", "top") %></li>
+          <li><%= link_to("Elemental-Lab", "/top") %></li>
           <li><p class="menubtn"><i class="fas fa-bars"></i></p>
           </li>               
         <% else %>
-          <li><%= link_to("Elemental-Lab", "top") %></li>
+          <li><%= link_to("Elemental-Lab", "/") %></li>
         <% end %>
       </ul>
 

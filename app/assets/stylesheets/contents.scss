@@ -371,3 +371,55 @@
     margin-left: 75px;
   }  
   
+
+  .lp {
+    img{
+      width: 50%;
+      height: 50%;
+    }
+    text-align: center;
+    line-height:180%;
+    h2,p,ul{
+      padding-bottom: 40px;
+    }
+    li{
+      position: relative;      
+      display: inline-block;
+      width: 150px;
+      height: 150px; 
+      border-radius: 50%;
+      margin-right: 30px;
+      margin-left: 30px;
+      p{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        text-align: center;
+        padding-bottom: 0;
+      }
+    }
+    .lesson1 {
+      background-color:#fda31d;
+    }    
+    .lesson2 {
+      background-color: #fda31d;
+    }    
+    .lesson3 {
+      background-color: #fda31d;
+    }    
+    a {
+      width: 150px;
+      height: 80px;
+      line-height: 80px;
+    }
+  }
+  .top_contents {
+    width: 840px;
+    padding: 50px 0 80px;
+    p {
+      padding-top: 50px;
+    }
+  }
+
