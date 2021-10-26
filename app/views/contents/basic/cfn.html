@@ -1,0 +1,514 @@
+<div class="main contents">
+    <div class="container">
+      <div class="article">
+        <h1>13.CloudFormationで自動構築してみよう</h1>
+
+        <div data-turbolinks='false'>
+            <details id="table-of-content" open>
+              <summary>目次</summary>
+            </details>
+        </div>
+
+        <h2>本章のゴール</h2>
+        <p>CloudFormationで今まで作成したリソースを自動構築してみよう</p>
+
+        <h2>技術解説</h2>
+
+        <h3>CloudFormation</h3>
+        <p>コードでAWS環境が構築できるサービス。</p>
+
+        <h3>スタック</h3>
+        <p>CloudFormationから作成されるAWSリソースの単位。スタック単位でプロビジョニングされる。</p>
+
+        <h2>構築手順</h2>
+
+        <h3>CFnでVPCを自動構築しよう</h3>
+
+        <p>AWSマネジメントコンソールにログインします。</p>
+        
+        <a href="/13_CFn/13-1.png" data-lightbox="13-1" data-title=""><img src="/13_CFn/13-1.png" alt=""></a>            
+
+        <p>サービス一覧からCloudFormationを選択します。</p>
+        
+        <a href="/13_CFn/13-2.png" data-lightbox="13-2" data-title=""><img src="/13_CFn/13-2.png" alt=""></a>            
+
+        <p>CloudFormationの画面が表示されました。「スタックの作成」をクリックします。</p>
+        
+        <a href="/13_CFn/13-3.png" data-lightbox="13-3" data-title=""><img src="/13_CFn/13-3.png" alt=""></a>            
+
+        <p>テンプレートのソースを「テンプレートファイルのアップロード」にします。以下のソースコードをコピーしてローカルPCのテキストエディタに貼り付けます。「VPC.yml」の名前で保存します。CloudFormationの画面で「ファイルの選択」をクリックし、先ほど保存したVPC.ymlを選択します。「次へ」をクリックします。</p>
+        
+        <a href="/13_CFn/13-4.png" data-lightbox="13-4" data-title=""><img src="/13_CFn/13-4.png" alt=""></a>    
+        
+        <pre class="prettyprint linenums">
+          AWSTemplateFormatVersion: "2010-09-09"
+          Description: Create VPC
+          Parameters:
+            VPCCIDR:
+              Type: String
+              Default: 10.0.0.0/24
+              Description: Default is 10.0.0.0/24.
+            PublicSubnetACIDR:
+              Type: String
+              Default: 10.0.0.0/26
+              Description: Default is 10.0.0.0/26.
+            PravateSubnetACIDR:
+              Type: String
+              Default: 10.0.0.64/26
+              Description: Default is 10.0.0.64/26.
+            PublicSubnetCCIDR:
+              Type: String
+              Default: 10.0.0.128/26
+              Description: Default is 10.0.0.128/26.
+            PravateSubnetCCIDR:
+              Type: String
+              Default: 10.0.0.192/26
+              Description: Default is 10.0.0.192/26.
+          
+          Resources:
+            ########## VPC ##########
+            VPC:
+              Type: AWS::EC2::VPC
+              Properties:
+                CidrBlock: !Ref VPCCIDR
+                EnableDnsSupport: "true"
+                EnableDnsHostnames: "true"
+                Tags:
+                  - Key: Name
+                    Value: VPC
+          
+            ########## Subnet ##########
+            PublicSubnetA:
+              Type: AWS::EC2::Subnet
+              Properties:
+                AvailabilityZone: "ap-northeast-1a"
+                CidrBlock: "10.0.0.0/26"
+                Tags:
+                  - Key: Name
+                    Value: public-subnet-A
+                VpcId: !Ref VPC
+            PrivateSubnetA:
+              Type: AWS::EC2::Subnet
+              Properties:
+                AvailabilityZone: "ap-northeast-1a"
+                CidrBlock: "10.0.0.64/26"
+                Tags:
+                  - Key: Name
+                    Value: private-subnet-A
+                VpcId: !Ref VPC
+            PublicSubnetC:
+              Type: AWS::EC2::Subnet
+              Properties:
+                AvailabilityZone: "ap-northeast-1c"
+                CidrBlock: "10.0.0.128/26"
+                Tags:
+                  - Key: Name
+                    Value: public-subnet-C
+                VpcId: !Ref VPC
+            PrivateSubnetC:
+              Type: AWS::EC2::Subnet
+              Properties:
+                AvailabilityZone: "ap-northeast-1c"
+                CidrBlock: "10.0.0.192/26"
+                Tags:
+                  - Key: Name
+                    Value: PrivateSubnetC
+                VpcId: !Ref VPC
+          
+            ########## InternetGateway ##########
+            myInternetGateway:
+              Type: AWS::EC2::InternetGateway
+              Properties:
+                Tags:
+                  - Key: Name
+                    Value: InternetGateway
+            Attach:
+              Type: AWS::EC2::VPCGatewayAttachment
+              Properties:
+                InternetGatewayId: !Ref myInternetGateway
+                VpcId: !Ref VPC
+          
+            ########## RouteTable ##########
+            PublicRouteTableA:
+              Type: AWS::EC2::RouteTable
+              Properties:
+                Tags:
+                  - Key: Name
+                    Value: PublicRouteTableA
+                VpcId: !Ref VPC
+            PravateRouteTableA:
+              Type: AWS::EC2::RouteTable
+              Properties:
+                Tags:
+                  - Key: Name
+                    Value: PravateRouteTableA
+                VpcId: !Ref VPC
+            PublicRouteTableC:
+              Type: AWS::EC2::RouteTable
+              Properties:
+                Tags:
+                  - Key: Name
+                    Value: PublicRouteTableC
+                VpcId: !Ref VPC
+            PravateRouteTableC:
+              Type: AWS::EC2::RouteTable
+              Properties:
+                Tags:
+                  - Key: Name
+                    Value: PravateRouteTableC
+                VpcId: !Ref VPC
+            PublicRouteA:
+              Type: AWS::EC2::Route
+              Properties:
+                DestinationCidrBlock: "0.0.0.0/0"
+                GatewayId: !Ref myInternetGateway
+                RouteTableId: !Ref PublicRouteTableA
+            PublicRouteC:
+              Type: AWS::EC2::Route
+              Properties:
+                DestinationCidrBlock: "0.0.0.0/0"
+                GatewayId: !Ref myInternetGateway
+                RouteTableId: !Ref PublicRouteTableC
+            AssosiatePublicRouteTableA:
+              Type: AWS::EC2::SubnetRouteTableAssociation
+              Properties:
+                RouteTableId: !Ref PublicRouteTableA
+                SubnetId: !Ref PublicSubnetA
+            AssosiatePublicRouteTableC:
+              Type: AWS::EC2::SubnetRouteTableAssociation
+              Properties:
+                RouteTableId: !Ref PublicRouteTableC
+                SubnetId: !Ref PublicSubnetC
+                
+          Outputs:
+            VPC:
+              Value: !Ref VPC
+              Export:
+                Name: ExportedVPC
+            PublicSubnetA:
+              Value: !Ref PublicSubnetA
+              Export:
+                Name: ExportedPublicSubnetA
+            PrivateSubnetA:
+              Value: !Ref PrivateSubnetA
+              Export:
+                Name: ExportedPrivateSubnetA
+            PublicSubnetC:
+              Value: !Ref PublicSubnetC
+              Export:
+                Name: ExportedPublicSubnetC
+            PrivateSubnetC:
+              Value: !Ref PrivateSubnetC
+              Export:
+                Name: ExportedPrivateSubnetC
+        </pre>          
+
+
+        <p>スタックの名前を「stack-VPC」にします。パラメータはデフォルトのままです。「次へ」をクリックします。</p>
+        
+        <a href="/13_CFn/13-5.png" data-lightbox="13-5" data-title=""><img src="/13_CFn/13-5.png" alt=""></a>            
+
+        <p>スタックのオプションの設定では何もしません。「次へ」をクリックします。</p>
+        
+        <a href="/13_CFn/13-6.png" data-lightbox="13-6" data-title=""><img src="/13_CFn/13-6.png" alt=""></a>            
+
+        <p>レビュー画面で設定に間違いがなければ「スタックの作成」をクリックします。</p>
+        
+        <a href="/13_CFn/13-7.png" data-lightbox="13-7" data-title=""><img src="/13_CFn/13-7.png" alt=""></a>            
+
+        <a href="/13_CFn/13-8.png" data-lightbox="13-8" data-title=""><img src="/13_CFn/13-8.png" alt=""></a>            
+
+        <p>イベントタブを開きCREATE_COMPLETEとなることを確認します。</p>
+        
+        <a href="/13_CFn/13-9.png" data-lightbox="13-9" data-title=""><img src="/13_CFn/13-9.png" alt=""></a>            
+
+        <p>では本当に作成されたか確認してみましょう。リソースタブを開き、VPCの物理IDをクリックします。</p>
+        
+        <a href="/13_CFn/13-10.png" data-lightbox="13-10" data-title=""><img src="/13_CFn/13-10.png" alt=""></a>            
+
+        <p>VPCの画面に移動しました。確かにVPCが作られていますね。先程のコードではVPC以外にもサブネットやルートテーブル等、VPCレイヤーのリソースは全て作られているので確認してみてください。</p>
+        
+        <a href="/13_CFn/13-11.png" data-lightbox="13-11" data-title=""><img src="/13_CFn/13-11.png" alt=""></a>  
+
+        <h3>セキュリティグループを自動構築する</h3>          
+
+        <p>CloudFormationの自動構築は先述のVPC自動構築と同じ要領で実施していきます。そのため必要な箇所だけ記載していきます。</p>
+
+        <p>ファイル保存名：SecurityGroup.yml</p>
+        <pre class="prettyprint linenums">
+          AWSTemplateFormatVersion: "2010-09-09"
+          Description: SG for EC2 , RDS , ALB
+          Resources:
+          
+            ########## SecurityGroup for EC2 ##########
+            SGforEC2:
+              Type: AWS::EC2::SecurityGroup
+              Properties:
+                GroupDescription: SGforEC2
+                GroupName: SGforEC2
+                SecurityGroupIngress:
+                  - IpProtocol: tcp
+                    FromPort: 22
+                    ToPort: 22
+                    CidrIp: XX.XX.XX.XX/32
+                  - IpProtocol: tcp
+                    FromPort: 80
+                    ToPort: 80
+                    CidrIp: 0.0.0.0/0
+                VpcId: !ImportValue ExportedVPC
+          
+            ########### SecurityGroup for RDS ##########
+            SGforRDS:
+              Type: AWS::EC2::SecurityGroup
+              Properties:
+                GroupDescription: SGforRDS
+                GroupName: SGforRDS
+                SecurityGroupIngress:
+                  - IpProtocol: tcp
+                    FromPort: 3306
+                    ToPort: 3306
+                    CidrIp: 10.0.0.10/32
+                VpcId: !ImportValue ExportedVPC
+          
+            ########### SecurityGroup for ALB ##########
+            SGforALB:
+              Type: AWS::EC2::SecurityGroup
+              Properties:
+                GroupDescription: SGforALB
+                GroupName: SGforALB
+                SecurityGroupIngress:
+                  - IpProtocol: tcp
+                    FromPort: 80
+                    ToPort: 80
+                    CidrIp: 0.0.0.0/0
+                VpcId: !ImportValue ExportedVPC
+          
+          Outputs:
+            SGforEC2:
+              Value: !Ref SGforEC2
+              Export:
+                Name: ExportedSGforEC2
+            SGforRDS:
+              Value: !Ref SGforRDS
+              Export:
+                Name: ExportedSGforRDS
+            SGforALB:
+              Value: !Ref SGforALB
+              Export:
+                Name: ExportedSGforALB          
+        </pre>        
+        <p>スタック名：stack-sg</p>
+
+        <p>※10行目の「KeyName: “KEY-NAME”」のKEY-NAMEですが、ここは自身が所持している鍵ファイル名に置き換えてください。（.pemは不要です）</p>
+
+        <h3>RDSを自動構築する</h3>
+
+        <p>ファイル保存名：RDS.yml</p>
+        <pre class="prettyprint linenums">
+          AWSTemplateFormatVersion: 2010-09-09
+          Description: Create RDS
+          Resources:
+          
+            ########## Subnet Group ##########
+            SubnetGroup:
+              Type: AWS::RDS::DBSubnetGroup
+              Properties:
+                DBSubnetGroupDescription: create subnet group
+                DBSubnetGroupName: RDS Subnet Group
+                SubnetIds:
+                  - !ImportValue ExportedPrivateSubnetA
+                  - !ImportValue ExportedPrivateSubnetC
+          
+            ########## RDS MySQL instance ##########
+            myRDSinstance:
+              Type: AWS::RDS::DBInstance
+              Properties:
+                  AllocatedStorage: "30"
+                  AvailabilityZone: "ap-northeast-1a"
+                  DBInstanceClass: "db.t2.micro"
+                  DBInstanceIdentifier: wordpress
+                  DBName: wordpress
+                  DBSubnetGroupName: !Ref SubnetGroup
+                  Engine: "MySQL"
+                  EngineVersion: "8.0.20"
+                  MasterUsername: "wordpress"
+                  MasterUserPassword: "任意のパスワード"
+                  MultiAZ: "false"
+                  Port: "3306"
+                  PubliclyAccessible: "false"
+                  VPCSecurityGroups:
+                    - !ImportValue ExportedSGforRDS          
+        </pre>
+        <p>スタック名：stack-rds</p>
+
+        <p>※27行目の「MasterUserPassword: “任意のパスワード”」の任意のパスワードですが、ここは自身が決めたパスワードに置き換えてください。</p>
+        
+        <h3>ALBを自動構築する</h3>
+
+        <p>ファイル保存名：ALB.yml</p>
+        <pre class="prettyprint linenums">
+          AWSTemplateFormatVersion: 2010-09-09
+          Description: ALB
+          Resources:
+          
+            ########## TargetGroup ##########
+            TargetGroup:
+              Type: AWS::ElasticLoadBalancingV2::TargetGroup
+              Properties:
+                HealthCheckPort: 80
+                HealthCheckProtocol: HTTP
+                Matcher:
+                  HttpCode: 200
+                Name: wordpress-target-group
+                Port: 80
+                Protocol: HTTP
+                Targets:
+                  - Id: !ImportValue ExportedEC2instance
+                    Port: 80
+                TargetType: instance
+                VpcId: !ImportValue ExportedVPC
+          
+            ########## ALB ##########
+            ALB:
+              Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+              Properties:
+                IpAddressType: ipv4
+                Name: wordpress-ALB
+                Scheme: internet-facing
+                SecurityGroups:
+                  - !ImportValue ExportedSGforALB
+                Subnets:
+                  - !ImportValue ExportedPublicSubnetA
+                  - !ImportValue ExportedPublicSubnetC
+                Type: application
+          
+            ########### Listener ##########
+            Listener:
+              Type: AWS::ElasticLoadBalancingV2::Listener
+              Properties:
+                DefaultActions:
+                  - TargetGroupArn: !Ref TargetGroup
+                    Type: forward
+                LoadBalancerArn: !Ref ALB
+                Port: 80
+                Protocol: HTTP          
+        </pre>
+        <p>スタック名：stack-alb</p>
+
+        <h3>ホストゾーンを自動構築する</h3>
+
+        <p>ファイル保存名：hostzone.yml</p>
+        <pre class="prettyprint linenums">
+          AWSTemplateFormatVersion: 2010-09-09
+          Description: Hostzone
+          Resources:
+            ########## Hostzone ##########
+            Hostzone:
+              Type: AWS::Route53::HostedZone
+              Properties:
+                Name: "取得したドメイン名."
+          Outputs:
+            Hostzone:
+              Value: !Ref Hostzone
+              Export:
+                Name: ExportedHostzone          
+        </pre>
+        <p>スタック名：stack-hostzone</p>
+
+        <p>※8行目の「Name: “取得したドメイン名.”」の取得したドメイン名ですが、ここは自身が取得したドメイン名に置き換えてください。</p>
+
+        <h3>レコードセットを自動構築する</h3>
+
+        <p>ファイル保存名：RecordSet.yml</p>
+        <pre class="prettyprint linenums">
+          AWSTemplateFormatVersion: 2010-09-09
+          Description: Hostzone
+          
+          Parameters:
+            ALBDNSName:
+              Type: String
+              Description: Enter Your ALB DNS Name.
+          
+            ALBHostzone:
+              Type: String
+              Description: Enter Your ALB Hostzone.
+          
+          Resources:
+          
+          ########## RecordSet ##########
+          
+            RecordSet:
+                Type: AWS::Route53::RecordSet
+                Properties: 
+                  AliasTarget:
+                    DNSName: !Ref ALBDNSName
+                    HostedZoneId: !Ref ALBHostzone
+          #        Comment: String
+          #        Failover: PRIMARY
+          #        GeoLocation: 
+          #          GeoLocation
+          #        HealthCheckId: String
+                  HostedZoneId: !ImportValue ExportedHostzone
+          #        HostedZoneName: String
+          #        MultiValueAnswer: Boolean
+                  Name: www.取得したドメイン名.tk.
+          #        Region: String
+          #        ResourceRecords: 
+          #          - String
+          #        SetIdentifier: "1"
+          #        TTL: String
+                  Type: CNAME
+          #        Weight: Integer          
+        </pre>
+        <p>スタック名：stack-RecordSet<br>
+          パラメータ：ALBDNSName＝ALBのDNS名<br>
+          　　　　　　 ALBHostzone＝ALBのホストゾーン
+        </p>
+
+        <p>※31行目の「Name: www.取得したドメイン名.」の取得したドメイン名ですが、ここは自身が取得したドメイン名に置き換えてください。</p>
+
+        <h3>WrdPress用のDBユーザを作成する</h3>
+
+        <p>「8.WordPressの設定をしよう」の「データベースの設定をする」を参考にDBユーザを作成します。</p>
+
+        <h3>WordPressの設定をする</h3>
+
+        <p>「8.WordPressの設定をしよう」の「WordPressをインストールする」を参考にWordPressの設定を実施します。</p>
+
+        <h3>取得したドメインをAWSに連携させる</h3>
+
+        <p>「11.ホストゾーンを作成してみよう」の「取得したドメインをAWSと連携させる」を参考にドメインを叩いてWordPressのサイトをみれるように設定します。
+        上記を踏まえて「http://www.取得したドメイン名」」でWordPressの設定画面が表示されればCFnで正常に自動構築が完了しています。
+        </p>
+
+        <h3>使い終わったリソースを削除する</h3>
+
+        <p>スタック一覧を表示させます。削除は構築の逆順に実施します。削除するリソースを選択します。削除ボタンをクリックします。</p>
+
+        <a href="/13_CFn/13-12.png" data-lightbox="13-12" data-title=""><img src="/13_CFn/13-12.png" alt=""></a>            
+
+        <p>「スタックの削除」をクリックします。</p>
+        
+        <a href="/13_CFn/13-13.png" data-lightbox="13-13" data-title=""><img src="/13_CFn/13-13.png" alt=""></a>            
+
+        <p>スタックの削除が開始されました。</p>
+        
+        <a href="/13_CFn/13-14.png" data-lightbox="13-14" data-title=""><img src="/13_CFn/13-14.png" alt=""></a>            
+
+        <p>一覧からスタックが削除されたことを確認します。同じ要領でスタックを削除していきます。</p>
+        
+        <a href="/13_CFn/13-15.png" data-lightbox="13-15" data-title=""><img src="/13_CFn/13-15.png" alt=""></a>            
+
+        <h2>まとめ</h2>
+
+        <p>CloudFormationで自動構築を実施しました。手作業とは比にならないくらい速く、簡単に構築できました。CloudFormationを使えば環境の複製も簡単のため構成をほとんど変えず開発環境や本番環境を準備することができます。</p>
+
+        <p>※使用していないAWSリソースは必ず削除してください！思わぬ従量課金に繋がります！</p>
+
+      </div>
+        <div class="button">
+          <a href="12" class="btn btn--green btn--cubic btn--shadow">戻る</a>
+        </div>
+    </div>
+</div>
+

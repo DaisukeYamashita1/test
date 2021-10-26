@@ -1,0 +1,210 @@
+<div class="main contents">
+    <div class="container">
+        <div class="article">
+            <h1>8.WordPressの設定をしよう</h1>
+
+            <div data-turbolinks='false'>
+                <details id="table-of-content" open>
+                  <summary>目次</summary>
+                </details>
+            </div>
+
+            <h2>本章のゴール</h2>
+
+            <p>EC2インスタンスにWordPressを設定し使用可能な状態にする。<br>本章を実施すると以下のような構成図になります。
+            </p>
+
+            <a href="/8_wordpress/8-1.png" data-lightbox="8-1" data-title=""><img src="/8_wordpress/8-1.png" alt=""></a>
+
+            <h2>技術解説</h2>
+            
+            <h3>SSH</h3>
+            <p>仮想サーバは普通データセンター内にありユーザから離れた場所にある。ユーザはインターネットを経由して仮想サーバを操作する必要がある。遠隔地からサーバを操作できるようにする技術のこと。</p>
+
+            <h3>鍵ファイル</h3>
+            <p>仮想サーバに接続するための認証情報。ほとんどの場合、そのサーバに対する鍵ファイルがないとログインできない。</p>
+
+            <h3>Apache</h3>
+            <p>Webコンテンツの公開には、サーバとブラウザ間でHTTP通信を行うためWEBサーバが必要である。ApacheはそのWEBサーバを提供するためのソフトウェアである。</p>
+
+            <h2>構築手順</h2>
+
+            <h3>SSHでEC2インスタンスに接続する（本手順ではMacOSで進めます）</h3>
+            <p>ローカルPCにてターミナルソフトを開きます。スポットライト検索で「ターミナル」を入力します。ヒットした「ターミナル」というアプリケーションを開きます。</p>
+
+            <a href="/8_wordpress/8-2.png" data-lightbox="8-2" data-title=""><img src="/8_wordpress/8-2.png" alt=""></a>
+
+            <p>ターミナルが起動しました。（個人の設定によって見た目に変化があります）</p>
+
+            <a href="/8_wordpress/8-3.png" data-lightbox="8-3" data-title=""><img src="/8_wordpress/8-3.png" alt=""></a>
+
+            <p>以下のコマンドを入力します。</p>
+
+            <pre class="prettyprint linenums">
+            cd ~/Downloads
+            ls -la | grep *.pem                    
+            </pre>      
+            
+            <p>ここでEC2インスタンスを起動した際にダウンロードした鍵ファイルの存在を確認します。インターネットからダウンロードしたのでダウンロードフォルダにありますが、これを「.ssh」というフォルダにコピーします。
+            </p>
+
+            <pre class="prettyprint linenums">
+            cp <鍵ファイル名>.pem ~/.ssh/（<鍵ファイル名>はご自身で読み替えてください）
+            </pre>           
+            
+            <p>鍵ファイルが持つ設定値を変更します。この変更がないとEC2インスタンス（サーバ）に接続出来ない可能性があります。</p>
+
+            <pre class="prettyprint linenums">
+            cd ~/.ssh
+            chmod 600 <鍵ファイル名>.pem
+            ls -la <鍵ファイル名>.pem                
+            </pre> 
+            
+            <p>表示された結果の左端が「-rw-------」となっていることを確認してください。問題なければいよいよEC2インスタンスに接続します。以下のコマンドを入力します。</p>
+
+            <pre class="prettyprint linenums">
+            ssh -i<鍵ファイル名>.pem ec2-user@<Elastic IPアドレス>  
+            </pre>
+
+            <p>「The authenticity of host ‘Elastic IPアドレス (Elastic IPアドレス)’ can’t be established.
+            ECDSA key fingerprint is SHA256:isOvdUQ7cLZaN8jwtBst0kb72SLJZU/Uk07pu581MaU.
+            Are you sure you want to continue connecting (yes/no/[fingerprint])?」と聞かれる場合があります。この場合は「yes」と入力します。
+            </p>
+
+            <p>EC2のアスキーアートが表示されたら接続完了です。</p>
+
+            <a href="/8_wordpress/8-4.png" data-lightbox="8-4" data-title=""><img src="/8_wordpress/8-4.png" alt=""></a>
+
+            <h3>データベースの設定をする</h3>
+            <p>まずEC2の状態を最新化します。</p>
+
+            <pre class="prettyprint linenums">
+            sudo yum -y update
+            </pre>
+
+            <p>データベースと接続するためにEC2インスタンスにクライアントソフトを入れます。</p>
+
+            <pre class="prettyprint linenums">
+            sudo yum -y install mysql
+            </pre>
+
+            <p>データベースに接続します。そのためにはRDSのエンドポイントを知る必要があります。エンドポイントはAWSマネジメントコンソール→RDS管理コンソールの作成したRDSの詳細画面に記載があります。
+            </p>
+
+            <a href="/8_wordpress/8-5.png" data-lightbox="8-5" data-title=""><img src="/8_wordpress/8-5.png" alt=""></a>
+
+            <a href="/8_wordpress/8-6.png" data-lightbox="8-6" data-title=""><img src="/8_wordpress/8-6.png" alt=""></a>
+
+            <p>RDSエンドポイントの確認が取れたら以下のコマンドでEC2インスタンスとデータベースを接続します。</p>
+
+            <pre class="prettyprint linenums">
+            mysql -h <RDSエンドポイント> -u wordpress -p
+            </pre>
+
+            <p>パスワードが聞かれるのでパスワードを入力します。完了するとデータベースへのアクセスが完了した状態になります。</p>
+
+            <a href="/8_wordpress/8-7.png" data-lightbox="8-7" data-title=""><img src="/8_wordpress/8-7.png" alt=""></a>
+
+            <p>WordPress接続用のユーザを作成します。以下のコマンドを入力します。「quit」を入力した後はデータベースからログアウトされます。</p>
+
+            <pre class="prettyprint linenums">
+            GRANT ALL PRIVILEGES ON wordpress.* TO wordpress;
+            FLUSH PRIVILEGES;
+            quit;                
+            </pre>
+
+            <a href="/8_wordpress/8-8.png" data-lightbox="8-8" data-title=""><img src="/8_wordpress/8-8.png" alt=""></a>
+
+            <h3>Apacheをインストールする</h3>
+            <p>以下のコマンドを実行してApacheをインストールし有効化します。</p>
+
+            <pre class="prettyprint linenums">
+            sudo yum install -y httpd
+            sudo systemctl start httpd
+            sudo systemctl enable httpd                
+            </pre>
+
+            <p>ここでブラウザを開き、EC2インスタンスのElastic IPアドレスを検索バーに入力します。以下のような画面が表示されればEC2インスタンスはWEBサーバとして機能しています。</p>
+
+            <a href="/8_wordpress/8-9.png" data-lightbox="8-9" data-title=""><img src="/8_wordpress/8-9.png" alt=""></a>
+
+            <h3>WordPressをインストールする</h3>
+
+            <p>以下のコマンドでWordPressをインストールします。</p>
+
+            <pre class="prettyprint linenums">
+            wget https://wordpress.org/latest.tar.gz
+            tar -xzf latest.tar.gz                
+            </pre>
+
+            <p>インストールされたことを確認します。設定値を変更するのでバックアップを取っておきます。</p>
+
+            <pre class="prettyprint linenums">
+            cd wordpress
+            cp wp-config-sample.php wp-config.php
+            ls -la                
+            </pre>    
+            
+            <p>WordPressを設定する際に必要な設定値を確認します。ブラウザから以下のURLにアクセスしてください。</p>
+
+            <a href="https://api.wordpress.org/secret-key/1.1/salt/" >https://api.wordpress.org/secret-key/1.1/salt/</a>
+
+            <p>defineから始まる文字列が8行表示されれば問題ありません。</p>
+
+            <a href="/8_wordpress/8-10.png" data-lightbox="8-10" data-title=""><img src="/8_wordpress/8-10.png" alt=""></a>
+
+            <p>Linux標準搭載のテキストエディタである「vi」でWordPressの設定ファイルを編集していきます。以下のコマンドを実行してください。</p>
+
+            <pre class="prettyprint linenums">
+            vi wp-config.php
+            </pre>      
+            
+            <p>「:set number」とキーボードから入力してください。ファイルに行番号が付きます。</p>
+
+            <a href="/8_wordpress/8-11.png" data-lightbox="8-11" data-title=""><img src="/8_wordpress/8-11.png" alt=""></a>
+
+            <p>以下の箇所を変更します。「i」キーを押すと編集可能となります。</p>
+
+            <p>23行目：define( 'DB_NAME', 'database_name_here' );をdefine( ‘DB_NAME’, ‘wordpress’ );に変更します。</p>
+
+            <p>26行目：define( ‘DB_USER’, ‘username_here’ );をdefine( ‘DB_USER’, ‘wordpress’ );に変更します。</p>
+
+            <p>29行目：define( ‘DB_PASSWORD’, ‘password_here’ );	define( ‘DB_PASSWORD’, ‘ご自身で設定したパスワード’ );に変更します。</p>
+
+            <p>32行目：define( ‘DB_HOST’, ‘localhost’ );をdefine( ‘DB_HOST’, ‘RDSエンドポイント’ );に変更します。</p>
+
+            <p>51行目〜58行目：https://api.wordpress.org/secret-key/1.1/salt/で表示された値に変更します。</p>
+
+            <p>上記の変更が完了したら「Esc」キーを押した後、「:wq」と入力します。これで保存されます。</p>
+
+            <a href="/8_wordpress/8-12.png" data-lightbox="8-12" data-title=""><img src="/8_wordpress/8-12.png" alt=""></a>
+
+            <a href="/8_wordpress/8-13.png" data-lightbox="8-13" data-title=""><img src="/8_wordpress/8-13.png" alt=""></a>
+
+            <p>以下のコマンドを実行し、WordPressをデプロイします。</p>
+
+            <pre class="prettyprint linenums">
+            sudo amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
+            cd /home/ec2-user
+            sudo cp -r wordpress/* /var/www/html/
+            sudo service httpd restart                
+            </pre> 
+            
+            <p>再びブラウザからEC2インスタンスのElasticIPアドレスにアクセスします。以下のようなWordPressの画面が表示されたらデプロイ成功です。</p>
+
+            <a href="/8_wordpress/8-14.png" data-lightbox="8-14" data-title=""><img src="/8_wordpress/8-14.png" alt=""></a>        
+            
+            <p>問題なければターミナルに「exit」と入力しEC2インスタンスからログアウトします。</p>
+
+            <h2>まとめ</h2>
+            <p>今回はWordPressの設定を実施しました。ターミナルでのコマンド作業がメインだったので普段とは違った作業となりました。</p>
+
+            <p>※使用していないAWSリソースは必ず削除してください！思わぬ従量課金に繋がります！</p>
+
+        </div>
+        <div class="button">
+            <a href="7" class="btn btn--green btn--cubic btn--shadow">戻る</a>
+            <a href="9" class="btn btn--orange btn--cubic btn--shadow">次へ</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,110 @@
+<div class="main contents">
+    <div class="container">
+        <div class="article">
+            <h1>11.ホストゾーンを作成してみよう</h1>
+
+            <div data-turbolinks='false'>
+                <details id="table-of-content" open>
+                  <summary>目次</summary>
+                </details>
+            </div>
+
+            <h2>本章のゴール</h2>
+            <p>自身で取得したドメインをAWSと連携させ、有効化させる。<br>
+            本章を最後までこなせば以下の構成図になります。
+            </p>
+
+            <a href="/11_hostzone/11-1.png" data-lightbox="11-1" data-title=""><img src="/11_hostzone/11-1.png" alt=""></a>     
+            
+            <h2>技術解説</h2>
+            <h3>ホストゾーン</h3>
+            <p>DNS ゾーンファイル（IPアドレスとドメイン名の対応表）のこと。</p>
+
+            <h3>Route53</h3>
+            <p>SLA100％を誇るAWSのDNSサービスのこと。</p>
+
+            <h2>構築手順</h2>
+
+            <h3>ホストゾーンを作成する</h3>
+
+            <p>AWSマネジメントコンソールにログインします。</p>
+
+            <a href="/11_hostzone/11-2.png" data-lightbox="11-2" data-title=""><img src="/11_hostzone/11-2.png" alt=""></a>       
+
+            <p>サービスメニューから「Route53」を選択します。</p>
+
+            <a href="/11_hostzone/11-3.png" data-lightbox="11-3" data-title=""><img src="/11_hostzone/11-3.png" alt=""></a>     
+
+            <p>Route53管理コンソールに移動しました。「ホストゾーンの作成」をクリックします。</p>
+
+            <a href="/11_hostzone/11-4.png" data-lightbox="11-4" data-title=""><img src="/11_hostzone/11-4.png" alt=""></a>  
+
+            <p>以下のパラメータを入力します。これら以外はデフォルトです。入力が完了したら「ホストゾーンの作成」をクリックします。</p>
+
+            <p>ドメイン名＝自身で取得したドメイン名</p>
+
+            <a href="/11_hostzone/11-5.png" data-lightbox="11-5" data-title=""><img src="/11_hostzone/11-5.png" alt=""></a>            
+
+            <p>ホストゾーンが正常に作成されたことを確認します。</p>
+
+            <a href="/11_hostzone/11-6.png" data-lightbox="11-6" data-title=""><img src="/11_hostzone/11-6.png" alt=""></a> 
+
+            <h3>取得したドメインをAWSと連携させる</h3>
+
+            <p>取得したドメインの管理サイトに移動します。「My Dmains」を開きドメイン一覧を表示します。続いて「Manage Domain」をクリックします。</p>
+
+            <a href="/11_hostzone/11-7.png" data-lightbox="11-7" data-title=""><img src="/11_hostzone/11-7.png" alt=""></a>      
+            
+            <p>「Management Tools」をクリックします。続いて「Nameservers」をクリックします。</p>
+
+            <a href="/11_hostzone/11-8.png" data-lightbox="11-8" data-title=""><img src="/11_hostzone/11-8.png" alt=""></a>            
+
+            <a href="/11_hostzone/11-9.png" data-lightbox="11-9" data-title=""><img src="/11_hostzone/11-9.png" alt=""></a>         
+            
+            <p>「use custom nameservers」を選択し、先ほど作成したホストゾーンのNSレコードを入力します。入力が完了したら「Change Nameservers」をクリックします。</p>
+            
+            <a href="/11_hostzone/11-10.png" data-lightbox="11-10" data-title=""><img src="/11_hostzone/11-10.png" alt=""></a>            
+
+            <a href="/11_hostzone/11-11.png" data-lightbox="11-11" data-title=""><img src="/11_hostzone/11-11.png" alt=""></a>    
+
+            <a href="/11_hostzone/11-12.png" data-lightbox="11-12" data-title=""><img src="/11_hostzone/11-12.png" alt=""></a>            
+
+            <p>変更が完了したことを確認します。</p>
+
+            <a href="/11_hostzone/11-13.png" data-lightbox="11-13" data-title=""><img src="/11_hostzone/11-13.png" alt=""></a>        
+            
+            <h3>レコードを追加する</h3>
+
+            <p>Route53管理コンソールに移動します。「レコードを作成」をクリックします。</p>
+
+            <a href="/11_hostzone/11-14.png" data-lightbox="11-14" data-title=""><img src="/11_hostzone/11-14.png" alt=""></a>        
+
+            <p>以下のパラメータを入力します。これら以外はデフォルトです。入力が完了したら「レコードを作成」をクリックします。</p>
+
+            <p>レコード名＝www<br>
+                レコードタイプ＝CNAME<br>
+                値＝ALBエンドポイント（EC2管理コンソールで確認）
+            </p>
+
+            <a href="/11_hostzone/11-15.png" data-lightbox="11-15" data-title=""><img src="/11_hostzone/11-15.png" alt=""></a>    
+            
+            <p>レコードが追加されたことを確認します。</p>
+
+            <a href="/11_hostzone/11-16.png" data-lightbox="11-16" data-title=""><img src="/11_hostzone/11-16.png" alt=""></a>   
+
+            <p>ブラウザの検索欄に「http://www.<取得したドメイン名>」と入力します。今まで見てきたWordPressの設定画面が表示されればOKです。</p>
+
+            <a href="/11_hostzone/11-17.png" data-lightbox="11-17" data-title=""><img src="/11_hostzone/11-17.png" alt=""></a>            
+
+            <h2>まとめ</h2>
+            <p>今回はドメインの設定を実施しました。自分で取得したドメインを自分で構築したシステムに連携させることができました。一般ユーザはWEBサイトにアクセスする時は直接IPアドレスを入力しませんよね？サイトやサービスを連想させるドメイン名を入力しますよね。自分のシステムにドメインを連携することはほぼ必須と言えます。</p>
+
+            <p>※使用していないAWSリソースは必ず削除してください！思わぬ従量課金に繋がります！</p>
+
+        </div>
+        <div class="button">
+            <a href="10" class="btn btn--green btn--cubic btn--shadow">戻る</a>
+            <a href="12" class="btn btn--orange btn--cubic btn--shadow">次へ</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,107 @@
+<div class="main contents">
+    <div class="container">
+        <div class="article">
+            <h1>6.EC2を作成してみよう</h1>
+
+            <div data-turbolinks='false'>
+                <details id="table-of-content" open>
+                  <summary>目次</summary>
+                </details>
+            </div>
+
+            <h2>本章のゴール</h2>
+            <p>AWSの仮想サーバであるEC2を構築する。<br>本章では以下の構成図になります。
+            </p>
+
+            <a href="/6_EC2/6-1.png" data-lightbox="6-1" data-title=""><img src="/6_EC2/6-1.png" alt=""></a>
+
+            <h2>技術解説</h2>
+
+            <h3>EC2</h3>
+            <p>仮想サーバのこと。AMIと呼ばれるOSイメージを選択することで様々なOSのサーバを構築することができる。</p>
+
+            <h3>Elastic IP</h3>
+            <p>AWSが所有するGlobal IP アドレスのこと。</p>
+
+            <h3>キーペア</h3>
+            <p>公開鍵と秘密鍵のセットのこと。EC2にSSHするとき公開鍵暗号方式というやり方でアクセスしている。EC2を起動するとき秘密鍵をダウンロードする。ユーザは秘密鍵を使って本人情報（署名）を作成しサーバにアクセスし、サーバは公開鍵を用いてユーザの本人情報（署名）を検証する。この検証で問題なければ無事サーバにログイン可能となる。</p>
+
+            <h3>AMI</h3>
+            <p>EC2で用いるOSのマシンイメージのこと。</p>
+
+            <h2>構築手順</h2>
+            <h3>EC2インスタンスを作成する</h3>
+            <p>AWSマネジメントコンソールにログインします。トップ画面からEC2管理コンソールに移動します。</p>
+
+            <a href="/6_EC2/6-2.png" data-lightbox="6-2" data-title=""><img src="/6_EC2/6-2.png" alt=""></a> 
+                       
+            <a href="/6_EC2/6-3.png" data-lightbox="6-3" data-title=""><img src="/6_EC2/6-3.png" alt=""></a> 
+            
+            <p>ナビゲーションペインから「インスタンス」を選択し、「インスタンスを起動」をクリックします。</p>
+            <a href="/6_EC2/6-4.png" data-lightbox="6-4" data-title=""><img src="/6_EC2/6-4.png" alt=""></a>
+
+            <p>AMIの選択画面です。ここでは無料利用枠対象のAmazonLinux2 AMIを選択します。</p>
+            <a href="/6_EC2/6-5.png" data-lightbox="6-5" data-title=""><img src="/6_EC2/6-5.png" alt=""></a> 
+
+            <p>続いてインスタンスタイプの選択です。ここでも無料利用枠対象のt2.microを選択します。</p>
+            <a href="/6_EC2/6-6.png" data-lightbox="6-6" data-title=""><img src="/6_EC2/6-6.png" alt=""></a>    
+            
+            <p>ここではインスタンスの詳細を設定します。以下の設定値を入力します。（これ以外はデフォルト値）入力が完了したら「次のステップ：ストレージの追加」をクリックします。</p>
+
+            <p>ネットワーク＝自身で作成したVPC<br>サブネット＝AZ-1aにあるパブリックサブネット<br>自動割り当てパブリック IP＝無効化<br>ネットワークインターフェイス＞プライマリIP＝10.0.0.10
+            </p>
+            <a href="/6_EC2/6-7.png" data-lightbox="6-7" data-title=""><img src="/6_EC2/6-7.png" alt=""></a>    
+
+            <p>EC2インスタンスのストレージを選択します。デフォルトのまま「次のステップ：タグの追加」に移動します。</p>
+            <a href="/6_EC2/6-8.png" data-lightbox="6-8" data-title=""><img src="/6_EC2/6-8.png" alt=""></a>         
+
+            <p>「タグの追加」では何も設定しません。「次のステップ：セキュリティグループの設定」をクリックします。</p>
+            <a href="/6_EC2/6-9.png" data-lightbox="6-9" data-title=""><img src="/6_EC2/6-9.png" alt=""></a>        
+
+            <p>「既存のセキュリティグループを選択する」を選択します。前回作成しておいたEC2用のセキュリティグループを選択します。</p>
+            <a href="/6_EC2/6-10.png" data-lightbox="6-10" data-title=""><img src="/6_EC2/6-10.png" alt=""></a>           
+
+            <p>全体の設定値を確認します。間違いがなければ「起動」をクリックします。</p>
+            <a href="/6_EC2/6-11.png" data-lightbox="6-11" data-title=""><img src="/6_EC2/6-11.png" alt=""></a>          
+
+            <p>プルダウンメニューから「新しいキーペアの作成」を選択し、キーペア名には任意の名前を入力します。入力後、キーペアのダウンロードを実行します。その後「インスタンスの作成」をクリックします。</p>
+            <a href="/6_EC2/6-12.png" data-lightbox="6-12" data-title=""><img src="/6_EC2/6-12.png" alt=""></a>          
+
+            <p>作成中と表示されます。「インスタンスの表示」をクリックします。</p>
+            <a href="/6_EC2/6-13.png" data-lightbox="6-13" data-title=""><img src="/6_EC2/6-13.png" alt=""></a>  
+            
+            <p>正常にEC2インスタンスが作成されたことを確認します。</p>
+            <a href="/6_EC2/6-14.png" data-lightbox="6-14" data-title=""><img src="/6_EC2/6-14.png" alt=""></a>  
+
+            <p>ナビゲーションペインから「Elastic IP」を選択します。「Elastic IPアドレスの割り当て」をクリックします。</p>
+            <a href="/6_EC2/6-15.png" data-lightbox="6-15" data-title=""><img src="/6_EC2/6-15.png" alt=""></a>    
+
+            <p>そのまま「割り当て」をクリックします。</p>
+            <a href="/6_EC2/6-16.png" data-lightbox="6-16" data-title=""><img src="/6_EC2/6-16.png" alt=""></a>           
+
+            <p>Elastic IPアドレスが1件割り当てられたことを確認します。アクションから「Elastic IPアドレスの関連付け」をクリックします。</p>
+            <a href="/6_EC2/6-17.png" data-lightbox="6-17" data-title=""><img src="/6_EC2/6-17.png" alt=""></a> 
+
+            <a href="/6_EC2/6-18.png" data-lightbox="6-18" data-title=""><img src="/6_EC2/6-18.png" alt=""></a>  
+
+            <p>インスタンスで先ほど作成したEC2インスタンスを選択します。「関連付ける」をクリックします。</p>
+            <a href="/6_EC2/6-19.png" data-lightbox="6-19" data-title=""><img src="/6_EC2/6-19.png" alt=""></a>             
+
+            <p>Elastic IPアドレスがEC2インスタンスに正常に関連付けられたことを確認します。</p>
+            <a href="/6_EC2/6-20.png" data-lightbox="6-20" data-title=""><img src="/6_EC2/6-20.png" alt=""></a>
+            
+            <p>これでAWSの仮想サーバであるEC2インスタンスの構築が完了しました。</p>
+
+            <h2>まとめ</h2>
+            <p>今回はAWSの仮想サーバであるEC2インスタンスの構築を実施しました。EC2は非常に便利なサービスで何かサーバで試したいことが発生した時、「サーバを使いたいけど3日だけでいいんだよな」といったケースで力を発揮します。手軽でお安くサーバを借りることが出来るのでぜひ様々なケースで使ってみてください。</p>
+
+            <p>※使用していないAWSリソースは必ず削除してください！思わぬ従量課金に繋がります！</p>
+            
+        </div>
+
+            <div class="button">
+                <a href="5" class="btn btn--green btn--cubic btn--shadow">戻る</a>
+                <a href="7" class="btn btn--orange btn--cubic btn--shadow">次へ</a>
+            </div>
+    </div>
+</div>

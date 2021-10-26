@@ -9,6 +9,10 @@ class NonUsersController < NonloginController
   def agreement
   end
 
+  #LP
+  def lp
+  end
+
   # 新規ユーザ作成
   # strong paramter を使った書き方
   # user.attribute = params

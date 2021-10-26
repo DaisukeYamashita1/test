@@ -3,23 +3,9 @@
     <h1>Elemental-Lab</h1>
     <h2>コンテンツ一覧</h2>
     <ul class="contents external--link">
-        <li><%= link_to("0.目標を確認する", "/contents/first") %></li>
-        <li><%= link_to("1.AWSのアカウントを作成する", "/contents/account") %></li>
-        <li><%= link_to("2.セキュリティ初期設定", "/contents/first_security") %></li>
-        <li><%= link_to("3.VPC作成", "/contents/vpc") %></li>
-        <li><%= link_to("4.セキュリティグループ作成", "/contents/securitygroup") %></li>
-        <li><%= link_to("5.EC2作成", "/contents/ec2") %></li>
-        <li><%= link_to("6.RDS作成", "/contents/rds") %></li>
-        <li><%= link_to("7.EC2にデプロイする", "/contents/ec2_deploy") %></li>
-        <li><%= link_to("8.WordPressの設定をする", "/contents/wordpress") %></li>
-        <li><%= link_to("9.ALB作成", "/contents/alb") %></li>
-        <li><%= link_to("10.ドメインを取得する", "/contents/domain") %></li>
-        <li><%= link_to("11.ホストゾーンを作成する", "/contents/hostzone") %></li>
-        <li><%= link_to("12.S3作成", "/contents/s3") %></li>
-        <li><%= link_to("13.Lambda作成", "/contents/lambda") %></li>
-        <li><%= link_to("14.リソース削除", "/contents/deleteresource") %></li>
-        <li><%= link_to("15.CloudFomation作成", "/contents/cfn") %></li>
-        <li><%= link_to("16.その他AWSサービス解説", "/contents/others") %></li>
+        <% @contents.each do |content| %>
+          <li><a href="/contents/<%= content.id %>"><%= content.id %>.<%= content.title %></a></li>
+        <% end %>
     </ul>
 
   </div>

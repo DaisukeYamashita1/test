@@ -1,0 +1,95 @@
+<div class="main contents">
+    <div class="container">
+        <div class="article">
+            <h1>7.RDSを作成してみよう</h1>
+
+            <div data-turbolinks='false'>
+                <details id="table-of-content" open>
+                  <summary>目次</summary>
+                </details>
+            </div>
+
+            <h2>本章のゴール</h2>
+            <p>RDSを作成する。<br>本章は以下の構成図を目指して構築を進めます。
+            </p>
+            <a href="/7_RDS/7-1.png" data-lightbox="7-1" data-title=""><img src="/7_RDS/7-1.png" alt=""></a>
+
+            <h2>技術解説</h2>
+            
+            <h3>RDS</h3>
+            <p>AWSが提供する関係データベースサービス。</p>
+
+            <h3>サブネットグループ</h3>
+            <p>RDSインスタンスが配置され得るサブネットをグループ化したもの。サブネットグループには2つ以上のサブネットの登録が必要でありかつそのサブネットは最低2つのAZにまたがっていなければならない。</p>
+
+            <h3>MySQL</h3>
+            <p>オープンソースのリレーショナルデータベース管理システム。</p>
+
+            <h2>構築手順</h2>
+            <h3>サブネットグループを作成する</h3>
+
+            <p>AWSマネジメントコンソールのサービス一覧から「RDS」を選択します。</p>
+            <a href="/7_RDS/7-2.png" data-lightbox="7-2" data-title=""><img src="/7_RDS/7-2.png" alt=""></a>
+
+            <p>RDS管理コンソールが表示されました。データベースを作成する前にサブネットグループを作成します。ナビゲーションペインから「サブネットグループ」を選択します。</p>
+            <a href="/7_RDS/7-3.png" data-lightbox="7-3" data-title=""><img src="/7_RDS/7-3.png" alt=""></a>
+
+            <p>「DBサブネットグループを作成」をクリックします。</p>
+            <a href="/7_RDS/7-4.png" data-lightbox="7-4" data-title=""><img src="/7_RDS/7-4.png" alt=""></a>
+            
+            <p>以下の設定値でサブネットグループを作成します。パラメータの入力後「作成」をクリックします。</p>
+
+            <p>名前＝任意<br>説明＝このサブネットグループの用途を記載<br>VPC＝作成したVPCを選択<br>アベイラビリティゾーン＝ap-northeast-1a、ap-northeast-1c<br>サブネット＝AZ-1aとAZ-1cそれぞれのプライベートサブネットを指定（CIDRが10.0.0.64/26と10.0.0.192/26のサブネット）
+            </p>
+
+            <a href="/7_RDS/7-5.png" data-lightbox="7-5" data-title=""><img src="/7_RDS/7-5.png" alt=""></a>
+
+            <p>サブネットグループが正常に作成されたことを確認してください。</p>
+            <a href="/7_RDS/7-6.png" data-lightbox="7-6" data-title=""><img src="/7_RDS/7-6.png" alt=""></a>
+
+            <h3>RDSを作成する</h3>
+            <p>ナビゲーションペインから「データベース」を選択します。「データベースの作成」をクリックします。</p>
+            <a href="/7_RDS/7-7.png" data-lightbox="7-7" data-title=""><img src="/7_RDS/7-7.png" alt=""></a>  
+            
+            <p>以下の設定値でRDSを作成します。これ以外の設定はデフォルト値です。入力が完了したら「データベースの作成」をクリックします。</p>
+
+            <p>エンジンのオプション＝MySQL<br>テンプレート＝無料利用枠<br>DBインスタンス識別子＝wordpress<br>マスターユーザー名＝wordpress<br>マスターパスワード＝任意（後ほど使いますので覚えておいてください）<br>Vertual Private Cloud（VPC）＝作成したVPC<br>サブネットグループ＝作成したサブネットグループ<br>VPCセキュリティグループ＝作成したRDS用のセキュリティグループ<br>アベイラビリティゾーン＝ap-northeast-1a
+            </p>
+            
+            <p>追加設定を開き以下設定します。<br>最初のデータベース名＝wordpress
+            </p>
+
+            <a href="/7_RDS/7-8.png" data-lightbox="7-8" data-title=""><img src="/7_RDS/7-8.png" alt=""></a>
+
+            <a href="/7_RDS/7-9.png" data-lightbox="7-9" data-title=""><img src="/7_RDS/7-9.png" alt=""></a>
+
+            <a href="/7_RDS/7-10.png" data-lightbox="7-10" data-title=""><img src="/7_RDS/7-10.png" alt=""></a>
+
+            <a href="/7_RDS/7-11.png" data-lightbox="7-11" data-title=""><img src="/7_RDS/7-11.png" alt=""></a>
+
+            <a href="/7_RDS/7-12.png" data-lightbox="7-12" data-title=""><img src="/7_RDS/7-12.png" alt=""></a>
+
+            <a href="/7_RDS/7-13.png" data-lightbox="7-13" data-title=""><img src="/7_RDS/7-13.png" alt=""></a>
+
+            <a href="/7_RDS/7-14.png" data-lightbox="7-14" data-title=""><img src="/7_RDS/7-14.png" alt=""></a>
+
+            <a href="/7_RDS/7-15.png" data-lightbox="7-15" data-title=""><img src="/7_RDS/7-15.png" alt=""></a>
+
+            <p>作成が完了するまで少々時間が掛かりますので完了まで待ちます。</p>
+            <a href="/7_RDS/7-16.png" data-lightbox="7-16" data-title=""><img src="/7_RDS/7-16.png" alt=""></a>
+
+            <p>作成が完了したことを確認します。</p>
+            <a href="/7_RDS/7-17.png" data-lightbox="7-17" data-title=""><img src="/7_RDS/7-17.png" alt=""></a>
+
+            <h2>まとめ</h2>
+            <p>今回はRDSの作成を実施しました。一般的にDBはシステム開発において重要な要素です。マイナーアップデートやアクセス制御、冗長構成など全てにおいて慎重に設定します。しかしRDSはその大部分をAWSがいい感じに設定してくれています。開発スピードは上がり、運用コストは減るので我々が受ける恩恵は非常に大きいものです。AWSではこの便利なマネージドサービスを使い倒すことで従来のオンプレミスシステムでは得られない恩恵を受けられます。（しかし細部に至るまで制御したい時はEC2にDBを入れて使用することもあります）</p>
+
+            <p>※使用していないAWSリソースは必ず削除してください！思わぬ従量課金に繋がります！</p>
+
+        </div>
+        <div class="button">
+            <a href="6" class="btn btn--green btn--cubic btn--shadow">戻る</a>
+            <a href="8" class="btn btn--orange btn--cubic btn--shadow">次へ</a>
+        </div>
+    </div>
+</div>
