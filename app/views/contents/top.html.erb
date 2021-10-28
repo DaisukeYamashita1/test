@@ -1,12 +1,15 @@
 <div class="main posts-index">
   <div class="container">
-    <h1>Elemental-Lab</h1>
-    <h2>コンテンツ一覧</h2>
-    <ul class="contents external--link">
-        <% @contents.each do |content| %>
-          <li><a href="/contents/<%= content.id %>"><%= content.id %>.<%= content.title %></a></li>
-        <% end %>
-    </ul>
+    <h1>コンテンツ一覧</h1>
+    <%= image_tag "img_01.svg", class: 'sized' %>
+    <div class="basic">
+      <h2><i class="far fa-lightbulb"></i><span>AWS基礎</span></h2>
+      <ul class="contents external--link">
+          <% @contents.each do |content| %>
+            <li><a href="/contents/<%= content.id %>"><%= content.id %>.<%= content.title %></a></li>
+          <% end %>
+      </ul>
+    </div>
 
   </div>
 </div>

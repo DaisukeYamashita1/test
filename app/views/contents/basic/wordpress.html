@@ -40,31 +40,31 @@
 
             <p>以下のコマンドを入力します。</p>
 
-            <pre class="prettyprint linenums">
-            cd ~/Downloads
-            ls -la | grep *.pem                    
-            </pre>      
+<pre class="prettyprint linenums">
+cd ~/Downloads
+ls -la | grep *.pem
+</pre>      
             
             <p>ここでEC2インスタンスを起動した際にダウンロードした鍵ファイルの存在を確認します。インターネットからダウンロードしたのでダウンロードフォルダにありますが、これを「.ssh」というフォルダにコピーします。
             </p>
 
-            <pre class="prettyprint linenums">
-            cp <鍵ファイル名>.pem ~/.ssh/（<鍵ファイル名>はご自身で読み替えてください）
-            </pre>           
+<pre class="prettyprint linenums">
+cp {鍵ファイル名}.pem ~/.ssh/（{鍵ファイル名}はご自身で読み替えてください）
+</pre>           
             
             <p>鍵ファイルが持つ設定値を変更します。この変更がないとEC2インスタンス（サーバ）に接続出来ない可能性があります。</p>
 
-            <pre class="prettyprint linenums">
-            cd ~/.ssh
-            chmod 600 <鍵ファイル名>.pem
-            ls -la <鍵ファイル名>.pem                
-            </pre> 
+<pre class="prettyprint linenums">
+cd ~/.ssh
+chmod 600 {鍵ファイル名}.pem
+ls -la {鍵ファイル名}.pem
+</pre> 
             
             <p>表示された結果の左端が「-rw-------」となっていることを確認してください。問題なければいよいよEC2インスタンスに接続します。以下のコマンドを入力します。</p>
 
-            <pre class="prettyprint linenums">
-            ssh -i<鍵ファイル名>.pem ec2-user@<Elastic IPアドレス>  
-            </pre>
+<pre class="prettyprint linenums">
+ssh -i {鍵ファイル名}.pem ec2-user@{Elastic IPアドレス}
+</pre>
 
             <p>「The authenticity of host ‘Elastic IPアドレス (Elastic IPアドレス)’ can’t be established.
             ECDSA key fingerprint is SHA256:isOvdUQ7cLZaN8jwtBst0kb72SLJZU/Uk07pu581MaU.
@@ -78,15 +78,15 @@
             <h3>データベースの設定をする</h3>
             <p>まずEC2の状態を最新化します。</p>
 
-            <pre class="prettyprint linenums">
-            sudo yum -y update
-            </pre>
+<pre class="prettyprint linenums">
+sudo yum -y update
+</pre>
 
             <p>データベースと接続するためにEC2インスタンスにクライアントソフトを入れます。</p>
 
-            <pre class="prettyprint linenums">
-            sudo yum -y install mysql
-            </pre>
+<pre class="prettyprint linenums">
+sudo yum -y install mysql
+</pre>
 
             <p>データベースに接続します。そのためにはRDSのエンドポイントを知る必要があります。エンドポイントはAWSマネジメントコンソール→RDS管理コンソールの作成したRDSの詳細画面に記載があります。
             </p>
@@ -97,9 +97,9 @@
 
             <p>RDSエンドポイントの確認が取れたら以下のコマンドでEC2インスタンスとデータベースを接続します。</p>
 
-            <pre class="prettyprint linenums">
-            mysql -h <RDSエンドポイント> -u wordpress -p
-            </pre>
+<pre class="prettyprint linenums">
+mysql -h {RDSエンドポイント} -u wordpress -p
+</pre>
 
             <p>パスワードが聞かれるのでパスワードを入力します。完了するとデータベースへのアクセスが完了した状態になります。</p>
 
@@ -107,22 +107,22 @@
 
             <p>WordPress接続用のユーザを作成します。以下のコマンドを入力します。「quit」を入力した後はデータベースからログアウトされます。</p>
 
-            <pre class="prettyprint linenums">
-            GRANT ALL PRIVILEGES ON wordpress.* TO wordpress;
-            FLUSH PRIVILEGES;
-            quit;                
-            </pre>
+<pre class="prettyprint linenums">
+GRANT ALL PRIVILEGES ON wordpress.* TO wordpress;
+FLUSH PRIVILEGES;
+quit;
+</pre>
 
             <a href="/8_wordpress/8-8.png" data-lightbox="8-8" data-title=""><img src="/8_wordpress/8-8.png" alt=""></a>
 
             <h3>Apacheをインストールする</h3>
             <p>以下のコマンドを実行してApacheをインストールし有効化します。</p>
 
-            <pre class="prettyprint linenums">
-            sudo yum install -y httpd
-            sudo systemctl start httpd
-            sudo systemctl enable httpd                
-            </pre>
+<pre class="prettyprint linenums">
+sudo yum install -y httpd
+sudo systemctl start httpd
+sudo systemctl enable httpd
+</pre>
 
             <p>ここでブラウザを開き、EC2インスタンスのElastic IPアドレスを検索バーに入力します。以下のような画面が表示されればEC2インスタンスはWEBサーバとして機能しています。</p>
 
@@ -132,22 +132,21 @@
 
             <p>以下のコマンドでWordPressをインストールします。</p>
 
-            <pre class="prettyprint linenums">
-            wget https://wordpress.org/latest.tar.gz
-            tar -xzf latest.tar.gz                
-            </pre>
+<pre class="prettyprint linenums">
+wget https://wordpress.org/latest.tar.gz
+tar -xzf latest.tar.gz
+</pre>
 
             <p>インストールされたことを確認します。設定値を変更するのでバックアップを取っておきます。</p>
 
-            <pre class="prettyprint linenums">
-            cd wordpress
-            cp wp-config-sample.php wp-config.php
-            ls -la                
-            </pre>    
+<pre class="prettyprint linenums">
+cd wordpress
+cp wp-config-sample.php wp-config.php
+ls -la
+</pre>    
             
-            <p>WordPressを設定する際に必要な設定値を確認します。ブラウザから以下のURLにアクセスしてください。</p>
-
-            <a href="https://api.wordpress.org/secret-key/1.1/salt/" >https://api.wordpress.org/secret-key/1.1/salt/</a>
+            <p>WordPressを設定する際に必要な設定値を確認します。ブラウザから以下のURLにアクセスしてください。<br>
+            <a href="https://api.wordpress.org/secret-key/1.1/salt/" class="underline">https://api.wordpress.org/secret-key/1.1/salt/</a></p>
 
             <p>defineから始まる文字列が8行表示されれば問題ありません。</p>
 
@@ -155,9 +154,9 @@
 
             <p>Linux標準搭載のテキストエディタである「vi」でWordPressの設定ファイルを編集していきます。以下のコマンドを実行してください。</p>
 
-            <pre class="prettyprint linenums">
-            vi wp-config.php
-            </pre>      
+<pre class="prettyprint linenums">
+vi wp-config.php
+</pre>      
             
             <p>「:set number」とキーボードから入力してください。ファイルに行番号が付きます。</p>
 
@@ -183,12 +182,12 @@
 
             <p>以下のコマンドを実行し、WordPressをデプロイします。</p>
 
-            <pre class="prettyprint linenums">
-            sudo amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
-            cd /home/ec2-user
-            sudo cp -r wordpress/* /var/www/html/
-            sudo service httpd restart                
-            </pre> 
+<pre class="prettyprint linenums">
+sudo amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
+cd /home/ec2-user
+sudo cp -r wordpress/* /var/www/html/
+sudo service httpd restart
+</pre> 
             
             <p>再びブラウザからEC2インスタンスのElasticIPアドレスにアクセスします。以下のようなWordPressの画面が表示されたらデプロイ成功です。</p>
 

@@ -15,7 +15,7 @@
           <%= f.text_field :user_name %>
           <p>パスワード　<span id="buttonEye" class="fa fa-eye" onclick="pushHideButton()"></p>       
           <%= f.password_field :password, id:"textPassword", oncopy:"return false", onpaste:"return false" %>  
-          <p>パスワードを忘れた場合は、再度、新規登録をお願いします。</p> 
+          <p style="font-size:14px;">※パスワードを忘れた場合は、再度、新規登録をお願いします。</p> 
           <%= f.submit value="ログイン"%>
         <% end %>
       </div>

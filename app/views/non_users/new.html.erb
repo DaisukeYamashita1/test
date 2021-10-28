@@ -15,13 +15,14 @@
                     <%= f.text_field :user_name %>
                     <p>パスワード　<span id="buttonEye" class="fa fa-eye" onclick="pushHideButton()"></p>
                     <%= f.password_field :password,id:"textPassword", oncopy:"return false",  onpaste:"return false" %>   
-                    <p>パスワードは8文字以上の半角英数（両方含む）で入力してください。</p>   
-                    <li><%= link_to "利用規約", "/agreement", class:"agreement-document" %></li>             
+                    <p style="font-size:14px;">パスワードは8文字以上の半角英数（両方含む）で入力してください。</p>   
+ 
                     <div class="agreement-check">
-                        <div class="agreement-checkbox">
-                        <%= f.check_box :agreement, {}, "ok", "" %>         
-                        </div>
-                        <%= f.label :agreement, "私は利用規約に同意しました" %> 
+                        <p><%= link_to "利用規約", "/agreement", class:"agreement-document" %></p>
+                        <ul>
+                            <li><%= f.check_box :agreement, {}, "ok", "" %></li>
+                            <li><%= f.label :agreement, "私は利用規約に同意しました" %></li>
+                        </ul>                         
                     </div>
                     <br>
                     <%= f.submit value="新規登録"%>
