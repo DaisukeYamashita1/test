@@ -61,7 +61,8 @@ body {
 .container {
   max-width: 800px;
   margin: 0px auto;
-  padding-top: 30px;
+  padding-top: 50px;
+  padding-bottom: 60px;
   clear: both;
 }
 
@@ -606,7 +607,7 @@ nav{
   }
 }
 
-.article {
+.article,.button {
   display: block;  /* for IE */
   margin-left: 220px;
 }
