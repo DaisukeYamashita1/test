@@ -8,6 +8,8 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=desert"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    
   </head>
 
   <body>
@@ -44,7 +46,7 @@
     </header>
 
     <% if @current_user && request.fullpath.index("/contents/") == 0%>  
-      <nav class="side-menu">
+      <nav class="side-menu" id="side-menu">
         <ul class="contents external--link">
             <% @contents = Content.where(category_id:1) %>
             <% @contents.each do |content| %>
@@ -52,6 +54,15 @@
             <% end %>      
         </ul> 
       </nav>  
+
+      <script type="text/javascript">
+      $(function(){
+        $("#side-menu").resizable({
+          maxWidth:400,
+        });
+      });
+      </script>      
+
     <% end %>
 
     <div id="pagetop">
