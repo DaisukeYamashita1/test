@@ -1,12 +1,23 @@
 import $ from 'jquery';
 
 $(document).on('turbolinks:load', function() {
-  $("nav").hide();
+
   $("#pagetop").hide();
 
-  $(".menubtn").click(function(){
-      $("nav").stop(true).animate({'width': 'toggle'});
+  $(window).scroll(function () {
+    if ($(this).scrollTop() > 32) {
+      $('.side-menu').addClass('fixed');
+    } else {
+      $('.side-menu').removeClass('fixed');
+    }
   });
+
+  $('#openModal').click(function(){
+    $('#modalArea').fadeIn();
+  });
+  $('#closeModal , #modalBg').click(function(){
+    $('#modalArea').fadeOut();
+  });  
 
   $(window).scroll(function () {
     if ($(this).scrollTop() > 100) {

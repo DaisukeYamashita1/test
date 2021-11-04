@@ -13,4 +13,7 @@ class ContentsController < LoginController
     render template: "contents/#{category_name}/#{path_name}"    
   end
 
+  def words
+  end
+
 end

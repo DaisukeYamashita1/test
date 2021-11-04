@@ -15,7 +15,6 @@
       <ul class="header-logo">
         <% if @current_user %>
           <li><%= link_to("Elemental-Lab", "/top") %></li>
-          <li><p class="menubtn"><i class="fas fa-bars"></i></p>
           </li>               
         <% else %>
           <li><%= link_to("Elemental-Lab", "/") %></li>
@@ -44,14 +43,16 @@
       </ul>
     </header>
 
-    <nav>
-      <ul class="contents external--link">
-          <% @contents = Content.where(category_id:1) %>
-          <% @contents.each do |content| %>
-            <li><a href="/contents/<%= content.id %>"><%= content.id %>.<%= content.title %></a></li>
-          <% end %>      
-      </ul> 
-    </nav>  
+    <% if @current_user && request.fullpath.index("/contents/") == 0%>  
+      <nav class="side-menu">
+        <ul class="contents external--link">
+            <% @contents = Content.where(category_id:1) %>
+            <% @contents.each do |content| %>
+              <li><a href="/contents/<%= content.id %>"><%= content.id %>.<%= content.title %></a></li>
+            <% end %>      
+        </ul> 
+      </nav>  
+    <% end %>
 
     <div id="pagetop">
     <a href="#">

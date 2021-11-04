@@ -18,7 +18,21 @@
             <h2>技術解説</h2>
 
             <h3>クラウドサービス</h3>
-            <p>インターネット経由で、デスクトップ仮想化や共有ディスクなど、ハードウェアやインフラ機能の提供を行うサービス。</p>
+            <p>インターネット経由で、<span id="openModal">デスクトップ仮想化</span>や <a href="words#word1" class="link-black">共有ディスク</a>など、ハードウェアやインフラ機能の提供を行うサービス。</p>
+
+            <!-- モーダルエリアここから -->
+            <section id="modalArea" class="modalArea">
+              <div id="modalBg" class="modalBg"></div>
+              <div class="modalWrapper">
+                <div class="modalContents">
+                  <p class="memobox-title">デスクトップ仮想化</p>
+                  <p>デスクトップ仮想化（Virtual Desktop Infrastructure：VDI）とは、サーバ上にあるデスクトップ環境を遠隔地にあるクライアント端末に転送して利用することです。</p>
+                </div>
+                <div id="closeModal" class="closeModal">
+                 <p></p>
+                </div>
+              </div>
+            </section>            
 
             <h3>Amazon Web Services</h3>
             <p>クラウド事業者のひとつ。他にもGCPやAzure等があるがAWSは最も汎用的でユーザファーストなクラウド事業者である。</p>

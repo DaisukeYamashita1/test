@@ -60,9 +60,8 @@ body {
 
 .container {
   max-width: 800px;
-  margin: 60px auto;
-  padding-left: 15px;
-  padding-right: 15px;
+  margin: 0px auto;
+  padding-top: 30px;
   clear: both;
 }
 
@@ -100,7 +99,6 @@ body {
 /* ヘッダー ================================ */
 header {
   height: 64px;
-  position: absolute;
   z-index: 1;
   width: 100%;
 }
@@ -333,17 +331,18 @@ a.btn--shadow {
   padding-top: 50px;
 }
 
-.agreement-document {
+.link-black,#openModal {
   padding-top: 10px;
   font-size: 16px;
   color: black;
   text-decoration: none;
-  border-bottom: solid 2px black;
+  border-bottom: solid 1px black;
 }
 
-.agreement-document:hover {
+.link-black:hover,#openModal:hover {
   opacity: 0.75;
-  border-bottom: solid 2px black;
+  border-bottom: solid 1.5px black;
+  cursor: pointer;
 }
 
 .agreement {
@@ -542,7 +541,6 @@ nav{
   height:100%;
   width:35%;
   z-index: 99;
-  margin-top: 64px;
   li {
     padding-top:5px;
   }
@@ -606,4 +604,95 @@ nav{
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
   }
+}
+
+.article {
+  display: block;  /* for IE */
+  margin-left: 220px;
+}
+
+.side-menu {
+  position: fixed;
+  top: 64px;
+  left: 0px;
+  width: 230px;
+  height: 100vh;
+  background: #4d4d60a6;
+
+  /* 縦方向のスクロールバーを表示 */
+  overflow-y: scroll;
+
+  /* IE などのスクロールバーの色設定 */
+  scrollbar-face-color: #999;
+  scrollbar-track-color: #eee;
+
+  /* スマホ用の慣性スクロール */
+  -webkit-overflow-scrolling: touch;
+}
+
+.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+
+
+
+/* モーダルCSS */
+.modalArea {
+  display: none;
+  position: fixed;
+  z-index: 10; /*サイトによってここの数値は調整 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.modalBg {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(30,30,30,0.9);
+}
+
+.modalWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform:translate(-50%,-50%);
+  width: 70%;
+  max-width: 500px;
+  padding: 30px 40px;
+  background-color: #fff9c4;
+  border-radius: 10px;  
+  border: solid 4px #fda31d;
+}
+
+.closeModal {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  cursor: pointer;
+}
+.closeModal:before{
+  font-family: "Font Awesome 5 Free";
+  content: "\f057";
+  font-size: 25px;
+  color: #fda31d;
+}
+.modalContents p{
+  margin: 0;
+  padding: 5px;
+}
+.memobox-title{
+  font-size: 18px;
+  font-weight: bold;
+  color: #fda31d;
+  padding-bottom: 10px;
+}
+.memobox-title:before{
+  font-family: "Font Awesome 5 Free";
+  content: "\f304"+" ";
+  font-size: 17px;
 }

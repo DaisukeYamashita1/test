@@ -6,7 +6,7 @@
       <h2><i class="far fa-lightbulb"></i><span>AWS基礎</span></h2>
       <ul class="contents external--link">
           <% @contents.each do |content| %>
-            <li><a href="/contents/<%= content.id %>"><%= content.id %>.<%= content.title %></a></li>
+            <li><%= content.id %>.<a href="/contents/<%= content.id %>" class="link-black"><%= content.title %></a></li>
           <% end %>
       </ul>
     </div>
