@@ -44,163 +44,163 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description: Create VPC
 Parameters:
-VPCCIDR:
-  Type: String
-  Default: 10.0.0.0/24
-  Description: Default is 10.0.0.0/24.
-PublicSubnetACIDR:
-  Type: String
-  Default: 10.0.0.0/26
-  Description: Default is 10.0.0.0/26.
-PravateSubnetACIDR:
-  Type: String
-  Default: 10.0.0.64/26
-  Description: Default is 10.0.0.64/26.
-PublicSubnetCCIDR:
-  Type: String
-  Default: 10.0.0.128/26
-  Description: Default is 10.0.0.128/26.
-PravateSubnetCCIDR:
-  Type: String
-  Default: 10.0.0.192/26
-  Description: Default is 10.0.0.192/26.
+  VPCCIDR:
+    Type: String
+    Default: 10.0.0.0/24
+    Description: Default is 10.0.0.0/24.
+  PublicSubnetACIDR:
+    Type: String
+    Default: 10.0.0.0/26
+    Description: Default is 10.0.0.0/26.
+  PravateSubnetACIDR:
+    Type: String
+    Default: 10.0.0.64/26
+    Description: Default is 10.0.0.64/26.
+  PublicSubnetCCIDR:
+    Type: String
+    Default: 10.0.0.128/26
+    Description: Default is 10.0.0.128/26.
+  PravateSubnetCCIDR:
+    Type: String
+    Default: 10.0.0.192/26
+    Description: Default is 10.0.0.192/26.
 
 Resources:
-########## VPC ##########
-VPC:
-  Type: AWS::EC2::VPC
-  Properties:
-    CidrBlock: !Ref VPCCIDR
-    EnableDnsSupport: "true"
-    EnableDnsHostnames: "true"
-    Tags:
-      - Key: Name
-        Value: VPC
+  ########## VPC ##########
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref VPCCIDR
+      EnableDnsSupport: "true"
+      EnableDnsHostnames: "true"
+      Tags:
+        - Key: Name
+          Value: VPC
 
-########## Subnet ##########
-PublicSubnetA:
-  Type: AWS::EC2::Subnet
-  Properties:
-    AvailabilityZone: "ap-northeast-1a"
-    CidrBlock: "10.0.0.0/26"
-    Tags:
-      - Key: Name
-        Value: public-subnet-A
-    VpcId: !Ref VPC
-PrivateSubnetA:
-  Type: AWS::EC2::Subnet
-  Properties:
-    AvailabilityZone: "ap-northeast-1a"
-    CidrBlock: "10.0.0.64/26"
-    Tags:
-      - Key: Name
-        Value: private-subnet-A
-    VpcId: !Ref VPC
-PublicSubnetC:
-  Type: AWS::EC2::Subnet
-  Properties:
-    AvailabilityZone: "ap-northeast-1c"
-    CidrBlock: "10.0.0.128/26"
-    Tags:
-      - Key: Name
-        Value: public-subnet-C
-    VpcId: !Ref VPC
-PrivateSubnetC:
-  Type: AWS::EC2::Subnet
-  Properties:
-    AvailabilityZone: "ap-northeast-1c"
-    CidrBlock: "10.0.0.192/26"
-    Tags:
-      - Key: Name
-        Value: PrivateSubnetC
-    VpcId: !Ref VPC
+  ########## Subnet ##########
+  PublicSubnetA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: "ap-northeast-1a"
+      CidrBlock: "10.0.0.0/26"
+      Tags:
+        - Key: Name
+          Value: public-subnet-A
+      VpcId: !Ref VPC
+  PrivateSubnetA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: "ap-northeast-1a"
+      CidrBlock: "10.0.0.64/26"
+      Tags:
+        - Key: Name
+          Value: private-subnet-A
+      VpcId: !Ref VPC
+  PublicSubnetC:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: "ap-northeast-1c"
+      CidrBlock: "10.0.0.128/26"
+      Tags:
+        - Key: Name
+          Value: public-subnet-C
+      VpcId: !Ref VPC
+  PrivateSubnetC:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: "ap-northeast-1c"
+      CidrBlock: "10.0.0.192/26"
+      Tags:
+        - Key: Name
+          Value: PrivateSubnetC
+      VpcId: !Ref VPC
 
-########## InternetGateway ##########
-myInternetGateway:
-  Type: AWS::EC2::InternetGateway
-  Properties:
-    Tags:
-      - Key: Name
-        Value: InternetGateway
-Attach:
-  Type: AWS::EC2::VPCGatewayAttachment
-  Properties:
-    InternetGatewayId: !Ref myInternetGateway
-    VpcId: !Ref VPC
+  ########## InternetGateway ##########
+  myInternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: InternetGateway
+  Attach:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      InternetGatewayId: !Ref myInternetGateway
+      VpcId: !Ref VPC
 
-########## RouteTable ##########
-PublicRouteTableA:
-  Type: AWS::EC2::RouteTable
-  Properties:
-    Tags:
-      - Key: Name
-        Value: PublicRouteTableA
-    VpcId: !Ref VPC
-PravateRouteTableA:
-  Type: AWS::EC2::RouteTable
-  Properties:
-    Tags:
-      - Key: Name
-        Value: PravateRouteTableA
-    VpcId: !Ref VPC
-PublicRouteTableC:
-  Type: AWS::EC2::RouteTable
-  Properties:
-    Tags:
-      - Key: Name
-        Value: PublicRouteTableC
-    VpcId: !Ref VPC
-PravateRouteTableC:
-  Type: AWS::EC2::RouteTable
-  Properties:
-    Tags:
-      - Key: Name
-        Value: PravateRouteTableC
-    VpcId: !Ref VPC
-PublicRouteA:
-  Type: AWS::EC2::Route
-  Properties:
-    DestinationCidrBlock: "0.0.0.0/0"
-    GatewayId: !Ref myInternetGateway
-    RouteTableId: !Ref PublicRouteTableA
-PublicRouteC:
-  Type: AWS::EC2::Route
-  Properties:
-    DestinationCidrBlock: "0.0.0.0/0"
-    GatewayId: !Ref myInternetGateway
-    RouteTableId: !Ref PublicRouteTableC
-AssosiatePublicRouteTableA:
-  Type: AWS::EC2::SubnetRouteTableAssociation
-  Properties:
-    RouteTableId: !Ref PublicRouteTableA
-    SubnetId: !Ref PublicSubnetA
-AssosiatePublicRouteTableC:
-  Type: AWS::EC2::SubnetRouteTableAssociation
-  Properties:
-    RouteTableId: !Ref PublicRouteTableC
-    SubnetId: !Ref PublicSubnetC
-    
+  ########## RouteTable ##########
+  PublicRouteTableA:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      Tags:
+        - Key: Name
+          Value: PublicRouteTableA
+      VpcId: !Ref VPC
+  PravateRouteTableA:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      Tags:
+        - Key: Name
+          Value: PravateRouteTableA
+      VpcId: !Ref VPC
+  PublicRouteTableC:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      Tags:
+        - Key: Name
+          Value: PublicRouteTableC
+      VpcId: !Ref VPC
+  PravateRouteTableC:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      Tags:
+        - Key: Name
+          Value: PravateRouteTableC
+      VpcId: !Ref VPC
+  PublicRouteA:
+    Type: AWS::EC2::Route
+    Properties:
+      DestinationCidrBlock: "0.0.0.0/0"
+      GatewayId: !Ref myInternetGateway
+      RouteTableId: !Ref PublicRouteTableA
+  PublicRouteC:
+    Type: AWS::EC2::Route
+    Properties:
+      DestinationCidrBlock: "0.0.0.0/0"
+      GatewayId: !Ref myInternetGateway
+      RouteTableId: !Ref PublicRouteTableC
+  AssosiatePublicRouteTableA:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicRouteTableA
+      SubnetId: !Ref PublicSubnetA
+  AssosiatePublicRouteTableC:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicRouteTableC
+      SubnetId: !Ref PublicSubnetC
+      
 Outputs:
-VPC:
-  Value: !Ref VPC
-  Export:
-    Name: ExportedVPC
-PublicSubnetA:
-  Value: !Ref PublicSubnetA
-  Export:
-    Name: ExportedPublicSubnetA
-PrivateSubnetA:
-  Value: !Ref PrivateSubnetA
-  Export:
-    Name: ExportedPrivateSubnetA
-PublicSubnetC:
-  Value: !Ref PublicSubnetC
-  Export:
-    Name: ExportedPublicSubnetC
-PrivateSubnetC:
-  Value: !Ref PrivateSubnetC
-  Export:
-    Name: ExportedPrivateSubnetC
+  VPC:
+    Value: !Ref VPC
+    Export:
+      Name: ExportedVPC
+  PublicSubnetA:
+    Value: !Ref PublicSubnetA
+    Export:
+      Name: ExportedPublicSubnetA
+  PrivateSubnetA:
+    Value: !Ref PrivateSubnetA
+    Export:
+      Name: ExportedPrivateSubnetA
+  PublicSubnetC:
+    Value: !Ref PublicSubnetC
+    Export:
+      Name: ExportedPublicSubnetC
+  PrivateSubnetC:
+    Value: !Ref PrivateSubnetC
+    Export:
+      Name: ExportedPrivateSubnetC
 </pre>          
 
 
@@ -299,6 +299,59 @@ Outputs:
 </pre>        
         <p>スタック名：stack-sg</p>
 
+        <p>※15行目の「CidrIp: XXX.XXX.XXX/32」のXXX箇所ですが自身のIPアドレスを入力する箇所です。以下のWEBサイトにアクセスして表示されたIPアドレスに置き換えてください。<br><a href="https://my.freenom.com/clientarea.php" class="underline"  target="_blank">https://www.cman.jp/network/support/go_access.cgi</a></p>
+
+        <h3>EC2インスタンスを自動構築する</h3>
+        <p>ファイル保存名：EC2.yml</p>
+<pre class="prettyprint linenums">
+AWSTemplateFormatVersion: 2010-09-09
+Description: Create EC2
+Resources:
+
+  ########## EC2 instance ##########
+  myEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: "ami-06098fd00463352b6"
+      KeyName: "KEY-NAME"
+      SubnetId: !ImportValue ExportedPublicSubnetA
+      InstanceType: "t2.micro"
+      PrivateIpAddress: "10.0.0.10"
+      SecurityGroupIds:
+        - !ImportValue ExportedSGforEC2
+      UserData:
+        Fn::Base64: |
+          #!/bin/bash
+          sudo yum -y update
+          sudo yum -y install mysql
+          sudo yum -y install httpd
+          sudo service httpd start
+      BlockDeviceMappings:
+        - DeviceName: "/dev/sdm"
+          Ebs:
+            VolumeType: "gp2"
+            DeleteOnTermination: "true"
+            VolumeSize: "8"
+
+  ########## Elastic IP ##########
+  myEIP:
+    Type: AWS::EC2::EIP
+    Properties:
+      InstanceId: !Ref myEC2Instance
+  AssosiateEIP:
+    Type: AWS::EC2::EIPAssociation
+    Properties:
+      EIP: !Ref myEIP
+      InstanceId: !Ref myEC2Instance
+
+Outputs:
+  EC2instance:
+    Value: !Ref myEC2Instance
+    Export:
+      Name: ExportedEC2instance
+</pre> 
+        <p>スタック名：stack-ec2</p>  
+        
         <p>※10行目の「KeyName: “KEY-NAME”」のKEY-NAMEですが、ここは自身が所持している鍵ファイル名に置き換えてください。（.pemは不要です）</p>
 
         <h3>RDSを自動構築する</h3>
