@@ -19,16 +19,20 @@
 
             <h2>技術解説</h2>
             <h3>VPC</h3>
-            <p>AWS上にオンプレミスと同じようなプライベートネットワーク空間を作成するAWSサービス。VPCで作成されたネットワーク空間は論理的に分離されており、外部とのネットワークが完全に分離される。</p>
+            <p>AWS上に<span class="openModal" id="openModal01">オンプレミス</span>と同じような<span class="openModal" id="openModal02">プライベートネットワーク</span>空間を作成するAWSサービス。VPCで作成されたネットワーク空間は論理的に分離されており、外部とのネットワークが完全に分離される。</p>
+            <p>VPCの詳しい説明は<a data-turbolinks="false" href="awswords#word6" class="link-black">こちら</a></p>
 
             <h3>サブネット</h3>
             <p>大きなネットワークの中にある小さなネットワークのこと。概念的には1つの会社がネットワークで会社内のそれぞれの部署がサブネット（サブネットワーク）。</p>
+            <p>サブネットの詳しい説明は<a data-turbolinks="false" href="awswords#word7" class="link-black">こちら</a></p>
 
             <h3>ルートテーブル</h3>
             <p>ネットワークを流れるデータの行き先を記載した表。データはルートテーブルに従ってネットワーク上を流れる。</p>
+            <p>ルートテーブルの詳しい説明は<a data-turbolinks="false" href="awswords#word9" class="link-black">こちら</a></p>
 
             <h3>インターネットゲートウェイ</h3>
             <p>VPC とインターネットとの間の通信を可能にするAWSリソース。</p>
+            <p>インターネットゲートウェイの詳しい説明は<a data-turbolinks="false" href="awswords#word8" class="link-black">こちら</a></p>
 
             <h2>構築手順</h2>
             <h3>VPCを作成する</h3>
@@ -137,7 +141,34 @@
             <p>以上でVPCの作成が完了しました。VPCと一言で言っても様々なコンポートネントで構成されていることが分かりました。</p>
             <p>※使用しない場合はAWSリソースは必ず削除してください！思わぬ従量課金に繋がります！</p>
             
-
+            <!-- モーダルエリア01 -->
+            <section id="modalArea01" class="modalArea">
+                <div id="modalBg01" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">オンプレミス</p>
+                    <p>自社でサーバーやソフトウェアなどシステム構築に必要なハードウェアを調達し、自社でシステムを開発・運用する仕組みです。</p>
+                  </div>
+                  <div id="closeModal01" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+            </section>     
+  
+            <!-- モーダルエリア02 -->
+            <section id="modalArea02" class="modalArea">
+                <div id="modalBg02" class="modalBg"></div>
+                <div class="modalWrapper">
+                    <div class="modalContents">
+                    <p class="memobox-title">プライベートネットワーク</p>
+                    <p>ある組織内や建物内で運用されるコンピュータネットワーク。</p>
+                    </div>
+                    <div id="closeModal02" class="closeModal">
+                    <p></p>
+                    </div>
+                </div>
+            </section>                        
+  
 
         </div>
         <div class="button">

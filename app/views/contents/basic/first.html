@@ -18,30 +18,16 @@
             <h2>技術解説</h2>
 
             <h3>クラウドサービス</h3>
-            <p>インターネット経由で、<span id="openModal">デスクトップ仮想化</span>や <a href="words#word1" class="link-black">共有ディスク</a>など、ハードウェアやインフラ機能の提供を行うサービス。</p>
+            <p>インターネット経由で、<span class="openModal" id="openModal01">デスクトップ仮想化</span>や <span class="openModal" id="openModal02">共有ディスク</span>など、ハードウェアや<span class="openModal" id="openModal03">インフラ</span>機能の提供を行うサービス。</p>
 
-            <!-- モーダルエリアここから -->
-            <section id="modalArea" class="modalArea">
-              <div id="modalBg" class="modalBg"></div>
-              <div class="modalWrapper">
-                <div class="modalContents">
-                  <p class="memobox-title">デスクトップ仮想化</p>
-                  <p>デスクトップ仮想化（Virtual Desktop Infrastructure：VDI）とは、サーバ上にあるデスクトップ環境を遠隔地にあるクライアント端末に転送して利用することです。</p>
-                </div>
-                <div id="closeModal" class="closeModal">
-                 <p></p>
-                </div>
-              </div>
-            </section>            
-
-            <h3>Amazon Web Services</h3>
-            <p>クラウド事業者のひとつ。他にもGCPやAzure等があるがAWSは最も汎用的でユーザファーストなクラウド事業者である。</p>
+            <h3>Amazon Web Services（AWS）</h3>
+            <p><span class="openModal" id="openModal04">クラウド事業者</span>のひとつ。他にもGCPやAzure等があるがAWSは最も汎用的でユーザファーストなクラウド事業者である。詳しい解説は<a data-turbolinks="false" href="word1" class="link-black">こちら</a></p>
 
             <h3>WordPress</h3>
-            <p>コンテンツ管理システム（CMS）のひとつ。ノンプログラミングでWebサイトを作成して公開することが出来るため非常に人気が高い。</p>
+            <p><span class="openModal" id="openModal05">コンテンツ管理システム（CMS）</span>のひとつ。ノンプログラミングでWebサイトを作成して公開することが出来るため非常に人気が高い。</p>
             
             <h3>AWSマネジメントコンソール</h3>
-            <p>GUIベースの画面でAWSを操作出来るWebサイトのこと。AWSリソースの使用状況を確認したり、構築、削除、変更、申請など様々なアクションが行える。</p>
+            <p><span class="openModal" id="openModal06">GUI</span>ベースの画面でAWSを操作出来るWebサイトのこと。AWSリソースの使用状況を確認したり、構築、削除、変更、申請など様々なアクションが行える。</p>
             
             <h3>GUI</h3>
             <p>グラフィカルユーザインターフェースのこと。マウス操作やタッチパネルなど直感的に操作出来ることが特徴。逆に文字ベースのCUIも存在する。</p>
@@ -59,7 +45,7 @@
             <p>答えはシンプルでクラウドベンダの中で最大のシェアを誇っているからです。またAWSは200を超えるサービスを提供しており、ほとんどのユーザが抱える課題に対応できます。（もちろん要件によっては他のクラウドが最善の場合もあります。）AWSは今もなおシェアを拡大しておりAWSエンジニアは今後更に必要とされます。当コースを通して多くのAWSエンジニアが世の中に排出されることを祈っております。</p>
 
             <h3>なぜWordPressなのか？</h3>
-            <p>Webの約42%はWordPressで構築されていると言われています。この数字からWordPressの需要は高いことが見受けられます。また「WordPressのインフラ構築」というのは「インフラ界のHelloWorld」とも呼ばれています。新しいインフラ技術を試すには、インフラだけではなくその上に乗るアプリケーションも必要ですよね。（インフラとアプリは切っても切り離せない関係です。）WordPressのインフラ構築は非常に手軽のため、メインであるインフラの構築に注力することができます。</p>
+            <p>Webの約42%はWordPressで構築されていると言われています。この数字からWordPressの需要は高いことが見受けられます。また「WordPressのインフラ構築」というのは「インフラ界のHelloWorld」とも呼ばれています。新しいインフラ技術を試すには、インフラだけではなくその上に乗る<span class="openModal" id="openModal07">アプリケーション</span>も必要ですよね。（インフラとアプリは切っても切り離せない関係です。）WordPressのインフラ構築は非常に手軽のため、メインであるインフラの構築に注力することができます。</p>
             
             <h3>作成するシステムの構成図</h3>
             <p>最終的には以下の構成のシステムを作成します。今完全に理解する必要はありません。各章を経て徐々にシステムを構築していきます。AWSには「AWSマネジメントコンソール」と呼ばれるGUIベースの画面が準備されています。最初の内はこのAWSマネジメントコンソールを用いて構築を進めていきます。最後の方では現在のインフラ構築で主流のIaC（Infrastructure as Code）にも挑戦してみましょう。このスキルはどこのIT現場でもほぼ必須と言って良い程使われている技術です。</p>
@@ -77,7 +63,7 @@
             <p>「4.VPCを作成してみよう〜11.ホストゾーンを作成してみよう」で作成したリソースを削除します。理由はコストを抑えるためです。AWSは従量課金制を採用しており使ったら使った分だけ金額が請求されます。非常に分かり易い課金体系になっていますがAWSリソースの使い方によっては、これが吉とも凶ともなります。不要なAWSリソースは削除して、次のIaCでの構築に備えましょう。</p>
 
             <h4>13.CloudFormationで自動構築してみよう</h4>
-            <p>いよいよIaCを用いてAWSリソースを構築していきます。構築する内容は今までと同じですが構築するための「やり方」が異なってきます。CloudFomationはAWSサービスをコーディングで作成していきます。一度覚えてしまえば非常に汎用性の高いサービスなので頑張って身に付けましょう。</p>
+            <p>いよいよIaCを用いてAWSリソースを構築していきます。構築する内容は今までと同じですが構築するための「やり方」が異なってきます。CloudFomationはAWSサービスを<span class="openModal" id="openModal08">コーディング</span>で作成していきます。一度覚えてしまえば非常に汎用性の高いサービスなので頑張って身に付けましょう。</p>
 
             <h2>当コースを通じてどのようなスキルが身に付くのか？</h2>
             <ul>
@@ -88,6 +74,118 @@
 
             <h2>まとめ</h2>
             <p>当コースの目標はAWSを用いてオーソドックスな構成のシステム構築が目標であり、これを構築することでAWSの基礎、AWS認定 SAA相応の構築スキル及びAWSにおけるIaCを身に付けることが可能である。</p>
+
+            <!-- モーダルエリア01 -->
+            <section id="modalArea01" class="modalArea">
+              <div id="modalBg01" class="modalBg"></div>
+              <div class="modalWrapper">
+                <div class="modalContents">
+                  <p class="memobox-title">デスクトップ仮想化</p>
+                  <p>デスクトップ仮想化（Virtual Desktop Infrastructure：VDI）とは、サーバ上にあるデスクトップ環境を遠隔地にあるクライアント端末に転送して利用することです。</p>
+                </div>
+                <div id="closeModal01" class="closeModal">
+                 <p></p>
+                </div>
+              </div>
+            </section>     
+
+            <!-- モーダルエリア02 -->
+            <section id="modalArea02" class="modalArea">
+              <div id="modalBg02" class="modalBg"></div>
+              <div class="modalWrapper">
+                <div class="modalContents">
+                  <p class="memobox-title">共有ディスク</p>
+                  <p>ネットワーク上の複数台のコンピュータからアクセスでき、ファイルの読み書きが可能なハードディスクの領域のことです。<br>ハードディスク＝PC上のデータを保存・格納しておく記憶装置</p>
+                </div>
+                <div id="closeModal02" class="closeModal">
+                 <p></p>
+                </div>
+              </div>
+            </section>                        
+
+            <!-- モーダルエリア03 -->
+            <section id="modalArea03" class="modalArea">
+              <div id="modalBg03" class="modalBg"></div>
+              <div class="modalWrapper">
+                <div class="modalContents">
+                  <p class="memobox-title">インフラ</p>
+                  <p>「インフラストラクチャ（Infrastructure）」の略称で、基盤となる設備や要素を指します。具体的には、パソコンやサーバーなどのハードウェア（コンピュータ関連の機械）、ネットワークを構築するインターネット・LAN・データベース・OSなどのソフトウェア（コンピューターを動かすプログラムの総称）のことを指します。</p>
+                </div>
+                <div id="closeModal03" class="closeModal">
+                 <p></p>
+                </div>
+              </div>
+            </section>     
+
+            <!-- モーダルエリア04 -->
+            <section id="modalArea04" class="modalArea">
+              <div id="modalBg04" class="modalBg"></div>
+              <div class="modalWrapper">
+                <div class="modalContents">
+                  <p class="memobox-title">クラウド事業者</p>
+                  <p>クラウドサービスを提供する事業者。</p>
+                </div>
+                <div id="closeModal04" class="closeModal">
+                 <p></p>
+                </div>
+              </div>
+            </section>   
+
+            <!-- モーダルエリア05 -->
+            <section id="modalArea05" class="modalArea">
+              <div id="modalBg05" class="modalBg"></div>
+              <div class="modalWrapper">
+                <div class="modalContents">
+                  <p class="memobox-title">コンテンツ管理システム（CMS）</p>
+                  <p>Webサイトのコンテンツを構成するテキストや画像、デザイン・レイアウト情報（テンプレート）などを一元的に保存・管理するシステム。</p>
+                </div>
+                <div id="closeModal05" class="closeModal">
+                 <p></p>
+                </div>
+              </div>
+            </section>                 
+
+            <!-- モーダルエリア06 -->
+            <section id="modalArea06" class="modalArea">
+              <div id="modalBg06" class="modalBg"></div>
+              <div class="modalWrapper">
+                <div class="modalContents">
+                  <p class="memobox-title">GUI</p>
+                  <p>グラフィカルユーザインターフェース(Graphical User Interface)の略語で、マウスやタッチパネルで操作ができる画面のことをいいます。</p>
+                </div>
+                <div id="closeModal06" class="closeModal">
+                 <p></p>
+                </div>
+              </div>
+            </section>     
+            
+            <!-- モーダルエリア07 -->
+            <section id="modalArea07" class="modalArea">
+              <div id="modalBg07" class="modalBg"></div>
+              <div class="modalWrapper">
+                <div class="modalContents">
+                  <p class="memobox-title">アプリケーション</p>
+                  <p>アプリケーションソフトウェアを指す。アプリケーションソフトウェアは、特定の用途や目的のために作られた、コンピューターのソフトウエア。ワープロソフト、表計算ソフト、メールソフト、ブラウザーなどが含まれます。</p>
+                </div>
+                <div id="closeModal07" class="closeModal">
+                 <p></p>
+                </div>
+              </div>
+            </section>     
+            
+            <!-- モーダルエリア08 -->
+            <section id="modalArea08" class="modalArea">
+              <div id="modalBg08" class="modalBg"></div>
+              <div class="modalWrapper">
+                <div class="modalContents">
+                  <p class="memobox-title">コーディング</p>
+                  <p>プログラムを書くこと。</p>
+                </div>
+                <div id="closeModal08" class="closeModal">
+                 <p></p>
+                </div>
+              </div>
+            </section>     
 
         </div>
         <div class="button">

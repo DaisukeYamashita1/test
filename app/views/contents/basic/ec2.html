@@ -10,7 +10,7 @@
             </div>
 
             <h2>本章のゴール</h2>
-            <p>AWSの仮想サーバであるEC2を構築する。<br>本章では以下の構成図になります。
+            <p>AWSの<span class="openModal" id="openModal01">仮想サーバ</span>であるEC2を構築する。<br>本章では以下の構成図になります。
             </p>
 
             <a href="/6_EC2/6-1.png" data-lightbox="6-1" data-title=""><img src="/6_EC2/6-1.png" alt=""></a>
@@ -19,18 +19,22 @@
 
             <h3>EC2</h3>
             <p>仮想サーバのこと。AMIと呼ばれるOSイメージを選択することで様々なOSのサーバを構築することができる。</p>
+            <p>EC2の詳しい説明は<a data-turbolinks="false" href="awswords#word10" class="link-black">こちら</a></p>
 
             <h3>Elastic IP</h3>
-            <p>AWSが所有するGlobal IP アドレスのこと。</p>
+            <p>AWSが所有する<span class="openModal" id="openModal02">Global IP アドレス</span>のこと。<br>IPアドレスの詳しい説明は<a data-turbolinks="false" href="awswords#word4" class="link-black">こちら</a></p>
 
             <h3>キーペア</h3>
-            <p>公開鍵と秘密鍵のセットのこと。EC2にSSHするとき公開鍵暗号方式というやり方でアクセスしている。EC2を起動するとき秘密鍵をダウンロードする。ユーザは秘密鍵を使って本人情報（署名）を作成しサーバにアクセスし、サーバは公開鍵を用いてユーザの本人情報（署名）を検証する。この検証で問題なければ無事サーバにログイン可能となる。</p>
+            <p><span class="openModal" id="openModal03">公開鍵</span>と<span class="openModal" id="openModal04">秘密鍵</span>のセットのこと。EC2に<span class="openModal" id="openModal05">SSH</span>するとき<span class="openModal" id="openModal06">公開鍵暗号方式</span>というやり方でアクセスしている。EC2を起動するとき秘密鍵をダウンロードする。ユーザは秘密鍵を使って本人情報（署名）を作成しサーバにアクセスし、サーバは公開鍵を用いてユーザの本人情報（署名）を検証する。この検証で問題なければ無事サーバにログイン可能となる。</p>
+            <p>キーペアの詳しい説明は<a data-turbolinks="false" href="awswords#word17" class="link-black">こちら</a></p>
+
 
             <h3>AMI</h3>
             <p>EC2で用いるOSのマシンイメージのこと。</p>
+            <p>AMIの詳しい説明は<a data-turbolinks="false" href="awswords#word12" class="link-black">こちら</a></p>
 
             <h2>構築手順</h2>
-            <h3>EC2インスタンスを作成する</h3>
+            <h3>EC2<span class="openModal" id="openModal07">インスタンス</span>を作成する</h3>
             <p>AWSマネジメントコンソールにログインします。トップ画面からEC2管理コンソールに移動します。</p>
 
             <a href="/6_EC2/6-2.png" data-lightbox="6-2" data-title=""><img src="/6_EC2/6-2.png" alt=""></a> 
@@ -43,7 +47,7 @@
             <p>AMIの選択画面です。ここでは無料利用枠対象のAmazonLinux2 AMIを選択します。</p>
             <a href="/6_EC2/6-5.png" data-lightbox="6-5" data-title=""><img src="/6_EC2/6-5.png" alt=""></a> 
 
-            <p>続いてインスタンスタイプの選択です。ここでも無料利用枠対象のt2.microを選択します。</p>
+            <p>続いて<a data-turbolinks="false" href="awswords#word11" class="link-black">インスタンスタイプ</a>の選択です。ここでも無料利用枠対象のt2.microを選択します。</p>
             <a href="/6_EC2/6-6.png" data-lightbox="6-6" data-title=""><img src="/6_EC2/6-6.png" alt=""></a>    
             
             <p>ここではインスタンスの詳細を設定します。以下の設定値を入力します。（これ以外はデフォルト値）入力が完了したら「次のステップ：ストレージの追加」をクリックします。</p>
@@ -96,7 +100,104 @@
             <p>今回はAWSの仮想サーバであるEC2インスタンスの構築を実施しました。EC2は非常に便利なサービスで何かサーバで試したいことが発生した時、「サーバを使いたいけど3日だけでいいんだよな」といったケースで力を発揮します。手軽でお安くサーバを借りることが出来るのでぜひ様々なケースで使ってみてください。</p>
 
             <p>※使用していないAWSリソースは必ず削除してください！思わぬ従量課金に繋がります！</p>
-            
+
+            <!-- モーダルエリア01 -->
+            <section id="modalArea01" class="modalArea">
+                <div id="modalBg01" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">仮想サーバ</p>
+                    <p>1台のサーバー上で複数のオペレーションシステム（OS）を動かし、複数のサーバーとして運用する仕組みです。</p>
+                  </div>
+                  <div id="closeModal01" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>     
+  
+              <!-- モーダルエリア02 -->
+              <section id="modalArea02" class="modalArea">
+                <div id="modalBg02" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">Global IP アドレス</p>
+                    <p>IPアドレスとは、スマホやPCなど ネットワーク上の機器に割り当てられるインターネット上の住所のようなもの。グローバルIPアドレス（Global IP アドレス）は、全世界で通用するアドレスで、世界中どこからでもデータ送受信の際に送り間違えのないよう、世界にただひとつ、インターネットに接続する際に割り振られるIPアドレス。</p>
+                  </div>
+                  <div id="closeModal02" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>                        
+  
+              <!-- モーダルエリア03 -->
+              <section id="modalArea03" class="modalArea">
+                <div id="modalBg03" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">公開鍵</p>
+                    <p>公開鍵とは、通信を暗号化するときに使うキーのことです。公開鍵暗号方式で使われる２種類の鍵のひとつで、誰でも利用できるように広く公開されています。</p>
+                  </div>
+                  <div id="closeModal03" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>     
+  
+              <!-- モーダルエリア04 -->
+              <section id="modalArea04" class="modalArea">
+                <div id="modalBg04" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">秘密鍵</p>
+                    <p>対になる公開鍵で暗号化された通信を復号するために使うキーのこと。</p>
+                  </div>
+                  <div id="closeModal04" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>   
+  
+              <!-- モーダルエリア05 -->
+              <section id="modalArea05" class="modalArea">
+                <div id="modalBg05" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">SSH</p>
+                    <p>Secure Shell（セキュアシェル）の略称で、リモートコンピュータと通信するためのプロトコルです。認証部分を含めネットワーク上の通信がすべて暗号化されるため、安全に通信することができます。<br>プロトコル＝コンピューター同士が通信を行うための規格（ルール）</p>
+                  </div>
+                  <div id="closeModal05" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>                 
+  
+              <!-- モーダルエリア06 -->
+              <section id="modalArea06" class="modalArea">
+                <div id="modalBg06" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">公開鍵暗号方式</p>
+                    <p>インターネット上でやり取りされるデータは盗聴される可能性が高いため、データを暗号化する必要があります。また、データの中身を見るためには、データの復号化をしなければなりません。<br>公開鍵暗号方式とは、「公開鍵」と「秘密鍵」という二つの鍵を利用して暗号化・復号化を行う暗号方式です。一般的に、受信側が公開鍵と秘密鍵を持ち、公開鍵は誰でも取得できるオープンな鍵であるのに対し、秘密鍵は受信側のみ保持している鍵。公開鍵で暗号化され、対になっている秘密鍵のみで復号化できます。</p>
+                  </div>
+                  <div id="closeModal06" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>     
+              
+              <!-- モーダルエリア07 -->
+              <section id="modalArea07" class="modalArea">
+                <div id="modalBg07" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">インスタンス</p>
+                    <p>オブジェクト指向プログラミングで、クラス定義に基いてメモリ上にデータと手続きの集合として実体化されたオブジェクトのこと。</p>
+                  </div>
+                  <div id="closeModal07" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>                 
         </div>
 
             <div class="button">

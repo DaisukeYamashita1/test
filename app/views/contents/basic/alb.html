@@ -20,9 +20,11 @@
 
             <h3>ターゲットグループ</h3>
             <p>ALBのデータ送信先をグループ化したもの。</p>
+            <p>ターゲットグループの詳しい説明は<a data-turbolinks="false" href="awswords#word22" class="link-black">こちら</a></p>
 
             <h3>ALB</h3>
             <p>AWSが提供するWebサービスにおいて負荷を分散させるロードバランシングサービス。</p>
+            <p>ALBの詳しい説明は<a data-turbolinks="false" href="awswords#word21" class="link-black">こちら</a></p>
 
             <h3>ロードバランサー</h3>
             <p>外部からのアクセスを複数のサーバに振り分け、負荷分散を行う機器やサービスのこと。</p>
@@ -88,7 +90,7 @@
 
             <a href="/9_ALB/9-15.png" data-lightbox="9-15" data-title=""><img src="/9_ALB/9-15.png" alt=""></a>
 
-            <p>ロードバランサの詳細画面からロードバランサのDNS名をクリップボードにコピーします。</p>
+            <p>ロードバランサの詳細画面からロードバランサの<span class="openModal" id="openModal01">DNS</span>名をクリップボードにコピーします。</p>
 
             <a href="/9_ALB/9-16.png" data-lightbox="9-16" data-title=""><img src="/9_ALB/9-16.png" alt=""></a>
 
@@ -100,6 +102,20 @@
             <p>今回はALBを作成しました。インターネットからEC2インスタンスにアクセスする過程でロードバランサを介することによって直接EC2インスタンスにアクセス出来なくなります。これによってEC2インスタンスを保護することが出来ます。</p>
 
             <p>※使用していないAWSリソースは必ず削除してください！思わぬ従量課金に繋がります！</p>
+
+            <!-- モーダルエリア01 -->
+            <section id="modalArea01" class="modalArea">
+                <div id="modalBg01" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">DNS</p>
+                    <p>Domain Name Systemの略称で、ドメインとIPアドレスを対応付けて管理するシステムのこと。</p>
+                  </div>
+                  <div id="closeModal01" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+            </section>     
             
         </div>
         <div class="button">

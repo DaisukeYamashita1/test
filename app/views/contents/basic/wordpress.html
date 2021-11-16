@@ -19,13 +19,13 @@
             <h2>技術解説</h2>
             
             <h3>SSH</h3>
-            <p>仮想サーバは普通データセンター内にありユーザから離れた場所にある。ユーザはインターネットを経由して仮想サーバを操作する必要がある。遠隔地からサーバを操作できるようにする技術のこと。</p>
+            <p>仮想サーバは普通<span class="openModal" id="openModal01">データセンター</span>内にありユーザから離れた場所にある。ユーザはインターネットを経由して仮想サーバを操作する必要がある。遠隔地からサーバを操作できるようにする技術のこと。</p>
 
             <h3>鍵ファイル</h3>
             <p>仮想サーバに接続するための認証情報。ほとんどの場合、そのサーバに対する鍵ファイルがないとログインできない。</p>
 
             <h3>Apache</h3>
-            <p>Webコンテンツの公開には、サーバとブラウザ間でHTTP通信を行うためWEBサーバが必要である。ApacheはそのWEBサーバを提供するためのソフトウェアである。</p>
+            <p>Webコンテンツの公開には、サーバと<span class="openModal" id="openModal02">ブラウザ</span>間で<span class="openModal" id="openModal03">HTTP通信</span>を行うため<span class="openModal" id="openModal04">WEBサーバ</span>が必要である。ApacheはそのWEBサーバを提供するためのソフトウェアである。</p>
 
             <h2>構築手順</h2>
 
@@ -38,7 +38,7 @@
 
             <a href="/8_wordpress/8-3.png" data-lightbox="8-3" data-title=""><img src="/8_wordpress/8-3.png" alt=""></a>
 
-            <p>以下のコマンドを入力します。</p>
+            <p>以下の<span class="openModal" id="openModal05">コマンド</span>を入力します。</p>
 
 <pre class="prettyprint linenums">
 cd ~/Downloads
@@ -71,7 +71,7 @@ ssh -i {鍵ファイル名}.pem ec2-user@{Elastic IPアドレス}
             Are you sure you want to continue connecting (yes/no/[fingerprint])?」と聞かれる場合があります。この場合は「yes」と入力します。
             </p>
 
-            <p>EC2のアスキーアートが表示されたら接続完了です。</p>
+            <p>EC2の<span class="openModal" id="openModal06">アスキーアート</span>が表示されたら接続完了です。</p>
 
             <a href="/8_wordpress/8-4.png" data-lightbox="8-4" data-title=""><img src="/8_wordpress/8-4.png" alt=""></a>
 
@@ -82,13 +82,13 @@ ssh -i {鍵ファイル名}.pem ec2-user@{Elastic IPアドレス}
 sudo yum -y update
 </pre>
 
-            <p>データベースと接続するためにEC2インスタンスにクライアントソフトを入れます。</p>
+            <p>データベースと接続するためにEC2インスタンスに<span class="openModal" id="openModal07">クライアントソフト</span>を入れます。</p>
 
 <pre class="prettyprint linenums">
 sudo yum -y install mysql
 </pre>
 
-            <p>データベースに接続します。そのためにはRDSのエンドポイントを知る必要があります。エンドポイントはAWSマネジメントコンソール→RDS管理コンソールの作成したRDSの詳細画面に記載があります。
+            <p>データベースに接続します。そのためにはRDSの<span class="openModal" id="openModal08">エンドポイント</span>を知る必要があります。エンドポイントはAWSマネジメントコンソール→RDS管理コンソールの作成したRDSの詳細画面に記載があります。
             </p>
 
             <a href="/8_wordpress/8-5.png" data-lightbox="8-5" data-title=""><img src="/8_wordpress/8-5.png" alt=""></a>
@@ -152,7 +152,7 @@ ls -la
 
             <a href="/8_wordpress/8-10.png" data-lightbox="8-10" data-title=""><img src="/8_wordpress/8-10.png" alt=""></a>
 
-            <p>Linux標準搭載のテキストエディタである「vi」でWordPressの設定ファイルを編集していきます。以下のコマンドを実行してください。</p>
+            <p>Linux標準搭載の<span class="openModal" id="openModal09">テキストエディタ</span>である「vi」でWordPressの設定ファイルを編集していきます。以下のコマンドを実行してください。</p>
 
 <pre class="prettyprint linenums">
 vi wp-config.php
@@ -180,7 +180,7 @@ vi wp-config.php
 
             <a href="/8_wordpress/8-13.png" data-lightbox="8-13" data-title=""><img src="/8_wordpress/8-13.png" alt=""></a>
 
-            <p>以下のコマンドを実行し、WordPressをデプロイします。</p>
+            <p>以下のコマンドを実行し、WordPressを<span class="openModal" id="openModal10">デプロイ</span>します。</p>
 
 <pre class="prettyprint linenums">
 sudo amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
@@ -199,6 +199,146 @@ sudo service httpd restart
             <p>今回はWordPressの設定を実施しました。ターミナルでのコマンド作業がメインだったので普段とは違った作業となりました。</p>
 
             <p>※使用していないAWSリソースは必ず削除してください！思わぬ従量課金に繋がります！</p>
+
+            <!-- モーダルエリア01 -->
+            <section id="modalArea01" class="modalArea">
+                <div id="modalBg01" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">データセンター</p>
+                    <p>サーバーやネットワーク機器を設置するために特別に作られた建物。</p>
+                  </div>
+                  <div id="closeModal01" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>     
+  
+              <!-- モーダルエリア02 -->
+              <section id="modalArea02" class="modalArea">
+                <div id="modalBg02" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">ブラウザ</p>
+                    <p>Chromeやsafari、Internet ExplorerなどのWEBサイトを閲覧するために使うソフト。</p>
+                  </div>
+                  <div id="closeModal02" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>                        
+  
+              <!-- モーダルエリア03 -->
+              <section id="modalArea03" class="modalArea">
+                <div id="modalBg03" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">HTTP通信</p>
+                    <p>クライアントとサーバーの間でハイパーテキストを転送するための通信プロトコルである、HTTPを用いて行われる通信のこと。ハイパーテキスト＝複数の文書を相互に関連付け、結び付ける仕組み</p>
+                  </div>
+                  <div id="closeModal03" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>     
+  
+              <!-- モーダルエリア04 -->
+              <section id="modalArea04" class="modalArea">
+                <div id="modalBg04" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">WEBサーバ</p>
+                    <p>WEBブラウザからのリクエストに応じて静的画面や画像などのホームページのデータを Web ブラウザーに送ってくれるサーバーのこと。</p>
+                  </div>
+                  <div id="closeModal04" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>   
+  
+              <!-- モーダルエリア05 -->
+              <section id="modalArea05" class="modalArea">
+                <div id="modalBg05" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">コマンド</p>
+                    <p>システムへの指示・指令あるいは命令のこと。</p>
+                  </div>
+                  <div id="closeModal05" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>                 
+  
+              <!-- モーダルエリア06 -->
+              <section id="modalArea06" class="modalArea">
+                <div id="modalBg06" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">アスキーアート</p>
+                    <p>コンピュータの画面上に文字を縦横に並べて絵に見立てたもの。</p>
+                  </div>
+                  <div id="closeModal06" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>     
+              
+              <!-- モーダルエリア07 -->
+              <section id="modalArea07" class="modalArea">
+                <div id="modalBg07" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">クライアントソフト</p>
+                    <p>サーバーからのサービスを利用するためのソフトウェアをクライアントソフトという。</p>
+                  </div>
+                  <div id="closeModal07" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>                       
+
+              <!-- モーダルエリア08 -->
+              <section id="modalArea08" class="modalArea">
+                <div id="modalBg08" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">エンドポイント</p>
+                    <p>「末端」「終点」を意味する言葉。セキュリティ用語ではネットワークに接続されている末端の機器、つまりPCやサーバーのほか、スマートフォンやタブレットなどの端末機器のことを指します。</p>
+                  </div>
+                  <div id="closeModal08" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>                       
+
+              <!-- モーダルエリア09 -->
+              <section id="modalArea09" class="modalArea">
+                <div id="modalBg09" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">テキストエディタ</p>
+                    <p>テキスト（文章）を編集するためのアプリケーション。</p>
+                  </div>
+                  <div id="closeModal09" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>                       
+
+              <!-- モーダルエリア10 -->
+              <section id="modalArea10" class="modalArea">
+                <div id="modalBg10" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">デプロイ</p>
+                    <p>開発したアプリケーション（機能やサービス）をサーバー上に展開・配置して利用できるようにすること。</p>
+                  </div>
+                  <div id="closeModal10" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>                       
 
         </div>
         <div class="button">

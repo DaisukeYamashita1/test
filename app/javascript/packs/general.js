@@ -12,13 +12,6 @@ $(document).on('turbolinks:load', function() {
     }
   });
 
-  $('#openModal').click(function(){
-    $('#modalArea').fadeIn();
-  });
-  $('#closeModal , #modalBg').click(function(){
-    $('#modalArea').fadeOut();
-  });  
-
   $(window).scroll(function () {
     if ($(this).scrollTop() > 100) {
         $('#pagetop').fadeIn();
@@ -62,5 +55,75 @@ $(document).on('turbolinks:load', function() {
       })
       document.querySelector('#table-of-content').innerHTML += `<ol>${contents}</ol>`;
   }  
+
+  $('#openModal01').click(function(){
+    $('#modalArea01').fadeIn();
+  });
+  $('#closeModal01 , #modalBg01').click(function(){
+    $('#modalArea01').fadeOut();
+  });  
+
+  $('#openModal02').click(function(){
+    $('#modalArea02').fadeIn();
+  });
+  $('#closeModal02 , #modalBg02').click(function(){
+    $('#modalArea02').fadeOut();
+  }); 
+
+  $('#openModal03').click(function(){
+    $('#modalArea03').fadeIn();
+  });
+  $('#closeModal03 , #modalBg03').click(function(){
+    $('#modalArea03').fadeOut();
+  });  
+
+  $('#openModal04').click(function(){
+    $('#modalArea04').fadeIn();
+  });
+  $('#closeModal04 , #modalBg04').click(function(){
+    $('#modalArea04').fadeOut();
+  }); 
+
+  $('#openModal05').click(function(){
+    $('#modalArea05').fadeIn();
+  });
+  $('#closeModal05 , #modalBg05').click(function(){
+    $('#modalArea05').fadeOut();
+  });  
+
+  $('#openModal06').click(function(){
+    $('#modalArea06').fadeIn();
+  });
+  $('#closeModal06 , #modalBg06').click(function(){
+    $('#modalArea06').fadeOut();
+  }); 
+
+  $('#openModal07').click(function(){
+    $('#modalArea07').fadeIn();
+  });
+  $('#closeModal07 , #modalBg07').click(function(){
+    $('#modalArea07').fadeOut();
+  });  
+
+  $('#openModal08').click(function(){
+    $('#modalArea08').fadeIn();
+  });
+  $('#closeModal08 , #modalBg08').click(function(){
+    $('#modalArea08').fadeOut();
+  }); 
+
+  $('#openModal09').click(function(){
+    $('#modalArea09').fadeIn();
+  });
+  $('#closeModal09 , #modalBg09').click(function(){
+    $('#modalArea09').fadeOut();
+  }); 
+  
+  $('#openModal10').click(function(){
+    $('#modalArea10').fadeIn();
+  });
+  $('#closeModal10 , #modalBg10').click(function(){
+    $('#modalArea10').fadeOut();
+  });   
 
 });

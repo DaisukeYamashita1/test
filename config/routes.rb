@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
 
-  get '/contents/words' => '/contents/words'
 
+
+  get '/contents/awswords' => 'contents#awswords'
   get '/' => 'non_users#lp'
   get 'top' => 'contents#top'
   get 'contents/top' => 'contents#top'
   get 'contents/:id' => 'contents#show'
-
 
   get "/login" => "non_users#login_form"
   post "login" => "non_users#login"
