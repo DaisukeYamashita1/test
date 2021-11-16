@@ -62,3 +62,6 @@ gem 'rails-i18n'
 
 #デバッグ
 gem 'pry-rails'
+
+#管理画面
+gem 'rails_admin', '~> 2.0'

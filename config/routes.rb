@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   get '/contents/awswords' => 'contents#awswords'
   get '/' => 'non_users#lp'
