@@ -47,13 +47,37 @@
 
     <% if @current_user && request.fullpath.index("/contents/") == 0%>  
       <nav class="side-menu" id="side-menu">
-        <ul class="contents external--link">
-            <% @contents = Content.where(category_id:1) %>
-            <% @contents.each do |content| %>
-              <li><a href="/contents/<%= content.id %>"><%= content.id %>.<%= content.title %></a></li>
-            <% end %>      
+        <ul class="tab-list list-unstyled">
+          <li class="tab tab-active">
+            AWS基礎
+          </li>
+          <li class="tab">
+            セキュリティコース
+          </li>
+          <li class="tab">
+            非認知教育コース
+          </li>          
+        </ul>
+        <div class="tabbox-contents">
+          <div class="tabbox box-show">
+            <%= render partial: 'contents/list', locals: { contents: @aws_contents } %>  
             <li><a href="/contents/awswords">【AWSサービス解説】</a></li>
-        </ul> 
+          </div>
+          <div class="tabbox">
+              <% if @current_user.allowed %>
+                <li>近日公開</li>
+              <% else %>
+                <li>有料会員のみ公開</li>
+              <% end %>
+          </div>
+          <div class="tabbox">
+            <% if @current_user.allowed %>
+              <li>近日公開</li>
+            <% else %>
+              <li>有料会員のみ公開</li>
+            <% end %>
+          </div>             
+        </div>
       </nav>  
 
       <script type="text/javascript">

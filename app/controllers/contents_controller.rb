@@ -10,6 +10,7 @@ class ContentsController < LoginController
   def show
     category_name = Content.find_by(id:params[:id]).category.name
     path_name = Content.find_by(id:params[:id]).path
+    @aws_contents = Content.where(category_id:1)
     render template: "contents/#{category_name}/#{path_name}"    
   end
 
