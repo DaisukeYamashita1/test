@@ -2,6 +2,7 @@
     <div class="container">
         <div class="article">
             <h1>7.RDSを作成してみよう</h1>
+            <p>この章は15分で読めます</p>
 
             <div data-turbolinks='false'>
                 <details id="table-of-content" open>
@@ -45,7 +46,7 @@
             </p>
 
             <p><a data-turbolinks="false" href="awswords#word3" class="link-black">アベイラビリティゾーン</a>の説明はこちら</p>
-            <p>CIRDの詳しい説明は<a data-turbolinks="false" href="awswords#word5" class="link-black">こちら</a></p>
+            <p>CIDRの詳しい説明は<a data-turbolinks="false" href="awswords#word5" class="link-black">こちら</a></p>
 
             <a href="/7_RDS/7-5.png" data-lightbox="7-5" data-title=""><img src="/7_RDS/7-5.png" alt=""></a>
 
@@ -87,7 +88,8 @@
             <a href="/7_RDS/7-17.png" data-lightbox="7-17" data-title=""><img src="/7_RDS/7-17.png" alt=""></a>
 
             <h2>まとめ</h2>
-            <p>今回はRDSの作成を実施しました。一般的にDBはシステム開発において重要な要素です。<span class="openModal" id="openModal05">マイナーアップデート</span>や<span class="openModal" id="openModal06">アクセス制御</span>、<span class="openModal" id="openModal07">冗長構成</span>など全てにおいて慎重に設定します。しかしRDSはその大部分をAWSがいい感じに設定してくれています。開発スピードは上がり、運用コストは減るので我々が受ける恩恵は非常に大きいものです。AWSではこの便利な<span class="openModal" id="openModal08">マネージドサービス</span>を使い倒すことで従来のオンプレミスシステムでは得られない恩恵を受けられます。（しかし細部に至るまで制御したい時はEC2にDBを入れて使用することもあります）</p>
+            <p>今回はRDSの作成を実施しました。一般的にDBはシステム開発において重要な要素です。AWSでDBを使う方法は2種類あります。1つ目はRDSを使用する方法。RDSは<span class="openModal" id="openModal08">マネージドサービス</span>のため運用コストが低くなります。開発スピードは上がり、運用コストは減るので我々が受ける恩恵は非常に大きいものです。2つ目はEC2インスタンスにRDBMSをインストールする方法です。後者はマネージドサービスではありませんので運用コストはRDSに比べて高くなりインストールから運用まで全て自身で設定する必要があります。しかし全て自身で設定できることがメリットでもあります。細部に至るまで制御したい場合は後者のパターンがオススメです。
+            </p>
 
             <p>※使用していないAWSリソースは必ず削除してください！思わぬ従量課金に繋がります！</p>
 

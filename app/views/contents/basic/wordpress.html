@@ -2,6 +2,7 @@
     <div class="container">
         <div class="article">
             <h1>8.WordPressの設定をしよう</h1>
+            <p>この章は15分で読めます</p>
 
             <div data-turbolinks='false'>
                 <details id="table-of-content" open>
@@ -66,6 +67,8 @@ ls -la {鍵ファイル名}.pem
 ssh -i {鍵ファイル名}.pem ec2-user@{Elastic IPアドレス}
 </pre>
 
+            <p>※Elastic IPアドレスは「6.EC2を作成してみよう」の「EC2インスタンスを作成する」で設定したElastic IPアドレスです</p>
+
             <p>「The authenticity of host ‘Elastic IPアドレス (Elastic IPアドレス)’ can’t be established.
             ECDSA key fingerprint is SHA256:isOvdUQ7cLZaN8jwtBst0kb72SLJZU/Uk07pu581MaU.
             Are you sure you want to continue connecting (yes/no/[fingerprint])?」と聞かれる場合があります。この場合は「yes」と入力します。
@@ -74,6 +77,50 @@ ssh -i {鍵ファイル名}.pem ec2-user@{Elastic IPアドレス}
             <p>EC2の<span class="openModal" id="openModal06">アスキーアート</span>が表示されたら接続完了です。</p>
 
             <a href="/8_wordpress/8-4.png" data-lightbox="8-4" data-title=""><img src="/8_wordpress/8-4.png" alt=""></a>
+
+            <h3>SSHでEC2インスタンスに接続する（Windowsの場合）</h3>
+
+            <p>まずTeraTermを下記サイトよりダウンロードします。（ポータブル版ではない方です）<br><a href="https://forest.watch.impress.co.jp/library/software/utf8teraterm/" class="underline">https://forest.watch.impress.co.jp/library/software/utf8teraterm/</a>
+            </p>
+
+            <a href="/8_wordpress/8-4-1.png" data-lightbox="8-4-1" data-title=""><img src="/8_wordpress/8-4-1.png" alt=""></a>
+
+            <p>拡張子がexeのファイルがダウンロードされます。ダブルクリックして開きます。<br>セットアップ言語を選択します。任意の言語で構いません。</p>
+            <a href="/8_wordpress/8-4-2.png" data-lightbox="8-4-2" data-title=""><img src="/8_wordpress/8-4-2.png" alt=""></a>
+
+            <p>使用許諾契約書が表示されます。「同意する」を選択し「次へ」をクリックします。</p>
+            <a href="/8_wordpress/8-4-3.png" data-lightbox="8-4-3" data-title=""><img src="/8_wordpress/8-4-3.png" alt=""></a>
+
+            <p>コンポーネントを選択します。デフォルトのまま「次へ」をクリックします。</p>
+
+            <a href="/8_wordpress/8-4-4.png" data-lightbox="8-4-4" data-title=""><img src="/8_wordpress/8-4-4.png" alt=""></a>
+
+            <p>TeraTermの言語を選択します。任意の言語で構いません。「次へ」をクリックします。</p>
+            <a href="/8_wordpress/8-4-5.png" data-lightbox="8-4-5" data-title=""><img src="/8_wordpress/8-4-5.png" alt=""></a>
+
+            <p>追加タスクの選択です。デフォルトのまま「次へ」をクリックします。</p>
+            <a href="/8_wordpress/8-4-6.png" data-lightbox="8-4-6" data-title=""><img src="/8_wordpress/8-4-6.png" alt=""></a>
+
+            <p>インストールの準備が出来ました。「インストール」をクリックします。</p>
+            <a href="/8_wordpress/8-4-7.png" data-lightbox="8-4-7" data-title=""><img src="/8_wordpress/8-4-7.png" alt=""></a>
+            <a href="/8_wordpress/8-4-8.png" data-lightbox="8-4-8" data-title=""><img src="/8_wordpress/8-4-8.png" alt=""></a>
+
+            <p>インストールが完了したらTeraTermを起動します。ホストの箇所にElastic IPアドレスを入力し、OKをクリックします。</p>
+            <a href="/8_wordpress/8-4-9.png" data-lightbox="8-4-9" data-title=""><img src="/8_wordpress/8-4-9.png" alt=""></a>
+
+            <p>セキュリティ警告が出ます。「OK」をクリックします。
+            </p>
+            <a href="/8_wordpress/8-4-10.png" data-lightbox="8-4-10" data-title=""><img src="/8_wordpress/8-4-10.png" alt=""></a>
+
+            <p>認証情報入力画面が表示されます。以下の情報を入力します。入力が完了したらOKをクリックします。<br>
+            ユーザ名：ec2-user<br>
+            RSA/DSA/ECDSA/ED25519鍵を使う：選択する<br>
+            秘密鍵：ダウンロードしておいた.pemファイル
+            </p>
+            <a href="/8_wordpress/8-4-11.png" data-lightbox="8-4-11" data-title=""><img src="/8_wordpress/8-4-11.png" alt=""></a>
+
+            <p>EC2のアスキーアートが表示されたら接続完了です。</p>
+
 
             <h3>データベースの設定をする</h3>
             <p>まずEC2の状態を最新化します。</p>

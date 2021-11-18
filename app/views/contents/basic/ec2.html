@@ -2,6 +2,7 @@
     <div class="container">
         <div class="article">
             <h1>6.EC2を作成してみよう</h1>
+            <p>この章は10分で読めます</p>
 
             <div data-turbolinks='false'>
                 <details id="table-of-content" open>
@@ -35,9 +36,12 @@
 
             <h2>構築手順</h2>
             <h3>EC2<span class="openModal" id="openModal07">インスタンス</span>を作成する</h3>
-            <p>AWSマネジメントコンソールにログインします。トップ画面からEC2管理コンソールに移動します。</p>
 
+            <p>AWSマネジメントコンソールにログインします。</p>
             <a href="/6_EC2/6-2.png" data-lightbox="6-2" data-title=""><img src="/6_EC2/6-2.png" alt=""></a> 
+
+            <p>サービス一覧よりEC2を選択し、EC2管理コンソールに移動します。</p>
+            <a href="/6_EC2/6-2-1.png" data-lightbox="6-2-1" data-title=""><img src="/6_EC2/6-2-1.png" alt=""></a>
                        
             <a href="/6_EC2/6-3.png" data-lightbox="6-3" data-title=""><img src="/6_EC2/6-3.png" alt=""></a> 
             
@@ -47,10 +51,10 @@
             <p>AMIの選択画面です。ここでは無料利用枠対象のAmazonLinux2 AMIを選択します。</p>
             <a href="/6_EC2/6-5.png" data-lightbox="6-5" data-title=""><img src="/6_EC2/6-5.png" alt=""></a> 
 
-            <p>続いて<a data-turbolinks="false" href="awswords#word11" class="link-black">インスタンスタイプ</a>の選択です。ここでも無料利用枠対象のt2.microを選択します。</p>
+            <p>続いて<a data-turbolinks="false" href="awswords#word11" class="link-black">インスタンスタイプ</a>の選択です。ここでも無料利用枠対象のt2.microを選択します。選択後「次のステップ：インスタンスの詳細の設定」をクリックします。</p>
             <a href="/6_EC2/6-6.png" data-lightbox="6-6" data-title=""><img src="/6_EC2/6-6.png" alt=""></a>    
             
-            <p>ここではインスタンスの詳細を設定します。以下の設定値を入力します。（これ以外はデフォルト値）入力が完了したら「次のステップ：ストレージの追加」をクリックします。</p>
+            <p>このページではインスタンスの詳細を設定します。以下の設定値を入力します。（これ以外はデフォルト値）入力が完了したら「次のステップ：ストレージの追加」をクリックします。</p>
 
             <p>ネットワーク＝自身で作成したVPC<br>サブネット＝AZ-1aにあるパブリックサブネット<br>自動割り当てパブリック IP＝無効化<br>ネットワークインターフェイス＞プライマリIP＝10.0.0.10
             </p>

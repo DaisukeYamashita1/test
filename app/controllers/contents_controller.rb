@@ -15,6 +15,7 @@ class ContentsController < LoginController
   end
 
   def awswords
+    @aws_contents = Content.where(category_id:1)
   end
 
 end

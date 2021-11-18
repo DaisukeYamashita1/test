@@ -2,6 +2,7 @@
     <div class="container">
         <div class="article">
             <h1>3.セキュリティ初期設定</h1>
+            <p>この章は40分で読めます</p>
 
             <div data-turbolinks='false'>
                 <details id="table-of-content" open>
@@ -59,20 +60,31 @@
             <a href="/3_FirstSecurity/3-5.png" data-lightbox="3-5" data-title=""><img src="/3_FirstSecurity/3-5.png" alt=""></a>            
 
             <p>表示されたQRコードを仮想MFAデバイスで読み取り、「MFAの割り当て」をクリックしてください</p>
-            <p>※仮想MFAデバイスは以下からダウンロードしてください。<br>
-            <a href="https://apps.apple.com/jp/app/google-authenticator/id388497605" class="underline">Google Authenticator</a></p>    
+            <p>※お手持ちのスマートフォンに以下から仮想MFAをダウンロードしてください。</p>
+            <p>App Store：Google Authenticator<br>
+            <a href="https://apps.apple.com/jp/app/google-authenticator/id388497605" class="underline">https://apps.apple.com/jp/app/google-authenticator/id388497605</a><br>Google Play Store：Google Authenticator            
+            <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=ja&gl=US" class="underline">https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=ja&gl=US</a></p>    
 
             <a href="/3_FirstSecurity/3-6.png" data-lightbox="3-6" data-title=""><img src="/3_FirstSecurity/3-6.png" alt=""></a>  
 
             <a href="/3_FirstSecurity/3-7.png" data-lightbox="3-7" data-title=""><img src="/3_FirstSecurity/3-7.png" alt=""></a>  
             
-            <p>正常に割り当てが完了したことを確認して完了です。一度ログアウトしてログイン時にMFA認証を求められるか試してみてください。</p>
+            <p>正常に割り当てが完了したことを確認して完了です。一度サインアウトしてサインイン時にMFA認証を求められるか試してみてください。</p>
 
             <a href="/3_FirstSecurity/3-8.png" data-lightbox="3-8" data-title=""><img src="/3_FirstSecurity/3-8.png" alt=""></a>        
             
             <h3>パスワードポリシーを変更する</h3>
 
-            <p>ナビゲーションペインから「アカウント設定」をクリックしてください。</p>
+            <p>AWSマネジメントコンソールにRootユーザでログインします。</p>
+            <a href="/3_FirstSecurity/3-8-1.png" data-lightbox="3-8-1" data-title=""><img src="/3_FirstSecurity/3-8-1.png" alt=""></a>
+
+            <p>サービス一覧からIAMを選択します。</p>
+            <a href="/3_FirstSecurity/3-8-2.png" data-lightbox="3-8-2" data-title=""><img src="/3_FirstSecurity/3-8-2.png" alt=""></a>
+
+            <p>IAM管理コンソールに移動しました。</p>
+            <a href="/3_FirstSecurity/3-8-3.png" data-lightbox="3-8-3" data-title=""><img src="/3_FirstSecurity/3-8-3.png" alt=""></a>
+
+            <p>ナビゲーションペイン（画面左側にある操作対象を切り替える枠）から「アカウント設定」をクリックしてください。</p>
 
             <a href="/3_FirstSecurity/3-9.png" data-lightbox="3-9" data-title=""><img src="/3_FirstSecurity/3-9.png" alt=""></a> 
 
@@ -86,7 +98,7 @@
 
             <a href="/3_FirstSecurity/3-11.png" data-lightbox="3-11" data-title=""><img src="/3_FirstSecurity/3-11.png" alt=""></a>
 
-            <p>「ユーザグループ名」に任意の名前をつけます。「アクセス許可ポリシー」ではまず「AdministratorAccess」でフィルタリングします。ポリシー名＝AdministratorAccessを選択し「グループを作成」をクリックしてください。</p>
+            <p>「ユーザグループ名」に任意の名前をつけます。「アクセス許可ポリシー」ではまず「AdministratorAccess」でフィルタリングします。列「ポリシー名」がAdministratorAccessとなっている行を選択します。「グループを作成」をクリックしてください。</p>
 
             <a href="/3_FirstSecurity/3-12.png" data-lightbox="3-12" data-title=""><img src="/3_FirstSecurity/3-12.png" alt=""></a>
 
@@ -116,7 +128,8 @@
             <p>内容に間違いがなければ「ユーザの作成」をクリックします。</p>
             <a href="/3_FirstSecurity/3-18.png" data-lightbox="3-18" data-title=""><img src="/3_FirstSecurity/3-18.png" alt=""></a>      
 
-            <p>ユーザを作成すると認証情報をダウンロード出来る画面が表示されます。CSVの認証情報をダウンロードしておきましょう。</p>
+            <p>ユーザを作成すると認証情報をダウンロード出来る画面が表示されます。「.csvのダウンロード」ボタンを押し、認証情報をダウンロードしておきましょう。後述する手順「一般ユーザのMFA認証有効化」で使用します。ここでダウンロードしておかないと後でダウンロード出来ませんのでご注意ください。
+            </p>
             <a href="/3_FirstSecurity/3-19.png" data-lightbox="3-19" data-title=""><img src="/3_FirstSecurity/3-19.png" alt=""></a>
 
             <p>ユーザが作成されていることを確認してください。</p>
@@ -124,17 +137,21 @@
             
             <h3>請求情報を確認出来るようにする</h3>
             
-            <p>マイセキュリティ資格情報をクリックする。</p>
+            <p>マイアカウントをクリックする。</p>
             <a href="/3_FirstSecurity/3-21.png" data-lightbox="3-21" data-title=""><img src="/3_FirstSecurity/3-21.png" alt=""></a>  
 
             <p>「IAMユーザ/ロールによる請求情報へのアクセス」の編集リンクをクリックする。</p>
             <a href="/3_FirstSecurity/3-22.png" data-lightbox="3-22" data-title=""><img src="/3_FirstSecurity/3-22.png" alt=""></a>   
 
-            <p>「IAMアクセスの有効化」にチェックを付け、更新ボタンをクリックする。</p>
+            <p>「IAMアクセスのアクティブ化」にチェックを付け、更新ボタンをクリックする。</p>
             <a href="/3_FirstSecurity/3-23.png" data-lightbox="3-23" data-title=""><img src="/3_FirstSecurity/3-23.png" alt=""></a>     
 
-            <p>続いてIAMのコンソール画面を開きます。</p>
+            <p>続いてIAMのコンソール画面を開きます。サービス一覧よりIAMを選択します。</p>
             <a href="/3_FirstSecurity/3-24.png" data-lightbox="3-24" data-title=""><img src="/3_FirstSecurity/3-24.png" alt=""></a>      
+            <a href="/3_FirstSecurity/3-24-1.png" data-lightbox="3-24-1" data-title=""><img src="/3_FirstSecurity/3-24-1.png" alt=""></a>   
+            
+            <p>IAM管理コンソールが表示されます。ナビゲーションペインよりポリシーを選択します。</p>
+            <a href="/3_FirstSecurity/3-24-2.png" data-lightbox="3-24-2" data-title=""><img src="/3_FirstSecurity/3-24-2.png" alt=""></a>
 
             <p>「ポリシーの作成」をクリックします。</p>
             <a href="/3_FirstSecurity/3-25.png" data-lightbox="3-25" data-title=""><img src="/3_FirstSecurity/3-25.png" alt=""></a>      
@@ -212,7 +229,8 @@
             <p>一度サインアウトします。</p>
             <a href="/3_FirstSecurity/3-47.png" data-lightbox="3-47" data-title=""><img src="/3_FirstSecurity/3-47.png" alt=""></a>      
 
-            <p>「コンソールにサインイン」をクリックして、作成した一般ユーザでログインします。ログイン情報は作成時にダウンロードしておいた「new_user_credentials.csv」に記載があります。</p>
+            <p>「コンソールにサインイン」をクリックして、作成した一般ユーザでログインします。ログイン情報は作成時にダウンロードしておいた「new_user_credentials.csv」に記載があります。ダウンロードしたCSVファイルはそれぞれ次の意味を表します。<br>User name：IAMユーザ名<br>Password：サインイン時に求められるパスワード<br>Access key ID：プログラムからアクセスする際に必要な情報（今回は使用しません）<br>Secret access key：プログラムからアクセスする際に必要な情報（今回は使用しません）<br>Console login link：サインインURL（このリンクにアクセスするとサインインが求められます）
+            </p>
             <a href="/3_FirstSecurity/3-48.png" data-lightbox="3-48" data-title=""><img src="/3_FirstSecurity/3-48.png" alt=""></a>      
 
             <p>IAMを選択し、IAMのコンソールに移動します。</p>
