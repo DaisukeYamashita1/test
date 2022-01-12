@@ -1,0 +1,180 @@
+<div class="main contents">
+    <div class="container">
+        <div class="article">
+            <h1>4.Amazon VPCを作成してみよう</h1>
+            <p>この章は15分で読めます</p>
+
+            <div data-turbolinks='false'>
+                <details id="table-of-content" open>
+                  <summary>目次</summary>
+                </details>
+            </div>      
+            
+            <h2>本章のゴール</h2>
+            <ul>
+                <li>・Amazon VPC（以下VPC）の基礎を理解する。</li>
+                <li>・本章では以下の構成図を作成します。</li>
+            </ul>
+
+            <a href="/4_vpc/4-1.png" data-lightbox="4-1" data-title=""><img src="/4_vpc/4-1.png" alt=""></a>  
+
+            <h2>技術解説</h2>
+            <h3>VPC</h3>
+            <p>AWS上に<span class="openModal" id="openModal01">オンプレミス</span>と同じような<span class="openModal" id="openModal02">プライベートネットワーク</span>空間を作成するAWSサービス。VPCで作成されたネットワーク空間は論理的に分離されており、外部とのネットワークが完全に分離される。</p>
+            <p>VPCの詳しい説明は<a data-turbolinks="false" href="awswords#word6" class="link-black">こちら</a></p>
+
+            <h3>サブネット</h3>
+            <p>大きなネットワークの中にある小さなネットワークのこと。概念的には1つの会社がネットワークで会社内のそれぞれの部署がサブネット（サブネットワーク）。</p>
+            <p>サブネットの詳しい説明は<a data-turbolinks="false" href="awswords#word7" class="link-black">こちら</a></p>
+
+            <h3>ルートテーブル</h3>
+            <p>ネットワークを流れるデータの行き先を記載した表。データはルートテーブルに従ってネットワーク上を流れる。</p>
+            <p>ルートテーブルの詳しい説明は<a data-turbolinks="false" href="awswords#word9" class="link-black">こちら</a></p>
+
+            <h3>インターネットゲートウェイ</h3>
+            <p>VPC とインターネットとの間の通信を可能にするAWSリソース。</p>
+            <p>インターネットゲートウェイの詳しい説明は<a data-turbolinks="false" href="awswords#word8" class="link-black">こちら</a></p>
+
+            <h2>構築手順</h2>
+            <h3>VPCを作成する</h3>
+
+            <p>AWSマネジメントコンソールにログインします。</p>
+            <a href="/4_vpc/4-2.png" data-lightbox="4-2" data-title=""><img src="/4_vpc/4-2.png" alt=""></a>
+
+            <p>VPCコンソールに移動します。</p>
+            <a href="/4_vpc/4-3.png" data-lightbox="4-3" data-title=""><img src="/4_vpc/4-3.png" alt=""></a>
+            <a href="/4_vpc/4-4.png" data-lightbox="4-4" data-title=""><img src="/4_vpc/4-4.png" alt=""></a>
+
+            <p>ナビゲーションペインから「VPC」を選択し、「VPCを作成」をクリックします。</p>
+            <a href="/4_vpc/4-5.png" data-lightbox="4-5" data-title=""><img src="/4_vpc/4-5.png" alt=""></a>
+
+            <p>以下の設定値でVPCを作成します。これら以外の設定はデフォルトのままです。入力したら「VPCを作成」をクリックしてください。</p>
+            <p>名前タグ＝任意<br>IPv4 CIDR ブロック＝10.0.0.0/24
+            </p>
+            <a href="/4_vpc/4-6.png" data-lightbox="4-6" data-title=""><img src="/4_vpc/4-6.png" alt=""></a>
+
+            <p>VPCが作成されたことを確認します。</p>
+            <a href="/4_vpc/4-7.png" data-lightbox="4-7" data-title=""><img src="/4_vpc/4-7.png" alt=""></a>
+            
+            <p>上記の作業で以下のリソースが構築されました。現在このような状況です。</p>
+            <a href="/4_vpc/4-8.png" data-lightbox="4-8" data-title=""><img src="/4_vpc/4-8.png" alt=""></a>
+
+            <h3>サブネットを作成する</h3>
+
+            <p>ナビゲーションペインから「サブネット」を選択します。「サブネットを作成」をクリックします。</p>
+            <a href="/4_vpc/4-9.png" data-lightbox="4-9" data-title=""><img src="/4_vpc/4-9.png" alt=""></a>
+            
+            <p>以下の設定でサブネットを4つ作成していきます。下記の設定値以外はデフォルトです。入力が完了したら「サブネットを作成」をクリックします。<br>※サブネット名は任意ですがサブネット同士を区別するためサブネットの場所を明記するのがベターです。（AZ-1aのパブリックサブネットならばpub-aなど）
+            </p>
+            <p>VPC ID = 先ほど作成したVPC（プルダウンメニューからはデフォルトではない方を選択）</p>
+            <a href="/4_vpc/4-10.png" data-lightbox="4-10" data-title=""><img src="/4_vpc/4-10.png" alt=""></a>
+            
+            <p>サブネット1つ目：AZ-1aのパブリックサブネット<br>サブネット名 = 任意<br>アベイラビリティーゾーン = アジアパシフィック(東京)  / ap-northeast-1a<br>IPv4 CIDR ブロック = 10.0.0.0/26
+            </p>
+            <a href="/4_vpc/4-11.png" data-lightbox="4-11" data-title=""><img src="/4_vpc/4-11.png" alt=""></a>
+
+            <p>サブネット2つ目：AZ-1aのプライベートサブネット<br>サブネット名 = 任意<br>アベイラビリティーゾーン = アジアパシフィック(東京)  / ap-northeast-1a<br>IPv4 CIDR ブロック = 10.0.0.64/26
+            </p>
+            <a href="/4_vpc/4-12.png" data-lightbox="4-12" data-title=""><img src="/4_vpc/4-12.png" alt=""></a>
+
+            <p>サブネット3つ目：AZ-1cのパブリックサブネット<br>サブネット名 = 任意<br>アベイラビリティーゾーン = アジアパシフィック(東京)  / ap-northeast-1c<br>IPv4 CIDR ブロック = 10.0.0.128/26
+            </p>
+            <a href="/4_vpc/4-13.png" data-lightbox="4-13" data-title=""><img src="/4_vpc/4-13.png" alt=""></a>
+
+            <p>サブネット4つ目：AZ-1cのプライベートサブネット<br>サブネット名 = 任意<br>アベイラビリティーゾーン = アジアパシフィック(東京)  / ap-northeast-1c<br>IPv4 CIDR ブロック = 10.0.0.192/26
+            </p>
+            <a href="/4_vpc/4-14.png" data-lightbox="4-14" data-title=""><img src="/4_vpc/4-14.png" alt=""></a>
+
+            <p>サブネットが4つ作成されたことを確認します。</p>
+            <a href="/4_vpc/4-15.png" data-lightbox="4-15" data-title=""><img src="/4_vpc/4-15.png" alt=""></a>
+
+            <p>現時点では以下の構成図になりました。</p>
+            <a href="/4_vpc/4-16.png" data-lightbox="4-16" data-title=""><img src="/4_vpc/4-16.png" alt=""></a>
+
+            <h3>インターネットゲートウェイを作成する</h3>
+            <p>ナビゲーションペインから「インターネットゲートウェイ」を選択し、「インターネットゲートウェイの作成」をクリックする。</p>
+            <a href="/4_vpc/4-17.png" data-lightbox="4-17" data-title=""><img src="/4_vpc/4-17.png" alt=""></a>
+
+            <p>以下の設定値でインターネットゲートウェイを作成する。</p>
+            <p>名前タグ＝任意</p>
+            <a href="/4_vpc/4-18.png" data-lightbox="4-18" data-title=""><img src="/4_vpc/4-18.png" alt=""></a>
+
+            <p>インターネットゲートウェイが作成されたことを確認します。</p>
+            <a href="/4_vpc/4-19.png" data-lightbox="4-19" data-title=""><img src="/4_vpc/4-19.png" alt=""></a>
+
+            <p>アクションから「VPCにアタッチ」を選択する。</p>
+            <a href="/4_vpc/4-20.png" data-lightbox="4-20" data-title=""><img src="/4_vpc/4-20.png" alt=""></a>
+
+            <p>「使用可能なVPC」で作成したVPCを選択する。</p>
+            <a href="/4_vpc/4-21.png" data-lightbox="4-21" data-title=""><img src="/4_vpc/4-21.png" alt=""></a>
+
+            <p>インターネットゲートウェイがVPCにアタッチされていることを確認します。</p>
+            <a href="/4_vpc/4-22.png" data-lightbox="4-22" data-title=""><img src="/4_vpc/4-22.png" alt=""></a>
+
+            <p>現時点では以下の構成図になりました。</p>
+            <a href="/4_vpc/4-23.png" data-lightbox="4-23" data-title=""><img src="/4_vpc/4-23.png" alt=""></a>
+
+            <h3>ルートテーブルを作成する</h3>
+            
+            <p>ナビゲーションペインから「ルートテーブル」を選択し、「ルートテーブルを作成」をクリックする。</p>
+            <a href="/4_vpc/4-24.png" data-lightbox="4-24" data-title=""><img src="/4_vpc/4-24.png" alt=""></a>
+            
+            <p>以下の設定値でルートテーブルを作成する。設定後「ルートテーブルを作成」をクリックする。</p>
+            <p>名前タグ＝任意<br>VPC＝上記で作成したVPC</p>
+            <a href="/4_vpc/4-25.png" data-lightbox="4-25" data-title=""><img src="/4_vpc/4-25.png" alt=""></a>
+
+            <p>ルートテーブルが作成されたことを確認し、アクションから「サブネットの関連付けを編集」をクリックする。</p>
+            <a href="/4_vpc/4-26.png" data-lightbox="4-26" data-title=""><img src="/4_vpc/4-26.png" alt=""></a>
+
+            <p>IPv4が「10.0.0.0/26」と「10.0.0.128/26」のサブネットを選択し、「関連付けを保存」をクリックする。</p>
+            <a href="/4_vpc/4-27.png" data-lightbox="4-27" data-title=""><img src="/4_vpc/4-27.png" alt=""></a>
+
+            <p>ルートテーブルとサブネットの関連付けが完了したらアクションから「ルートの編集」をクリックする。</p>
+            <a href="/4_vpc/4-28.png" data-lightbox="4-28" data-title=""><img src="/4_vpc/4-28.png" alt=""></a>
+
+            <p>送信先を「0.0.0.0/0」と入力し、ターゲットをインターネットゲートウェイを指定する。「変更して保存」をクリックする。</p>
+            <a href="/4_vpc/4-29.png" data-lightbox="4-29" data-title=""><img src="/4_vpc/4-29.png" alt=""></a>
+
+            <p>ルートの編集が完了したことを確認する。</p>
+            <a href="/4_vpc/4-30.png" data-lightbox="4-30" data-title=""><img src="/4_vpc/4-30.png" alt=""></a>
+            
+            <h2>まとめ</h2>
+            <p>以上でVPCの作成が完了しました。VPCと一言で言っても様々なコンポートネントで構成されていることが分かりました。</p>
+            <p>※使用しない場合はAWSリソースは必ず削除してください！思わぬ従量課金に繋がります！</p>
+            
+            <!-- モーダルエリア01 -->
+            <section id="modalArea01" class="modalArea">
+                <div id="modalBg01" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">オンプレミス</p>
+                    <p>自社でサーバーやソフトウェアなどシステム構築に必要なハードウェアを調達し、自社でシステムを開発・運用する仕組みです。</p>
+                  </div>
+                  <div id="closeModal01" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+            </section>     
+  
+            <!-- モーダルエリア02 -->
+            <section id="modalArea02" class="modalArea">
+                <div id="modalBg02" class="modalBg"></div>
+                <div class="modalWrapper">
+                    <div class="modalContents">
+                    <p class="memobox-title">プライベートネットワーク</p>
+                    <p>ある組織内や建物内で運用されるコンピュータネットワーク。</p>
+                    </div>
+                    <div id="closeModal02" class="closeModal">
+                    <p></p>
+                    </div>
+                </div>
+            </section>                        
+  
+
+        </div>
+        <div class="button">
+            <a href="3" class="btn btn--green btn--cubic btn--shadow">戻る</a>
+            <a href="5" class="btn btn--orange btn--cubic btn--shadow">次へ</a>
+        </div>        
+    </div>
+</div>

@@ -1,0 +1,127 @@
+<div class="main contents">
+    <div class="container">
+        <div class="article">
+            <h1>9.ALBを作成してみよう</h1>
+            <p>この章は10分で読めます</p>
+
+            <div data-turbolinks='false'>
+                <details id="table-of-content" open>
+                  <summary>目次</summary>
+                </details>
+            </div>
+
+            <h2>本章のゴール</h2>
+            <ul>
+                <li>・ALBを作成してみる。</li>
+                <li>・本章を終えると以下のような構成図になります。</li>
+            </ul>
+            <a href="/9_ALB/9-1.png" data-lightbox="9-1" data-title=""><img src="/9_ALB/9-1.png" alt=""></a>
+
+            <h2>技術解説</h2>
+
+            <h3>ターゲットグループ</h3>
+            <p>ALBのデータ送信先をグループ化したもの。</p>
+            <p>ターゲットグループの詳しい説明は<a data-turbolinks="false" href="awswords#word22" class="link-black">こちら</a></p>
+
+            <h3>ALB</h3>
+            <p>AWSが提供するWebサービスにおいて負荷を分散させるロードバランシングサービス。</p>
+            <p>ALBの詳しい説明は<a data-turbolinks="false" href="awswords#word21" class="link-black">こちら</a></p>
+
+            <h3>ロードバランサー</h3>
+            <p>外部からのアクセスを複数のサーバに振り分け、負荷分散を行う機器やサービスのこと。</p>
+
+            <h2>構築手順</h2>
+
+            <h3>ターゲットグループを作成する</h3>
+            <p>AWSマネジメントコンソールにログインします。EC2コンソールに移動します。</p>
+
+            <a href="/9_ALB/9-2.png" data-lightbox="9-2" data-title=""><img src="/9_ALB/9-2.png" alt=""></a>
+
+            <a href="/9_ALB/9-3.png" data-lightbox="9-3" data-title=""><img src="/9_ALB/9-3.png" alt=""></a>   
+            
+            <p>ナビゲーションペインから「ターゲットグループ」を選択します。「Create target group」をクリックします。</p>
+
+            <a href="/9_ALB/9-4.png" data-lightbox="9-4" data-title=""><img src="/9_ALB/9-4.png" alt=""></a>  
+            
+            <p>以下のパラメータを入力します。これら以外はデフォルトです。入力が完了したら「Next」をクリックします。</p>
+
+            <p>Target group name ＝ 任意<br>VPC ＝ 作成したVPC
+            </p>
+
+            <a href="/9_ALB/9-5.png" data-lightbox="9-5" data-title=""><img src="/9_ALB/9-5.png" alt=""></a>  
+
+            <a href="/9_ALB/9-6.png" data-lightbox="9-6" data-title=""><img src="/9_ALB/9-6.png" alt=""></a>  
+
+            <p>ターゲットグループにインスタンスを追加します。「Available Instances」に表示されているEC2インスタンスにチェックを付けます。「Include as Include as pending below」をクリックして追加します。追加し終えたら「Create target group」をクリックします。</p>
+
+            <a href="/9_ALB/9-7.png" data-lightbox="9-7" data-title=""><img src="/9_ALB/9-7.png" alt=""></a>  
+
+            <p>ターゲットグループが作成されたことを確認します。</p>
+
+            <a href="/9_ALB/9-8.png" data-lightbox="9-8" data-title=""><img src="/9_ALB/9-8.png" alt=""></a>  
+
+            <h3>ロードバランサを作成する</h3>
+
+            <p>ナビゲーションペインから「ロードバランサー」を選択します。「ロードバランサの作成」をクリックします。</p>
+
+            <a href="/9_ALB/9-9.png" data-lightbox="9-9" data-title=""><img src="/9_ALB/9-9.png" alt=""></a>  
+            
+            <p>ロードバランサのタイプを決めます。Application Load BalancerのCreateをクリックします。</p>
+
+            <a href="/9_ALB/9-10.png" data-lightbox="9-10" data-title=""><img src="/9_ALB/9-10.png" alt=""></a>  
+
+            <p>以下のパラメータを入力します。これら以外はデフォルトです。入力が完了したら「Create Load Balancer」をクリックします。</p>
+
+            <p>Load Balancer name＝任意<br>
+                VPC＝作成したVPC<br>
+                Mappings＝ap-northeast-1a,ap-northeast-1cのそれぞれパブリックサブネットを指定<br>
+                SecurityGroup＝ALB用のSecurityGroup<br>
+                Default action＝作成したターゲットグループ
+            </p>
+
+            <a href="/9_ALB/9-11.png" data-lightbox="9-11" data-title=""><img src="/9_ALB/9-11.png" alt=""></a>
+            
+            <a href="/9_ALB/9-12.png" data-lightbox="9-12" data-title=""><img src="/9_ALB/9-12.png" alt=""></a>
+            
+            <a href="/9_ALB/9-13.png" data-lightbox="9-13" data-title=""><img src="/9_ALB/9-13.png" alt=""></a>
+            
+            <a href="/9_ALB/9-14.png" data-lightbox="9-14" data-title=""><img src="/9_ALB/9-14.png" alt=""></a>  
+            
+            <p>ALBが作成されたことを確認します。</p>
+
+            <a href="/9_ALB/9-15.png" data-lightbox="9-15" data-title=""><img src="/9_ALB/9-15.png" alt=""></a>
+
+            <p>ロードバランサの詳細画面からロードバランサの<span class="openModal" id="openModal01">DNS</span>名をクリップボードにコピーします。</p>
+
+            <a href="/9_ALB/9-16.png" data-lightbox="9-16" data-title=""><img src="/9_ALB/9-16.png" alt=""></a>
+
+            <p>ブラウザを開き、検索欄に先ほどコピーしたDNS名を貼り付けてアクセスします。WordPressの設定画面が表示されればOKです。</p>
+
+            <a href="/9_ALB/9-17.png" data-lightbox="9-17" data-title=""><img src="/9_ALB/9-17.png" alt=""></a>   
+            
+            <h2>まとめ</h2>
+            <p>今回はALBを作成しました。インターネットからEC2インスタンスにアクセスする過程でロードバランサを介することによって直接EC2インスタンスにアクセス出来なくなります。これによってEC2インスタンスを保護することが出来ます。</p>
+
+            <p>※使用していないAWSリソースは必ず削除してください！思わぬ従量課金に繋がります！</p>
+
+            <!-- モーダルエリア01 -->
+            <section id="modalArea01" class="modalArea">
+                <div id="modalBg01" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">DNS</p>
+                    <p>Domain Name Systemの略称で、ドメインとIPアドレスを対応付けて管理するシステムのこと。</p>
+                  </div>
+                  <div id="closeModal01" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+            </section>     
+            
+        </div>
+        <div class="button">
+            <a href="8" class="btn btn--green btn--cubic btn--shadow">戻る</a>
+            <a href="10" class="btn btn--orange btn--cubic btn--shadow">次へ</a>
+        </div>
+    </div>
+</div>

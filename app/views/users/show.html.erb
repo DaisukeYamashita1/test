@@ -1,0 +1,14 @@
+<div class="main user-show">
+    <div class="container">
+        <div class="mypage">
+        <% if @user.id == @current_user.id %>
+            <h1>マイページ</h1>
+            <p>ログイン中のユーザー：<%= @user.user_name %></p>
+            <%= link_to("パスワードを変更", "/users/#{@user.public_uid}/edit", {class: "pw_change"}) %>
+        <% else %>
+            <h1>草www</h1>
+        <% end %>
+        <%= image_tag "img_02.svg", class: 'sized' %>
+        </div>
+    </div>
+</div>

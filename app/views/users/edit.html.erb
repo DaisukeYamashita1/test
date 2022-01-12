@@ -1,0 +1,23 @@
+<div class="main users-edit">
+    <div class="container">
+    <div class="form-heading">パスワード変更</div>
+    <div class="form users-form">
+        <div class="form-body">
+
+        <% @user.errors.full_messages.each do |message| %>
+            <div class="form-error">
+                <%= message %>
+            </div>
+        <% end %>
+        
+        <%= form_with url: "/users/#{@user.public_uid}/update" do |f| %>
+            <p>新しいパスワード</p>
+            <%= f.text_field :password %>
+            <p>パスワードは8文字以上の半角英数（両方含む）で入力してください。</p>                     
+            <%= f.submit value="保存"%>
+        <% end %>
+        
+        </div>
+    </div>
+    </div>
+</div>

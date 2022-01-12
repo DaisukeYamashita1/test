@@ -1,0 +1,213 @@
+<div class="main contents">
+    <div class="container">
+        <div class="article">
+            <h1>7.RDSを作成してみよう</h1>
+            <p>この章は15分で読めます</p>
+
+            <div data-turbolinks='false'>
+                <details id="table-of-content" open>
+                  <summary>目次</summary>
+                </details>
+            </div>
+
+            <h2>本章のゴール</h2>
+            <p>RDSを作成する。<br>本章は以下の構成図を目指して構築を進めます。
+            </p>
+            <a href="/7_RDS/7-1.png" data-lightbox="7-1" data-title=""><img src="/7_RDS/7-1.png" alt=""></a>
+
+            <h2>技術解説</h2>
+            
+            <h3>RDS</h3>
+            <p>AWSが提供する関係<span class="openModal" id="openModal01">データベース</span>サービス。</p>
+            <p>RDSの詳しい説明は<a data-turbolinks="false" href="awswords#word18" class="link-black">こちら</a></p>
+
+            <h3>サブネットグループ</h3>
+            <p>RDSインスタンスが配置され得るサブネットをグループ化したもの。サブネットグループには2つ以上のサブネットの登録が必要でありかつそのサブネットは最低2つのAZにまたがっていなければならない。</p>
+            <p>サブネットグループの詳しい説明は<a data-turbolinks="false" href="awswords#word19" class="link-black">こちら</a></p>
+
+            <h3>MySQL</h3>
+            <p><span class="openModal" id="openModal02">オープンソース</span>の<span class="openModal" id="openModal03">リレーショナルデータベース</span>管理システム。</p>
+
+            <h2>構築手順</h2>
+            <h3>サブネットグループを作成する</h3>
+
+            <p>AWSマネジメントコンソールのサービス一覧から「RDS」を選択します。</p>
+            <a href="/7_RDS/7-2.png" data-lightbox="7-2" data-title=""><img src="/7_RDS/7-2.png" alt=""></a>
+
+            <p>RDS管理コンソールが表示されました。データベースを作成する前にサブネットグループを作成します。ナビゲーションペインから「サブネットグループ」を選択します。</p>
+            <a href="/7_RDS/7-3.png" data-lightbox="7-3" data-title=""><img src="/7_RDS/7-3.png" alt=""></a>
+
+            <p>「DBサブネットグループを作成」をクリックします。</p>
+            <a href="/7_RDS/7-4.png" data-lightbox="7-4" data-title=""><img src="/7_RDS/7-4.png" alt=""></a>
+            
+            <p>以下の設定値でサブネットグループを作成します。パラメータの入力後「作成」をクリックします。</p>
+
+            <p>名前＝任意<br>説明＝このサブネットグループの用途を記載<br>VPC＝作成したVPCを選択<br>アベイラビリティゾーン＝ap-northeast-1a、ap-northeast-1c<br>サブネット＝AZ-1aとAZ-1cそれぞれのプライベートサブネットを指定（<span class="openModal" id="openModal04">CIDR</span>が10.0.0.64/26と10.0.0.192/26のサブネット）
+            </p>
+
+            <p><a data-turbolinks="false" href="awswords#word3" class="link-black">アベイラビリティゾーン</a>の説明はこちら</p>
+            <p>CIDRの詳しい説明は<a data-turbolinks="false" href="awswords#word5" class="link-black">こちら</a></p>
+
+            <a href="/7_RDS/7-5.png" data-lightbox="7-5" data-title=""><img src="/7_RDS/7-5.png" alt=""></a>
+
+            <p>サブネットグループが正常に作成されたことを確認してください。</p>
+            <a href="/7_RDS/7-6.png" data-lightbox="7-6" data-title=""><img src="/7_RDS/7-6.png" alt=""></a>
+
+            <h3>RDSを作成する</h3>
+            <p>ナビゲーションペインから「データベース」を選択します。「データベースの作成」をクリックします。</p>
+            <a href="/7_RDS/7-7.png" data-lightbox="7-7" data-title=""><img src="/7_RDS/7-7.png" alt=""></a>  
+            
+            <p>以下の設定値でRDSを作成します。これ以外の設定はデフォルト値です。入力が完了したら「データベースの作成」をクリックします。</p>
+
+            <p>エンジンのオプション＝MySQL<br>テンプレート＝無料利用枠<br>DBインスタンス識別子＝wordpress<br>マスターユーザー名＝wordpress<br>マスターパスワード＝任意（後ほど使いますので覚えておいてください）<br>Vertual Private Cloud（VPC）＝作成したVPC<br>サブネットグループ＝作成したサブネットグループ<br>VPCセキュリティグループ＝作成したRDS用のセキュリティグループ<br>アベイラビリティゾーン＝ap-northeast-1a
+            </p>
+            
+            <p>追加設定を開き以下設定します。<br>最初のデータベース名＝wordpress
+            </p>
+
+            <a href="/7_RDS/7-8.png" data-lightbox="7-8" data-title=""><img src="/7_RDS/7-8.png" alt=""></a>
+
+            <a href="/7_RDS/7-9.png" data-lightbox="7-9" data-title=""><img src="/7_RDS/7-9.png" alt=""></a>
+
+            <a href="/7_RDS/7-10.png" data-lightbox="7-10" data-title=""><img src="/7_RDS/7-10.png" alt=""></a>
+
+            <a href="/7_RDS/7-11.png" data-lightbox="7-11" data-title=""><img src="/7_RDS/7-11.png" alt=""></a>
+
+            <a href="/7_RDS/7-12.png" data-lightbox="7-12" data-title=""><img src="/7_RDS/7-12.png" alt=""></a>
+
+            <a href="/7_RDS/7-13.png" data-lightbox="7-13" data-title=""><img src="/7_RDS/7-13.png" alt=""></a>
+
+            <a href="/7_RDS/7-14.png" data-lightbox="7-14" data-title=""><img src="/7_RDS/7-14.png" alt=""></a>
+
+            <a href="/7_RDS/7-15.png" data-lightbox="7-15" data-title=""><img src="/7_RDS/7-15.png" alt=""></a>
+
+            <p>作成が完了するまで少々時間が掛かりますので完了まで待ちます。</p>
+            <a href="/7_RDS/7-16.png" data-lightbox="7-16" data-title=""><img src="/7_RDS/7-16.png" alt=""></a>
+
+            <p>作成が完了したことを確認します。</p>
+            <a href="/7_RDS/7-17.png" data-lightbox="7-17" data-title=""><img src="/7_RDS/7-17.png" alt=""></a>
+
+            <h2>まとめ</h2>
+            <p>今回はRDSの作成を実施しました。一般的にDBはシステム開発において重要な要素です。AWSでDBを使う方法は2種類あります。1つ目はRDSを使用する方法。RDSは<span class="openModal" id="openModal08">マネージドサービス</span>のため運用コストが低くなります。開発スピードは上がり、運用コストは減るので我々が受ける恩恵は非常に大きいものです。2つ目はEC2インスタンスにRDBMSをインストールする方法です。後者はマネージドサービスではありませんので運用コストはRDSに比べて高くなりインストールから運用まで全て自身で設定する必要があります。しかし全て自身で設定できることがメリットでもあります。細部に至るまで制御したい場合は後者のパターンがオススメです。
+            </p>
+
+            <p>※使用していないAWSリソースは必ず削除してください！思わぬ従量課金に繋がります！</p>
+
+            <!-- モーダルエリア01 -->
+            <section id="modalArea01" class="modalArea">
+              <div id="modalBg01" class="modalBg"></div>
+              <div class="modalWrapper">
+                <div class="modalContents">
+                  <p class="memobox-title">データベース</p>
+                  <p>検索や蓄積が容易にできるよう整理された情報の集まり。</p>
+                </div>
+                <div id="closeModal01" class="closeModal">
+                 <p></p>
+                </div>
+              </div>
+            </section>     
+
+            <!-- モーダルエリア02 -->
+            <section id="modalArea02" class="modalArea">
+              <div id="modalBg02" class="modalBg"></div>
+              <div class="modalWrapper">
+                <div class="modalContents">
+                  <p class="memobox-title">オープンソース</p>
+                  <p>ソフトウェアを構成しているプログラム「ソースコード」を、無償で一般公開すること。</p>
+                </div>
+                <div id="closeModal02" class="closeModal">
+                 <p></p>
+                </div>
+              </div>
+            </section>                        
+
+            <!-- モーダルエリア03 -->
+            <section id="modalArea03" class="modalArea">
+              <div id="modalBg03" class="modalBg"></div>
+              <div class="modalWrapper">
+                <div class="modalContents">
+                  <p class="memobox-title">リレーショナルデータベース</p>
+                  <p>行と列によって構成された「表形式のテーブル」と呼ばれるデータの集合を、互いに関連付けて関係モデルを使ったデータベースのこと。</p>
+                </div>
+                <div id="closeModal03" class="closeModal">
+                 <p></p>
+                </div>
+              </div>
+            </section>     
+
+            <!-- モーダルエリア04 -->
+            <section id="modalArea04" class="modalArea">
+              <div id="modalBg04" class="modalBg"></div>
+              <div class="modalWrapper">
+                <div class="modalContents">
+                  <p class="memobox-title">CIDR</p>
+                  <p>インターネット上のIPアドレスの割り当てと経路選択（ルーティング）を柔軟に運用する仕組み。</p>
+                </div>
+                <div id="closeModal04" class="closeModal">
+                 <p></p>
+                </div>
+              </div>
+            </section>   
+
+            <!-- モーダルエリア05 -->
+            <section id="modalArea05" class="modalArea">
+              <div id="modalBg05" class="modalBg"></div>
+              <div class="modalWrapper">
+                <div class="modalContents">
+                  <p class="memobox-title">マイナーアップデート</p>
+                  <p>ソフトウェアなどのバージョンアップは2種類あり、新機能の追加、仕様やロジックの変更など大規模なアップデートをメジャーアップデート（メジャーバージョンアップ）と言い、不具合の修正や小規模な機能の追加などをマイナーアップデート（マイナーバージョンアップ）といいます。</p>
+                </div>
+                <div id="closeModal05" class="closeModal">
+                 <p></p>
+                </div>
+              </div>
+            </section>                 
+
+            <!-- モーダルエリア06 -->
+            <section id="modalArea06" class="modalArea">
+              <div id="modalBg06" class="modalBg"></div>
+              <div class="modalWrapper">
+                <div class="modalContents">
+                  <p class="memobox-title">アクセス制御</p>
+                  <p>コンピュータやネットワークにアクセスできるユーザーを制限する機能のこと。</p>
+                </div>
+                <div id="closeModal06" class="closeModal">
+                 <p></p>
+                </div>
+              </div>
+            </section>     
+            
+            <!-- モーダルエリア07 -->
+            <section id="modalArea07" class="modalArea">
+              <div id="modalBg07" class="modalBg"></div>
+              <div class="modalWrapper">
+                <div class="modalContents">
+                  <p class="memobox-title">冗長構成</p>
+                  <p>情報システムなどの構成の一種で、設備や装置を複数用意し、一部が故障しても運用を継続できるようにしたもの。システムなどが持つそのような性質を「冗長性」、そのような構成法を「冗長化」といいます。</p>
+                </div>
+                <div id="closeModal07" class="closeModal">
+                 <p></p>
+                </div>
+              </div>
+            </section>     
+            
+            <!-- モーダルエリア08 -->
+            <section id="modalArea08" class="modalArea">
+              <div id="modalBg08" class="modalBg"></div>
+              <div class="modalWrapper">
+                <div class="modalContents">
+                  <p class="memobox-title">マネージドサービス</p>
+                  <p>運用管理の改善と経費削減のため、プロセスや機能の維持と需要予測の責任をアウトソーシングする手法。</p>
+                </div>
+                <div id="closeModal08" class="closeModal">
+                 <p></p>
+                </div>
+              </div>
+            </section>                
+        </div>
+        <div class="button">
+            <a href="6" class="btn btn--green btn--cubic btn--shadow">戻る</a>
+            <a href="8" class="btn btn--orange btn--cubic btn--shadow">次へ</a>
+        </div>
+    </div>
+</div>

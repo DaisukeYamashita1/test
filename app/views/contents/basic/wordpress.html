@@ -1,0 +1,396 @@
+<div class="main contents">
+    <div class="container">
+        <div class="article">
+            <h1>8.WordPressの設定をしよう</h1>
+            <p>この章は15分で読めます</p>
+
+            <div data-turbolinks='false'>
+                <details id="table-of-content" open>
+                  <summary>目次</summary>
+                </details>
+            </div>
+
+            <h2>本章のゴール</h2>
+
+            <p>EC2インスタンスにWordPressを設定し使用可能な状態にする。<br>本章を実施すると以下のような構成図になります。
+            </p>
+
+            <a href="/8_wordpress/8-1.png" data-lightbox="8-1" data-title=""><img src="/8_wordpress/8-1.png" alt=""></a>
+
+            <h2>技術解説</h2>
+            
+            <h3>SSH</h3>
+            <p>仮想サーバは普通<span class="openModal" id="openModal01">データセンター</span>内にありユーザから離れた場所にある。ユーザはインターネットを経由して仮想サーバを操作する必要がある。遠隔地からサーバを操作できるようにする技術のこと。</p>
+
+            <h3>鍵ファイル</h3>
+            <p>仮想サーバに接続するための認証情報。ほとんどの場合、そのサーバに対する鍵ファイルがないとログインできない。</p>
+
+            <h3>Apache</h3>
+            <p>Webコンテンツの公開には、サーバと<span class="openModal" id="openModal02">ブラウザ</span>間で<span class="openModal" id="openModal03">HTTP通信</span>を行うため<span class="openModal" id="openModal04">WEBサーバ</span>が必要である。ApacheはそのWEBサーバを提供するためのソフトウェアである。</p>
+
+            <h2>構築手順</h2>
+
+            <h3>SSHでEC2インスタンスに接続する（本手順ではMacOSで進めます）</h3>
+            <p>ローカルPCにてターミナルソフトを開きます。スポットライト検索で「ターミナル」を入力します。ヒットした「ターミナル」というアプリケーションを開きます。</p>
+
+            <a href="/8_wordpress/8-2.png" data-lightbox="8-2" data-title=""><img src="/8_wordpress/8-2.png" alt=""></a>
+
+            <p>ターミナルが起動しました。（個人の設定によって見た目に変化があります）</p>
+
+            <a href="/8_wordpress/8-3.png" data-lightbox="8-3" data-title=""><img src="/8_wordpress/8-3.png" alt=""></a>
+
+            <p>以下の<span class="openModal" id="openModal05">コマンド</span>を入力します。</p>
+
+<pre class="prettyprint linenums">
+cd ~/Downloads
+ls -la | grep *.pem
+</pre>      
+            
+            <p>ここでEC2インスタンスを起動した際にダウンロードした鍵ファイルの存在を確認します。インターネットからダウンロードしたのでダウンロードフォルダにありますが、これを「.ssh」というフォルダにコピーします。
+            </p>
+
+<pre class="prettyprint linenums">
+cp {鍵ファイル名}.pem ~/.ssh/（{鍵ファイル名}はご自身で読み替えてください）
+</pre>           
+            
+            <p>鍵ファイルが持つ設定値を変更します。この変更がないとEC2インスタンス（サーバ）に接続出来ない可能性があります。</p>
+
+<pre class="prettyprint linenums">
+cd ~/.ssh
+chmod 600 {鍵ファイル名}.pem
+ls -la {鍵ファイル名}.pem
+</pre> 
+            
+            <p>表示された結果の左端が「-rw-------」となっていることを確認してください。問題なければいよいよEC2インスタンスに接続します。以下のコマンドを入力します。</p>
+
+<pre class="prettyprint linenums">
+ssh -i {鍵ファイル名}.pem ec2-user@{Elastic IPアドレス}
+</pre>
+
+            <p>※Elastic IPアドレスは「6.EC2を作成してみよう」の「EC2インスタンスを作成する」で設定したElastic IPアドレスです</p>
+
+            <p>「The authenticity of host ‘Elastic IPアドレス (Elastic IPアドレス)’ can’t be established.
+            ECDSA key fingerprint is SHA256:isOvdUQ7cLZaN8jwtBst0kb72SLJZU/Uk07pu581MaU.
+            Are you sure you want to continue connecting (yes/no/[fingerprint])?」と聞かれる場合があります。この場合は「yes」と入力します。
+            </p>
+
+            <p>EC2の<span class="openModal" id="openModal06">アスキーアート</span>が表示されたら接続完了です。</p>
+
+            <a href="/8_wordpress/8-4.png" data-lightbox="8-4" data-title=""><img src="/8_wordpress/8-4.png" alt=""></a>
+
+            <h3>SSHでEC2インスタンスに接続する（Windowsの場合）</h3>
+
+            <p>まずTeraTermを下記サイトよりダウンロードします。（ポータブル版ではない方です）<br><a href="https://forest.watch.impress.co.jp/library/software/utf8teraterm/" class="underline">https://forest.watch.impress.co.jp/library/software/utf8teraterm/</a>
+            </p>
+
+            <a href="/8_wordpress/8-4-1.png" data-lightbox="8-4-1" data-title=""><img src="/8_wordpress/8-4-1.png" alt=""></a>
+
+            <p>拡張子がexeのファイルがダウンロードされます。ダブルクリックして開きます。<br>セットアップ言語を選択します。任意の言語で構いません。</p>
+            <a href="/8_wordpress/8-4-2.png" data-lightbox="8-4-2" data-title=""><img src="/8_wordpress/8-4-2.png" alt=""></a>
+
+            <p>使用許諾契約書が表示されます。「同意する」を選択し「次へ」をクリックします。</p>
+            <a href="/8_wordpress/8-4-3.png" data-lightbox="8-4-3" data-title=""><img src="/8_wordpress/8-4-3.png" alt=""></a>
+
+            <p>コンポーネントを選択します。デフォルトのまま「次へ」をクリックします。</p>
+
+            <a href="/8_wordpress/8-4-4.png" data-lightbox="8-4-4" data-title=""><img src="/8_wordpress/8-4-4.png" alt=""></a>
+
+            <p>TeraTermの言語を選択します。任意の言語で構いません。「次へ」をクリックします。</p>
+            <a href="/8_wordpress/8-4-5.png" data-lightbox="8-4-5" data-title=""><img src="/8_wordpress/8-4-5.png" alt=""></a>
+
+            <p>追加タスクの選択です。デフォルトのまま「次へ」をクリックします。</p>
+            <a href="/8_wordpress/8-4-6.png" data-lightbox="8-4-6" data-title=""><img src="/8_wordpress/8-4-6.png" alt=""></a>
+
+            <p>インストールの準備が出来ました。「インストール」をクリックします。</p>
+            <a href="/8_wordpress/8-4-7.png" data-lightbox="8-4-7" data-title=""><img src="/8_wordpress/8-4-7.png" alt=""></a>
+            <a href="/8_wordpress/8-4-8.png" data-lightbox="8-4-8" data-title=""><img src="/8_wordpress/8-4-8.png" alt=""></a>
+
+            <p>インストールが完了したらTeraTermを起動します。ホストの箇所にElastic IPアドレスを入力し、OKをクリックします。</p>
+            <a href="/8_wordpress/8-4-9.png" data-lightbox="8-4-9" data-title=""><img src="/8_wordpress/8-4-9.png" alt=""></a>
+
+            <p>セキュリティ警告が出ます。「OK」をクリックします。
+            </p>
+            <a href="/8_wordpress/8-4-10.png" data-lightbox="8-4-10" data-title=""><img src="/8_wordpress/8-4-10.png" alt=""></a>
+
+            <p>認証情報入力画面が表示されます。以下の情報を入力します。入力が完了したらOKをクリックします。<br>
+            ユーザ名：ec2-user<br>
+            RSA/DSA/ECDSA/ED25519鍵を使う：選択する<br>
+            秘密鍵：ダウンロードしておいた.pemファイル
+            </p>
+            <a href="/8_wordpress/8-4-11.png" data-lightbox="8-4-11" data-title=""><img src="/8_wordpress/8-4-11.png" alt=""></a>
+
+            <p>EC2のアスキーアートが表示されたら接続完了です。</p>
+
+
+            <h3>データベースの設定をする</h3>
+            <p>まずEC2の状態を最新化します。</p>
+
+<pre class="prettyprint linenums">
+sudo yum -y update
+</pre>
+
+            <p>データベースと接続するためにEC2インスタンスに<span class="openModal" id="openModal07">クライアントソフト</span>を入れます。</p>
+
+<pre class="prettyprint linenums">
+sudo yum -y install mysql
+</pre>
+
+            <p>データベースに接続します。そのためにはRDSの<span class="openModal" id="openModal08">エンドポイント</span>を知る必要があります。エンドポイントはAWSマネジメントコンソール→RDS管理コンソールの作成したRDSの詳細画面に記載があります。
+            </p>
+
+            <a href="/8_wordpress/8-5.png" data-lightbox="8-5" data-title=""><img src="/8_wordpress/8-5.png" alt=""></a>
+
+            <a href="/8_wordpress/8-6.png" data-lightbox="8-6" data-title=""><img src="/8_wordpress/8-6.png" alt=""></a>
+
+            <p>RDSエンドポイントの確認が取れたら以下のコマンドでEC2インスタンスとデータベースを接続します。</p>
+
+<pre class="prettyprint linenums">
+mysql -h {RDSエンドポイント} -u wordpress -p
+</pre>
+
+            <p>パスワードが聞かれるのでパスワードを入力します。完了するとデータベースへのアクセスが完了した状態になります。</p>
+
+            <a href="/8_wordpress/8-7.png" data-lightbox="8-7" data-title=""><img src="/8_wordpress/8-7.png" alt=""></a>
+
+            <p>WordPress接続用のユーザを作成します。以下のコマンドを入力します。「quit」を入力した後はデータベースからログアウトされます。</p>
+
+<pre class="prettyprint linenums">
+GRANT ALL PRIVILEGES ON wordpress.* TO wordpress;
+FLUSH PRIVILEGES;
+quit;
+</pre>
+
+            <a href="/8_wordpress/8-8.png" data-lightbox="8-8" data-title=""><img src="/8_wordpress/8-8.png" alt=""></a>
+
+            <h3>Apacheをインストールする</h3>
+            <p>以下のコマンドを実行してApacheをインストールし有効化します。</p>
+
+<pre class="prettyprint linenums">
+sudo yum install -y httpd
+sudo systemctl start httpd
+sudo systemctl enable httpd
+</pre>
+
+            <p>ここでブラウザを開き、EC2インスタンスのElastic IPアドレスを検索バーに入力します。以下のような画面が表示されればEC2インスタンスはWEBサーバとして機能しています。</p>
+
+            <a href="/8_wordpress/8-9.png" data-lightbox="8-9" data-title=""><img src="/8_wordpress/8-9.png" alt=""></a>
+
+            <h3>WordPressをインストールする</h3>
+
+            <p>以下のコマンドでWordPressをインストールします。</p>
+
+<pre class="prettyprint linenums">
+wget https://wordpress.org/latest.tar.gz
+tar -xzf latest.tar.gz
+</pre>
+
+            <p>インストールされたことを確認します。設定値を変更するのでバックアップを取っておきます。</p>
+
+<pre class="prettyprint linenums">
+cd wordpress
+cp wp-config-sample.php wp-config.php
+ls -la
+</pre>    
+            
+            <p>WordPressを設定する際に必要な設定値を確認します。ブラウザから以下のURLにアクセスしてください。<br>
+            <a href="https://api.wordpress.org/secret-key/1.1/salt/" class="underline">https://api.wordpress.org/secret-key/1.1/salt/</a></p>
+
+            <p>defineから始まる文字列が8行表示されれば問題ありません。</p>
+
+            <a href="/8_wordpress/8-10.png" data-lightbox="8-10" data-title=""><img src="/8_wordpress/8-10.png" alt=""></a>
+
+            <p>Linux標準搭載の<span class="openModal" id="openModal09">テキストエディタ</span>である「vi」でWordPressの設定ファイルを編集していきます。以下のコマンドを実行してください。</p>
+
+<pre class="prettyprint linenums">
+vi wp-config.php
+</pre>      
+            
+            <p>「:set number」とキーボードから入力してください。ファイルに行番号が付きます。</p>
+
+            <a href="/8_wordpress/8-11.png" data-lightbox="8-11" data-title=""><img src="/8_wordpress/8-11.png" alt=""></a>
+
+            <p>以下の箇所を変更します。「i」キーを押すと編集可能となります。</p>
+
+            <p>23行目：define( 'DB_NAME', 'database_name_here' );をdefine( ‘DB_NAME’, ‘wordpress’ );に変更します。</p>
+
+            <p>26行目：define( ‘DB_USER’, ‘username_here’ );をdefine( ‘DB_USER’, ‘wordpress’ );に変更します。</p>
+
+            <p>29行目：define( ‘DB_PASSWORD’, ‘password_here’ );	define( ‘DB_PASSWORD’, ‘ご自身で設定したパスワード’ );に変更します。</p>
+
+            <p>32行目：define( ‘DB_HOST’, ‘localhost’ );をdefine( ‘DB_HOST’, ‘RDSエンドポイント’ );に変更します。</p>
+
+            <p>51行目〜58行目：https://api.wordpress.org/secret-key/1.1/salt/で表示された値に変更します。</p>
+
+            <p>上記の変更が完了したら「Esc」キーを押した後、「:wq」と入力します。これで保存されます。</p>
+
+            <a href="/8_wordpress/8-12.png" data-lightbox="8-12" data-title=""><img src="/8_wordpress/8-12.png" alt=""></a>
+
+            <a href="/8_wordpress/8-13.png" data-lightbox="8-13" data-title=""><img src="/8_wordpress/8-13.png" alt=""></a>
+
+            <p>以下のコマンドを実行し、WordPressを<span class="openModal" id="openModal10">デプロイ</span>します。</p>
+
+<pre class="prettyprint linenums">
+sudo amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
+cd /home/ec2-user
+sudo cp -r wordpress/* /var/www/html/
+sudo service httpd restart
+</pre> 
+            
+            <p>再びブラウザからEC2インスタンスのElasticIPアドレスにアクセスします。以下のようなWordPressの画面が表示されたらデプロイ成功です。</p>
+
+            <a href="/8_wordpress/8-14.png" data-lightbox="8-14" data-title=""><img src="/8_wordpress/8-14.png" alt=""></a>        
+            
+            <p>問題なければターミナルに「exit」と入力しEC2インスタンスからログアウトします。</p>
+
+            <h2>まとめ</h2>
+            <p>今回はWordPressの設定を実施しました。ターミナルでのコマンド作業がメインだったので普段とは違った作業となりました。</p>
+
+            <p>※使用していないAWSリソースは必ず削除してください！思わぬ従量課金に繋がります！</p>
+
+            <!-- モーダルエリア01 -->
+            <section id="modalArea01" class="modalArea">
+                <div id="modalBg01" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">データセンター</p>
+                    <p>サーバーやネットワーク機器を設置するために特別に作られた建物。</p>
+                  </div>
+                  <div id="closeModal01" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>     
+  
+              <!-- モーダルエリア02 -->
+              <section id="modalArea02" class="modalArea">
+                <div id="modalBg02" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">ブラウザ</p>
+                    <p>Chromeやsafari、Internet ExplorerなどのWEBサイトを閲覧するために使うソフト。</p>
+                  </div>
+                  <div id="closeModal02" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>                        
+  
+              <!-- モーダルエリア03 -->
+              <section id="modalArea03" class="modalArea">
+                <div id="modalBg03" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">HTTP通信</p>
+                    <p>クライアントとサーバーの間でハイパーテキストを転送するための通信プロトコルである、HTTPを用いて行われる通信のこと。ハイパーテキスト＝複数の文書を相互に関連付け、結び付ける仕組み</p>
+                  </div>
+                  <div id="closeModal03" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>     
+  
+              <!-- モーダルエリア04 -->
+              <section id="modalArea04" class="modalArea">
+                <div id="modalBg04" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">WEBサーバ</p>
+                    <p>WEBブラウザからのリクエストに応じて静的画面や画像などのホームページのデータを Web ブラウザーに送ってくれるサーバーのこと。</p>
+                  </div>
+                  <div id="closeModal04" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>   
+  
+              <!-- モーダルエリア05 -->
+              <section id="modalArea05" class="modalArea">
+                <div id="modalBg05" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">コマンド</p>
+                    <p>システムへの指示・指令あるいは命令のこと。</p>
+                  </div>
+                  <div id="closeModal05" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>                 
+  
+              <!-- モーダルエリア06 -->
+              <section id="modalArea06" class="modalArea">
+                <div id="modalBg06" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">アスキーアート</p>
+                    <p>コンピュータの画面上に文字を縦横に並べて絵に見立てたもの。</p>
+                  </div>
+                  <div id="closeModal06" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>     
+              
+              <!-- モーダルエリア07 -->
+              <section id="modalArea07" class="modalArea">
+                <div id="modalBg07" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">クライアントソフト</p>
+                    <p>サーバーからのサービスを利用するためのソフトウェアをクライアントソフトという。</p>
+                  </div>
+                  <div id="closeModal07" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>                       
+
+              <!-- モーダルエリア08 -->
+              <section id="modalArea08" class="modalArea">
+                <div id="modalBg08" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">エンドポイント</p>
+                    <p>「末端」「終点」を意味する言葉。セキュリティ用語ではネットワークに接続されている末端の機器、つまりPCやサーバーのほか、スマートフォンやタブレットなどの端末機器のことを指します。</p>
+                  </div>
+                  <div id="closeModal08" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>                       
+
+              <!-- モーダルエリア09 -->
+              <section id="modalArea09" class="modalArea">
+                <div id="modalBg09" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">テキストエディタ</p>
+                    <p>テキスト（文章）を編集するためのアプリケーション。</p>
+                  </div>
+                  <div id="closeModal09" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>                       
+
+              <!-- モーダルエリア10 -->
+              <section id="modalArea10" class="modalArea">
+                <div id="modalBg10" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">デプロイ</p>
+                    <p>開発したアプリケーション（機能やサービス）をサーバー上に展開・配置して利用できるようにすること。</p>
+                  </div>
+                  <div id="closeModal10" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>                       
+
+        </div>
+        <div class="button">
+            <a href="7" class="btn btn--green btn--cubic btn--shadow">戻る</a>
+            <a href="9" class="btn btn--orange btn--cubic btn--shadow">次へ</a>
+        </div>
+    </div>
+</div>

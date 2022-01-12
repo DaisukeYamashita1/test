@@ -1,0 +1,112 @@
+<div class="main contents">
+    <div class="container">
+        <div class="article">
+            <h1>5.SecurityGroupを作成してみよう</h1>
+            <p>この章は10分で読めます</p>
+
+            <div data-turbolinks='false'>
+                <details id="table-of-content" open>
+                  <summary>目次</summary>
+                </details>
+            </div>
+
+            <h2>本章のゴール</h2>
+            <p>SecurityGroupを理解し、実際に構築してみる。</p>
+
+            <h2>技術解説</h2>
+
+            <h3>SecurityGroup</h3>
+            <p><span class="openModal" id="openModal01">ホワイトリスト型</span>のファイアウォール。</p>
+
+            <h3>ファイアウォール</h3>
+            <p>ネットワークの通信にて「その通信を通すかどうか」を判断し、許可または拒否する仕組み。</p>
+
+            <h2>構築手順</h2>
+            <h3>EC2用のSecurityGroupを作成する</h3>
+            <p>サービス一覧からEC2を選択しEC2コンソールに移動する。</p>
+            <a href="/5_SecurityGroup/5-1.png" data-lightbox="5-1" data-title=""><img src="/5_SecurityGroup/5-1.png" alt=""></a>            
+            <a href="/5_SecurityGroup/5-2.png" data-lightbox="5-2" data-title=""><img src="/5_SecurityGroup/5-2.png" alt=""></a>
+
+            <p>ナビゲーションペインから「セキュリティグループ」を選択し「セキュリティグループを作成」をクリックする。</p>
+            <p>セキュリティグループの詳しい説明は<a data-turbolinks="false" href="awswords#word15" class="link-black">こちら</a></p>
+
+            <a href="/5_SecurityGroup/5-3.png" data-lightbox="5-3" data-title=""><img src="/5_SecurityGroup/5-3.png" alt=""></a>            
+
+            <p>以下の設定値でSecurityGroupを作成する。入力が完了したら「セキュリティグループを作成」をクリックする。
+            </p>
+
+            <p>セキュリティグループ名＝任意<br>説明＝任意<br>VPC＝作成したVPC
+            </p>
+
+            <p>インバウンドルール</p>
+            <p>タイプ＝HTTP<br>ソース＝AnyWhere IPv4 0.0.0.0/0
+            </p>
+
+            <p>タイプ＝SSH<br>ソース＝マイIP
+            </p>
+
+            <a href="/5_SecurityGroup/5-4.png" data-lightbox="5-4" data-title=""><img src="/5_SecurityGroup/5-4.png" alt=""></a>
+
+            <p>SecurityGroupが作成されたことを確認する。</p>
+            <a href="/5_SecurityGroup/5-5.png" data-lightbox="5-5" data-title=""><img src="/5_SecurityGroup/5-5.png" alt=""></a>            
+
+            <h3>RDS用のSecurityGroupを作成する</h3>
+            <p>「セキュリティグループを作成」をクリックする。</p>
+            <a href="/5_SecurityGroup/5-6.png" data-lightbox="5-6" data-title=""><img src="/5_SecurityGroup/5-6.png" alt=""></a>       
+            <p>以下の設定値でSecurityGroupを作成する。入力が完了したら「セキュリティグループを作成」をクリックする。</p>     
+
+            <p>セキュリティグループ名＝任意<br>説明＝任意<br>VPC＝作成したVPC
+            </p>
+
+            <p>インバウンドルール</p>
+            <p>タイプ＝MYSQL/Aurora<br>ソース＝カスタム 10.0.0.10/32
+            </p>            
+            <a href="/5_SecurityGroup/5-7.png" data-lightbox="5-7" data-title=""><img src="/5_SecurityGroup/5-7.png" alt=""></a>            
+
+            <p>SecurityGroupが作成されたことを確認する。</p>
+            <a href="/5_SecurityGroup/5-8.png" data-lightbox="5-8" data-title=""><img src="/5_SecurityGroup/5-8.png" alt=""></a>
+
+            <h3>ALB用のSecurityGroupを作成する</h3>
+            <p>「セキュリティグループを作成」をクリックする。</p>
+            <a href="/5_SecurityGroup/5-9.png" data-lightbox="5-9" data-title=""><img src="/5_SecurityGroup/5-9.png" alt=""></a>
+
+            <p>以下の設定値でSecurityGroupを作成する。入力が完了したら「セキュリティグループを作成」をクリックする。</p>
+
+            <p>セキュリティグループ名＝任意<br>説明＝任意<br>VPC＝作成したVPC
+            </p>
+
+            <p>インバウンドルール</p>
+            <p>タイプ＝HTTP<br>ソース＝AnyWhere IPv4 0.0.0.0/0
+            </p>            
+
+            <a href="/5_SecurityGroup/5-10.png" data-lightbox="5-10" data-title=""><img src="/5_SecurityGroup/5-10.png" alt=""></a>         
+            
+            <p>SecurityGroupが作成されたことを確認する。</p>
+            <a href="/5_SecurityGroup/5-11.png" data-lightbox="5-11" data-title=""><img src="/5_SecurityGroup/5-11.png" alt=""></a>
+
+            <h2>まとめ</h2>
+            <p>本章ではSecurityGroupの作成を行いました。実際には使用していませんが次回以降作成するEC2、RDS、ALBの作成を楽にするために今回事前作成しました。SecurityGroupは基本的なアクセス制御なので使い方を覚えておきましょう。</p>
+
+            <p>※使用していないAWSリソースは必ず削除してください！思わぬ従量課金に繋がります！</p>
+
+            <!-- モーダルエリア01 -->
+            <section id="modalArea01" class="modalArea">
+                <div id="modalBg01" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">ホワイトリスト型</p>
+                    <p>安全であるアプリやソフトをリスト化し、それに該当しない不正な動きをウイルスとして検知する方法です。</p>
+                  </div>
+                  <div id="closeModal01" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+            </section>     
+  
+        </div>
+        <div class="button">
+            <a href="4" class="btn btn--green btn--cubic btn--shadow">戻る</a>
+            <a href="6" class="btn btn--orange btn--cubic btn--shadow">次へ</a>
+        </div>        
+    </div>
+</div>

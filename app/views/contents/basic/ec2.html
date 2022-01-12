@@ -1,0 +1,212 @@
+<div class="main contents">
+    <div class="container">
+        <div class="article">
+            <h1>6.EC2を作成してみよう</h1>
+            <p>この章は10分で読めます</p>
+
+            <div data-turbolinks='false'>
+                <details id="table-of-content" open>
+                  <summary>目次</summary>
+                </details>
+            </div>
+
+            <h2>本章のゴール</h2>
+            <p>AWSの<span class="openModal" id="openModal01">仮想サーバ</span>であるEC2を構築する。<br>本章では以下の構成図になります。
+            </p>
+
+            <a href="/6_EC2/6-1.png" data-lightbox="6-1" data-title=""><img src="/6_EC2/6-1.png" alt=""></a>
+
+            <h2>技術解説</h2>
+
+            <h3>EC2</h3>
+            <p>仮想サーバのこと。AMIと呼ばれるOSイメージを選択することで様々なOSのサーバを構築することができる。</p>
+            <p>EC2の詳しい説明は<a data-turbolinks="false" href="awswords#word10" class="link-black">こちら</a></p>
+
+            <h3>Elastic IP</h3>
+            <p>AWSが所有する<span class="openModal" id="openModal02">Global IP アドレス</span>のこと。<br>IPアドレスの詳しい説明は<a data-turbolinks="false" href="awswords#word4" class="link-black">こちら</a></p>
+
+            <h3>キーペア</h3>
+            <p><span class="openModal" id="openModal03">公開鍵</span>と<span class="openModal" id="openModal04">秘密鍵</span>のセットのこと。EC2に<span class="openModal" id="openModal05">SSH</span>するとき<span class="openModal" id="openModal06">公開鍵暗号方式</span>というやり方でアクセスしている。EC2を起動するとき秘密鍵をダウンロードする。ユーザは秘密鍵を使って本人情報（署名）を作成しサーバにアクセスし、サーバは公開鍵を用いてユーザの本人情報（署名）を検証する。この検証で問題なければ無事サーバにログイン可能となる。</p>
+            <p>キーペアの詳しい説明は<a data-turbolinks="false" href="awswords#word17" class="link-black">こちら</a></p>
+
+
+            <h3>AMI</h3>
+            <p>EC2で用いるOSのマシンイメージのこと。</p>
+            <p>AMIの詳しい説明は<a data-turbolinks="false" href="awswords#word12" class="link-black">こちら</a></p>
+
+            <h2>構築手順</h2>
+            <h3>EC2<span class="openModal" id="openModal07">インスタンス</span>を作成する</h3>
+
+            <p>AWSマネジメントコンソールにログインします。</p>
+            <a href="/6_EC2/6-2.png" data-lightbox="6-2" data-title=""><img src="/6_EC2/6-2.png" alt=""></a> 
+
+            <p>サービス一覧よりEC2を選択し、EC2管理コンソールに移動します。</p>
+            <a href="/6_EC2/6-2-1.png" data-lightbox="6-2-1" data-title=""><img src="/6_EC2/6-2-1.png" alt=""></a>
+                       
+            <a href="/6_EC2/6-3.png" data-lightbox="6-3" data-title=""><img src="/6_EC2/6-3.png" alt=""></a> 
+            
+            <p>ナビゲーションペインから「インスタンス」を選択し、「インスタンスを起動」をクリックします。</p>
+            <a href="/6_EC2/6-4.png" data-lightbox="6-4" data-title=""><img src="/6_EC2/6-4.png" alt=""></a>
+
+            <p>AMIの選択画面です。ここでは無料利用枠対象のAmazonLinux2 AMIを選択します。</p>
+            <a href="/6_EC2/6-5.png" data-lightbox="6-5" data-title=""><img src="/6_EC2/6-5.png" alt=""></a> 
+
+            <p>続いて<a data-turbolinks="false" href="awswords#word11" class="link-black">インスタンスタイプ</a>の選択です。ここでも無料利用枠対象のt2.microを選択します。選択後「次のステップ：インスタンスの詳細の設定」をクリックします。</p>
+            <a href="/6_EC2/6-6.png" data-lightbox="6-6" data-title=""><img src="/6_EC2/6-6.png" alt=""></a>    
+            
+            <p>このページではインスタンスの詳細を設定します。以下の設定値を入力します。（これ以外はデフォルト値）入力が完了したら「次のステップ：ストレージの追加」をクリックします。</p>
+
+            <p>ネットワーク＝自身で作成したVPC<br>サブネット＝AZ-1aにあるパブリックサブネット<br>自動割り当てパブリック IP＝無効化<br>ネットワークインターフェイス＞プライマリIP＝10.0.0.10
+            </p>
+            <a href="/6_EC2/6-7.png" data-lightbox="6-7" data-title=""><img src="/6_EC2/6-7.png" alt=""></a>    
+
+            <p>EC2インスタンスのストレージを選択します。デフォルトのまま「次のステップ：タグの追加」に移動します。</p>
+            <a href="/6_EC2/6-8.png" data-lightbox="6-8" data-title=""><img src="/6_EC2/6-8.png" alt=""></a>         
+
+            <p>「タグの追加」では何も設定しません。「次のステップ：セキュリティグループの設定」をクリックします。</p>
+            <a href="/6_EC2/6-9.png" data-lightbox="6-9" data-title=""><img src="/6_EC2/6-9.png" alt=""></a>        
+
+            <p>「既存のセキュリティグループを選択する」を選択します。前回作成しておいたEC2用のセキュリティグループを選択します。</p>
+            <a href="/6_EC2/6-10.png" data-lightbox="6-10" data-title=""><img src="/6_EC2/6-10.png" alt=""></a>           
+
+            <p>全体の設定値を確認します。間違いがなければ「起動」をクリックします。</p>
+            <a href="/6_EC2/6-11.png" data-lightbox="6-11" data-title=""><img src="/6_EC2/6-11.png" alt=""></a>          
+
+            <p>プルダウンメニューから「新しいキーペアの作成」を選択し、キーペア名には任意の名前を入力します。入力後、キーペアのダウンロードを実行します。その後「インスタンスの作成」をクリックします。</p>
+            <a href="/6_EC2/6-12.png" data-lightbox="6-12" data-title=""><img src="/6_EC2/6-12.png" alt=""></a>          
+
+            <p>作成中と表示されます。「インスタンスの表示」をクリックします。</p>
+            <a href="/6_EC2/6-13.png" data-lightbox="6-13" data-title=""><img src="/6_EC2/6-13.png" alt=""></a>  
+            
+            <p>正常にEC2インスタンスが作成されたことを確認します。</p>
+            <a href="/6_EC2/6-14.png" data-lightbox="6-14" data-title=""><img src="/6_EC2/6-14.png" alt=""></a>  
+
+            <p>ナビゲーションペインから「Elastic IP」を選択します。「Elastic IPアドレスの割り当て」をクリックします。</p>
+            <a href="/6_EC2/6-15.png" data-lightbox="6-15" data-title=""><img src="/6_EC2/6-15.png" alt=""></a>    
+
+            <p>そのまま「割り当て」をクリックします。</p>
+            <a href="/6_EC2/6-16.png" data-lightbox="6-16" data-title=""><img src="/6_EC2/6-16.png" alt=""></a>           
+
+            <p>Elastic IPアドレスが1件割り当てられたことを確認します。アクションから「Elastic IPアドレスの関連付け」をクリックします。</p>
+            <a href="/6_EC2/6-17.png" data-lightbox="6-17" data-title=""><img src="/6_EC2/6-17.png" alt=""></a> 
+
+            <a href="/6_EC2/6-18.png" data-lightbox="6-18" data-title=""><img src="/6_EC2/6-18.png" alt=""></a>  
+
+            <p>インスタンスで先ほど作成したEC2インスタンスを選択します。「関連付ける」をクリックします。</p>
+            <a href="/6_EC2/6-19.png" data-lightbox="6-19" data-title=""><img src="/6_EC2/6-19.png" alt=""></a>             
+
+            <p>Elastic IPアドレスがEC2インスタンスに正常に関連付けられたことを確認します。</p>
+            <a href="/6_EC2/6-20.png" data-lightbox="6-20" data-title=""><img src="/6_EC2/6-20.png" alt=""></a>
+            
+            <p>これでAWSの仮想サーバであるEC2インスタンスの構築が完了しました。</p>
+
+            <h2>まとめ</h2>
+            <p>今回はAWSの仮想サーバであるEC2インスタンスの構築を実施しました。EC2は非常に便利なサービスで何かサーバで試したいことが発生した時、「サーバを使いたいけど3日だけでいいんだよな」といったケースで力を発揮します。手軽でお安くサーバを借りることが出来るのでぜひ様々なケースで使ってみてください。</p>
+
+            <p>※使用していないAWSリソースは必ず削除してください！思わぬ従量課金に繋がります！</p>
+
+            <!-- モーダルエリア01 -->
+            <section id="modalArea01" class="modalArea">
+                <div id="modalBg01" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">仮想サーバ</p>
+                    <p>1台のサーバー上で複数のオペレーションシステム（OS）を動かし、複数のサーバーとして運用する仕組みです。</p>
+                  </div>
+                  <div id="closeModal01" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>     
+  
+              <!-- モーダルエリア02 -->
+              <section id="modalArea02" class="modalArea">
+                <div id="modalBg02" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">Global IP アドレス</p>
+                    <p>IPアドレスとは、スマホやPCなど ネットワーク上の機器に割り当てられるインターネット上の住所のようなもの。グローバルIPアドレス（Global IP アドレス）は、全世界で通用するアドレスで、世界中どこからでもデータ送受信の際に送り間違えのないよう、世界にただひとつ、インターネットに接続する際に割り振られるIPアドレス。</p>
+                  </div>
+                  <div id="closeModal02" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>                        
+  
+              <!-- モーダルエリア03 -->
+              <section id="modalArea03" class="modalArea">
+                <div id="modalBg03" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">公開鍵</p>
+                    <p>公開鍵とは、通信を暗号化するときに使うキーのことです。公開鍵暗号方式で使われる２種類の鍵のひとつで、誰でも利用できるように広く公開されています。</p>
+                  </div>
+                  <div id="closeModal03" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>     
+  
+              <!-- モーダルエリア04 -->
+              <section id="modalArea04" class="modalArea">
+                <div id="modalBg04" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">秘密鍵</p>
+                    <p>対になる公開鍵で暗号化された通信を復号するために使うキーのこと。</p>
+                  </div>
+                  <div id="closeModal04" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>   
+  
+              <!-- モーダルエリア05 -->
+              <section id="modalArea05" class="modalArea">
+                <div id="modalBg05" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">SSH</p>
+                    <p>Secure Shell（セキュアシェル）の略称で、リモートコンピュータと通信するためのプロトコルです。認証部分を含めネットワーク上の通信がすべて暗号化されるため、安全に通信することができます。<br>プロトコル＝コンピューター同士が通信を行うための規格（ルール）</p>
+                  </div>
+                  <div id="closeModal05" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>                 
+  
+              <!-- モーダルエリア06 -->
+              <section id="modalArea06" class="modalArea">
+                <div id="modalBg06" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">公開鍵暗号方式</p>
+                    <p>インターネット上でやり取りされるデータは盗聴される可能性が高いため、データを暗号化する必要があります。また、データの中身を見るためには、データの復号化をしなければなりません。<br>公開鍵暗号方式とは、「公開鍵」と「秘密鍵」という二つの鍵を利用して暗号化・復号化を行う暗号方式です。一般的に、受信側が公開鍵と秘密鍵を持ち、公開鍵は誰でも取得できるオープンな鍵であるのに対し、秘密鍵は受信側のみ保持している鍵。公開鍵で暗号化され、対になっている秘密鍵のみで復号化できます。</p>
+                  </div>
+                  <div id="closeModal06" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>     
+              
+              <!-- モーダルエリア07 -->
+              <section id="modalArea07" class="modalArea">
+                <div id="modalBg07" class="modalBg"></div>
+                <div class="modalWrapper">
+                  <div class="modalContents">
+                    <p class="memobox-title">インスタンス</p>
+                    <p>オブジェクト指向プログラミングで、クラス定義に基いてメモリ上にデータと手続きの集合として実体化されたオブジェクトのこと。</p>
+                  </div>
+                  <div id="closeModal07" class="closeModal">
+                   <p></p>
+                  </div>
+                </div>
+              </section>                 
+        </div>
+
+            <div class="button">
+                <a href="5" class="btn btn--green btn--cubic btn--shadow">戻る</a>
+                <a href="7" class="btn btn--orange btn--cubic btn--shadow">次へ</a>
+            </div>
+    </div>
+</div>

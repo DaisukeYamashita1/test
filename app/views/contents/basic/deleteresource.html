@@ -1,0 +1,267 @@
+<div class="main contents">
+    <div class="container">
+        <div class="article">
+            <h1>12.今まで作成したリソースを削除しよう</h1>
+            <p>この章は40分で読めます</p>
+
+            <div data-turbolinks='false'>
+                <details id="table-of-content" open>
+                  <summary>目次</summary>
+                </details>
+            </div>
+
+            <h2>本章のゴール</h2>
+            <p>次章で自動構築を実施するため手動で構築したリソースを削除する</p>
+
+            <h2>作業手順</h2>
+
+            <h3>ホストゾーンを削除する</h3>
+
+            <p>AWSマネジメントコンソールにログインします。「Route53」をクリックしRoute53管理コンソールに移動します。</p>
+
+            <a href="/12_DeleteResource/12-1.png" data-lightbox="12-1" data-title=""><img src="/12_DeleteResource/12-1.png" alt=""></a>            
+
+            <p>Route53管理コンソールが表示されました。「ホストゾーン」をクリックします。</p>
+
+            <a href="/12_DeleteResource/12-2.png" data-lightbox="12-2" data-title=""><img src="/12_DeleteResource/12-2.png" alt=""></a>            
+
+            <p>表示されているホストゾーンをクリックします。</p>
+
+            <a href="/12_DeleteResource/12-3.png" data-lightbox="12-3" data-title=""><img src="/12_DeleteResource/12-3.png" alt=""></a>            
+
+            <p>タイプが「CNAME」のレコードにチェックを付け、「レコードを削除」をクリックします。</p>
+
+            <a href="/12_DeleteResource/12-4.png" data-lightbox="12-4" data-title=""><img src="/12_DeleteResource/12-4.png" alt=""></a>            
+
+            <p>「削除」をクリックします。</p>
+
+            <a href="/12_DeleteResource/12-5.png" data-lightbox="12-5" data-title=""><img src="/12_DeleteResource/12-5.png" alt=""></a>            
+
+            <p>レコードが正常に削除されたことを確認します。続いて「ゾーンを削除する」をクリックします。</p>
+
+            <a href="/12_DeleteResource/12-6.png" data-lightbox="12-6" data-title=""><img src="/12_DeleteResource/12-6.png" alt=""></a>            
+
+            <p>テキストフィールドに「削除」と入力し「削除」をクリックします。</p>
+
+            <a href="/12_DeleteResource/12-7.png" data-lightbox="12-7" data-title=""><img src="/12_DeleteResource/12-7.png" alt=""></a>            
+
+            <p>ホストゾーンが正常に削除されたことを確認します。</p>
+
+            <a href="/12_DeleteResource/12-8.png" data-lightbox="12-8" data-title=""><img src="/12_DeleteResource/12-8.png" alt=""></a>            
+
+            <h3>ALBを削除する</h3>
+
+            <p>ナビゲーションペインの「ロードバランサー」を選択します。</p>
+
+            <a href="/12_DeleteResource/12-9.png" data-lightbox="12-9" data-title=""><img src="/12_DeleteResource/12-9.png" alt=""></a>            
+
+            <p>アクションから「削除」をクリックします。</p>
+
+            <a href="/12_DeleteResource/12-10.png" data-lightbox="12-10" data-title=""><img src="/12_DeleteResource/12-10.png" alt=""></a>    
+            
+            <p>「はい、削除する」をクリックします。</p>
+
+            <a href="/12_DeleteResource/12-11.png" data-lightbox="12-11" data-title=""><img src="/12_DeleteResource/12-11.png" alt=""></a>            
+            
+            <p>ロードバランサーが削除されたことを確認します。</p>
+
+            <a href="/12_DeleteResource/12-12.png" data-lightbox="12-12" data-title=""><img src="/12_DeleteResource/12-12.png" alt=""></a>            
+            
+            <h3>ターゲットグループを削除する</h3>
+
+            <p>ナビゲーションペインのターゲットグループを選択します。</p>
+
+            <a href="/12_DeleteResource/12-13.png" data-lightbox="12-13" data-title=""><img src="/12_DeleteResource/12-13.png" alt=""></a>            
+            
+            <p>「Actions」から「Delete」をクリックします。</p>
+
+            <a href="/12_DeleteResource/12-14.png" data-lightbox="12-14" data-title=""><img src="/12_DeleteResource/12-14.png" alt=""></a>            
+            
+            <p>「Yes , delete」をクリックします。</p>
+
+            <a href="/12_DeleteResource/12-15.png" data-lightbox="12-15" data-title=""><img src="/12_DeleteResource/12-15.png" alt=""></a>            
+            
+            <p>正常にターゲットグループが削除されたことを確認します。</p>
+
+            <a href="/12_DeleteResource/12-16.png" data-lightbox="12-16" data-title=""><img src="/12_DeleteResource/12-16.png" alt=""></a>    
+            
+            <h3>RDSを削除する</h3>
+            
+            <p>RDS管理コンソールに移動します。ナビゲーションペインから「データベース」を選択します。データベースを選択し「アクション」から「削除」をクリックします。</p>
+
+            <a href="/12_DeleteResource/12-17.png" data-lightbox="12-17" data-title=""><img src="/12_DeleteResource/12-17.png" alt=""></a>  
+
+            <a href="/12_DeleteResource/12-18.png" data-lightbox="12-18" data-title=""><img src="/12_DeleteResource/12-18.png" alt=""></a>            
+            
+            <p>1つ目のチェックボックスを外し、2つ目のチェックボックスにチェックを付けます。テキストフィールドに「delete me」と入力します。「削除」をクリックします。</p>
+
+            <a href="/12_DeleteResource/12-19.png" data-lightbox="12-19" data-title=""><img src="/12_DeleteResource/12-19.png" alt=""></a>            
+            
+            <p>正常にデータベースが削除されたことを確認します。</p>
+
+            <a href="/12_DeleteResource/12-20.png" data-lightbox="12-20" data-title=""><img src="/12_DeleteResource/12-20.png" alt=""></a>            
+            
+            <p>ナビゲーションペインから「サブネットグループ」を選択します。表示されているサブネットグループにチェックを付け「削除」ボタンをクリックします。</p>
+
+            <a href="/12_DeleteResource/12-21.png" data-lightbox="12-21" data-title=""><img src="/12_DeleteResource/12-21.png" alt=""></a>            
+            
+            <p>「削除」をクリックします。</p>
+
+            <a href="/12_DeleteResource/12-22.png" data-lightbox="12-22" data-title=""><img src="/12_DeleteResource/12-22.png" alt=""></a>            
+            
+            <p>正常にサブネットグループが削除されたことを確認します。</p>
+
+            <a href="/12_DeleteResource/12-23.png" data-lightbox="12-23" data-title=""><img src="/12_DeleteResource/12-23.png" alt=""></a>            
+            
+            <h3>EC2インスタンスを削除する</h3>
+
+            <p>EC2管理コンソールに移動します。ナビゲーションペインから「インスタンス」を選択します。</p>
+
+            <a href="/12_DeleteResource/12-24.png" data-lightbox="12-24" data-title=""><img src="/12_DeleteResource/12-24.png" alt=""></a>            
+            
+            <p>表示されているEC2インスタンスにチェックを付け「インスタンスの状態」から「インスタンスを終了」をクリックします。</p>
+
+            <a href="/12_DeleteResource/12-25.png" data-lightbox="12-25" data-title=""><img src="/12_DeleteResource/12-25.png" alt=""></a>            
+            
+            <p>「終了」をクリックします。</p>
+
+            <a href="/12_DeleteResource/12-26.png" data-lightbox="12-26" data-title=""><img src="/12_DeleteResource/12-26.png" alt=""></a>            
+            
+            <p>正常にEC2インスタンスが削除されたことを確認します。</p>
+
+            <a href="/12_DeleteResource/12-27.png" data-lightbox="12-27" data-title=""><img src="/12_DeleteResource/12-27.png" alt=""></a>            
+            
+            <p>ナビゲーションペインから「Elastic IP」を選択します。表示されているElastic IPにチェックを付けます。</p>
+
+            <a href="/12_DeleteResource/12-28.png" data-lightbox="12-28" data-title=""><img src="/12_DeleteResource/12-28.png" alt=""></a>            
+            
+            <p>「アクション」から「Elastic IPアドレスの解放」をクリックします。</p>
+
+            <a href="/12_DeleteResource/12-29.png" data-lightbox="12-29" data-title=""><img src="/12_DeleteResource/12-29.png" alt=""></a>            
+            
+            <p>「解放」をクリックします。</p>
+
+            <a href="/12_DeleteResource/12-30.png" data-lightbox="12-30" data-title=""><img src="/12_DeleteResource/12-30.png" alt=""></a>            
+            
+            <p>Elastic IPが表示されていないことを確認します。</p>
+
+            <a href="/12_DeleteResource/12-31.png" data-lightbox="12-31" data-title=""><img src="/12_DeleteResource/12-31.png" alt=""></a>   
+            
+            <h3>セキュリティグループを削除する</h3>
+            
+            <p>EC2管理コンソールにいる状態で、ナビゲーションペインから「セキュリティグループ」を選択します。</p>
+
+            <a href="/12_DeleteResource/12-32.png" data-lightbox="12-32" data-title=""><img src="/12_DeleteResource/12-32.png" alt=""></a>            
+            
+            <p>表示されているセキュリティグループ全てにチェックを付けます。「アクション」から「セキュリティグループを削除」をクリックします。</p>
+
+            <a href="/12_DeleteResource/12-33.png" data-lightbox="12-33" data-title=""><img src="/12_DeleteResource/12-33.png" alt=""></a>            
+            
+            <p>テキストフィールドに「削除」と入力します。「削除」をクリックします。</p>
+
+            <a href="/12_DeleteResource/12-34.png" data-lightbox="12-34" data-title=""><img src="/12_DeleteResource/12-34.png" alt=""></a>            
+            
+            <p>VPCデフォルトのセキュリティグループのみが残り、自身で作成したセキュリティグループが削除されたことを確認します。</p>
+
+            <a href="/12_DeleteResource/12-35.png" data-lightbox="12-35" data-title=""><img src="/12_DeleteResource/12-35.png" alt=""></a>   
+            
+            <h3>インターネットゲートウェイを削除する</h3>
+            
+            <p>VPC管理コンソールに移動します。ナビゲーションペインから「インターネットゲートウェイ」を選択します。</p>
+
+            <a href="/12_DeleteResource/12-36.png" data-lightbox="12-36" data-title=""><img src="/12_DeleteResource/12-36.png" alt=""></a>            
+            
+            <p>自身で作成したインターネットゲートウェイを選択し「アクション」から「VPCからデタッチ」を選択します。</p>
+
+            <a href="/12_DeleteResource/12-37.png" data-lightbox="12-37" data-title=""><img src="/12_DeleteResource/12-37.png" alt=""></a>            
+            
+            <p>「インターネットゲートウェイのデタッチ」をクリックします。</p>
+
+            <a href="/12_DeleteResource/12-38.png" data-lightbox="12-38" data-title=""><img src="/12_DeleteResource/12-38.png" alt=""></a>            
+            
+            <p>正常にデタッチされたことを確認します。「インターネットゲートウェイの削除」をクリックします。</p>
+
+            <a href="/12_DeleteResource/12-39.png" data-lightbox="12-39" data-title=""><img src="/12_DeleteResource/12-39.png" alt=""></a>            
+            
+            <p>テキストフィールドに「削除」と入力して「インターネットゲートウェイの削除」をクリックします。</p>
+
+            <a href="/12_DeleteResource/12-40.png" data-lightbox="12-40" data-title=""><img src="/12_DeleteResource/12-40.png" alt=""></a>            
+            
+            <p>正常にインターネットゲートウェイが削除されたことを確認します。</p>
+
+            <a href="/12_DeleteResource/12-41.png" data-lightbox="12-41" data-title=""><img src="/12_DeleteResource/12-41.png" alt=""></a>   
+            
+            <h3>ルートテーブルを削除する</h3>
+
+            <p>VPC管理コンソールにいる状態で、ナビゲーションペインから「ルートテーブル」を選択します。自身で作成したルートテーブルを選択します。</p>
+
+            <a href="/12_DeleteResource/12-42.png" data-lightbox="12-42" data-title=""><img src="/12_DeleteResource/12-42.png" alt=""></a>
+            
+            <p>「アクション」から「サブネットの関連付けを編集」をクリックします。</p>
+
+            <a href="/12_DeleteResource/12-43.png" data-lightbox="12-43" data-title=""><img src="/12_DeleteResource/12-43.png" alt=""></a>
+            
+            <p>サブネット一覧が表示されます。全てのチェックを外して「関連付けを保存」をクリックします。</p>
+
+            <a href="/12_DeleteResource/12-44.png" data-lightbox="12-44" data-title=""><img src="/12_DeleteResource/12-44.png" alt=""></a>
+            
+            <p>サブネットの関連付けが正常に解除されたことを確認します。「アクション」から「ルートテーブルを削除」をクリックします。</p>
+
+            <a href="/12_DeleteResource/12-45.png" data-lightbox="12-45" data-title=""><img src="/12_DeleteResource/12-45.png" alt=""></a>
+            
+            <p>テキストフィールドに「削除」と入力します。「削除」をクリックします。</p>
+
+            <a href="/12_DeleteResource/12-46.png" data-lightbox="12-46" data-title=""><img src="/12_DeleteResource/12-46.png" alt=""></a>
+            
+            <p>メインルートテーブルのみが表示され、自身で作成したルートテーブルが正常に削除されたことを確認します。</p>
+
+            <a href="/12_DeleteResource/12-47.png" data-lightbox="12-47" data-title=""><img src="/12_DeleteResource/12-47.png" alt=""></a>
+            
+            <h3>サブネットを削除する</h3>
+            
+            <p>VPC管理コンソールにいる状態で、ナビゲーションペインから「サブネット」を選択します。</p>
+
+            <a href="/12_DeleteResource/12-48.png" data-lightbox="12-48" data-title=""><img src="/12_DeleteResource/12-48.png" alt=""></a>
+            
+            <p>自身で作成したサブネットを選択します。「アクション」から「サブネットを削除」をクリックします。</p>
+
+            <a href="/12_DeleteResource/12-49.png" data-lightbox="12-49" data-title=""><img src="/12_DeleteResource/12-49.png" alt=""></a>
+            
+            <p>テキストフィールドに「削除」と入力し「削除」をクリックします。</p>
+
+            <a href="/12_DeleteResource/12-50.png" data-lightbox="12-50" data-title=""><img src="/12_DeleteResource/12-50.png" alt=""></a>
+            
+            <p>自身が作成したサブネットが正常に削除されたことを確認します。</p>
+
+            <a href="/12_DeleteResource/12-51.png" data-lightbox="12-51" data-title=""><img src="/12_DeleteResource/12-51.png" alt=""></a>
+            
+            <h3>VPCを削除する</h3>
+
+            <p>VPC管理コンソールにいる状態で、ナビゲーションペインから「VPC」を選択します。</p>
+
+            <a href="/12_DeleteResource/12-52.png" data-lightbox="12-52" data-title=""><img src="/12_DeleteResource/12-52.png" alt=""></a>
+
+            <p>自身が作成したVPCを選択し「アクション」から「VPCの削除」をクリックする。</p>
+
+            <a href="/12_DeleteResource/12-53.png" data-lightbox="12-53" data-title=""><img src="/12_DeleteResource/12-53.png" alt=""></a>
+
+            <p>テキストフィールドに「削除」と入力し「削除」をクリックします。</p>
+
+            <a href="/12_DeleteResource/12-54.png" data-lightbox="12-54" data-title=""><img src="/12_DeleteResource/12-54.png" alt=""></a>
+
+            <p>正常にVPCが削除されたことを確認します。</p>
+
+            <a href="/12_DeleteResource/12-55.png" data-lightbox="12-55" data-title=""><img src="/12_DeleteResource/12-55.png" alt=""></a>
+
+            <h2>まとめ</h2>
+            <p>今回はAWSリソースを削除しました。手数が多く大変な作業だったと思います。しかし次章で利用するCloudFormationでは環境の自動構築出来ます。つまり自動構築出来るということは自動削除も出来ます。手動で削除していると誤って削除してはいけないリソースを削除してしまうかもしれません。そのようなリスクを減らすために次章のCloudFormationが役に立ちます。ぜひ使い方を覚えてリソースの自動構築、自動削除をマスターしましょう。</p>
+
+            <p>※使用していないAWSリソースは必ず削除してください！思わぬ従量課金に繋がります</p>
+
+        </div>    
+        <div class="button">
+            <a href="11" class="btn btn--green btn--cubic btn--shadow">戻る</a>
+            <a href="13" class="btn btn--orange btn--cubic btn--shadow">次へ</a>
+        </div>
+    </div>
+</div>

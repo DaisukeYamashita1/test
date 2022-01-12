@@ -1,0 +1,34 @@
+<div class="main users-new">
+    <div class="container">
+        <div class="form-heading">新規ユーザー登録</div>
+        <div class="form users-form">
+            <div class="form-body">
+
+                <% @user.errors.full_messages.each do |message| %>
+                    <div class="form-error">
+                        <%= message %>
+                    </div>
+                <% end %>
+
+                <%= form_with model:@user, url: "/non_users/create" do |f| %>
+                    <p>ユーザー名</p>
+                    <%= f.text_field :user_name %>
+                    <p>パスワード　<span id="buttonEye" class="fa fa-eye" onclick="pushHideButton()"></p>
+                    <%= f.password_field :password,id:"textPassword", oncopy:"return false",  onpaste:"return false" %>   
+                    <p style="font-size:14px;">パスワードは8文字以上の半角英数（両方含む）で入力してください。</p>   
+ 
+                    <div class="agreement-check">
+                        <p><%= link_to "利用規約", "/agreement", class:"link-black" %></p>
+                        <ul>
+                            <li><%= f.check_box :agreement, {}, "ok", "" %></li>
+                            <li><%= f.label :agreement, "私は利用規約に同意しました" %></li>
+                        </ul>                         
+                    </div>
+                    <br>
+                    <%= f.submit value="新規登録"%>
+                    <% end %>
+
+            </div>
+        </div>
+    </div>
+</div>

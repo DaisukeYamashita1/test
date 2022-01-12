@@ -1,0 +1,258 @@
+<div class="main contents">
+    <div class="container">
+        <div class="article">
+            <h1>3.セキュリティ初期設定</h1>
+            <p>この章は40分で読めます</p>
+
+            <div data-turbolinks='false'>
+                <details id="table-of-content" open>
+                  <summary>目次</summary>
+                </details>
+            </div>
+
+            <h2>本章のゴール</h2>
+            <p>AWSアカウントのセキュリティ対策を実施する。</p>
+
+            <h2>技術解説</h2>
+            <h3>アクセスキー</h3>
+            <p>S3やEC2といったAWSの各サービスに対してプログラムにおけるアクセスを認証するために作成される認証キーのこと。AWSアクセスキーはプログラムにおけるアクセスが可能なので漏洩してしまえば誰でもアクセス可能になる。</p>
+
+            <h3>MFA認証</h3>
+            <p>Webサービスへのログイン時に2つ以上の「要素」によって行う認証のこと。</p>
+
+            <h3>ユーザグループ</h3>
+            <p>同一の権限を持つユーザの集合。グループにポリシーを適用することができ、グループに適用されたポリシーはグループに所属するユーザーにも引き継がれる。</p>
+
+            <h3>IAMユーザ</h3>
+            <p>AWSアカウントのユーザ。</p>
+
+            <h3>IAMロール</h3>
+            <p>AWSリソースが他のAWSリソースにアクセスするときのアクセス権限。</p>
+
+            <h3>IAMポリシー</h3>
+            <p>AWSサービスに対するアクセス権限。</p>
+
+            <h3>CloudTrail</h3>
+            <p>IAMユーザの操作履歴を取得するAWSサービス。</p>
+
+            <h2>構築手順</h2>
+            <h3>Rootユーザのアクセスキーが無いことを確認する</h3>
+            <p>Rootユーザでログインしてください。</p>
+
+            <a href="/3_FirstSecurity/3-1.png" data-lightbox="3-1" data-title=""><img src="/3_FirstSecurity/3-1.png" alt=""></a>     
+            
+            <p>アカウントのユーザ名をクリックし「マイセキュリティ資格情報」をクリックします。</p>
+
+            <a href="/3_FirstSecurity/3-2.png" data-lightbox="3-2" data-title=""><img src="/3_FirstSecurity/3-2.png" alt=""></a>    
+            
+            <p>「アクセスキー (アクセスキー ID とシークレットアクセスキー)」を開き、アクセスキーが存在していないことを確認してください。仮に存在している場合は削除してください。</p>
+
+            <a href="/3_FirstSecurity/3-3.png" data-lightbox="3-3" data-title=""><img src="/3_FirstSecurity/3-3.png" alt=""></a>
+
+            <h3>RootユーザのMFA認証を登録する</h3>
+
+            <p>多要素認証（MFA）を開き、「MFAの有効化」をクリックしてください。</p>
+
+            <a href="/3_FirstSecurity/3-4.png" data-lightbox="3-4" data-title=""><img src="/3_FirstSecurity/3-4.png" alt=""></a>            
+
+            <p>「仮想MFAデバイス」を選択し「続行」をクリックしてください。</p>
+
+            <a href="/3_FirstSecurity/3-5.png" data-lightbox="3-5" data-title=""><img src="/3_FirstSecurity/3-5.png" alt=""></a>            
+
+            <p>表示されたQRコードを仮想MFAデバイスで読み取り、「MFAの割り当て」をクリックしてください</p>
+            <p>※お手持ちのスマートフォンに以下から仮想MFAをダウンロードしてください。</p>
+            <p>App Store：Google Authenticator<br>
+            <a href="https://apps.apple.com/jp/app/google-authenticator/id388497605" class="underline">https://apps.apple.com/jp/app/google-authenticator/id388497605</a><br>Google Play Store：Google Authenticator            
+            <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=ja&gl=US" class="underline">https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=ja&gl=US</a></p>    
+
+            <a href="/3_FirstSecurity/3-6.png" data-lightbox="3-6" data-title=""><img src="/3_FirstSecurity/3-6.png" alt=""></a>  
+
+            <a href="/3_FirstSecurity/3-7.png" data-lightbox="3-7" data-title=""><img src="/3_FirstSecurity/3-7.png" alt=""></a>  
+            
+            <p>正常に割り当てが完了したことを確認して完了です。一度サインアウトしてサインイン時にMFA認証を求められるか試してみてください。</p>
+
+            <a href="/3_FirstSecurity/3-8.png" data-lightbox="3-8" data-title=""><img src="/3_FirstSecurity/3-8.png" alt=""></a>        
+            
+            <h3>パスワードポリシーを変更する</h3>
+
+            <p>AWSマネジメントコンソールにRootユーザでログインします。</p>
+            <a href="/3_FirstSecurity/3-8-1.png" data-lightbox="3-8-1" data-title=""><img src="/3_FirstSecurity/3-8-1.png" alt=""></a>
+
+            <p>サービス一覧からIAMを選択します。</p>
+            <a href="/3_FirstSecurity/3-8-2.png" data-lightbox="3-8-2" data-title=""><img src="/3_FirstSecurity/3-8-2.png" alt=""></a>
+
+            <p>IAM管理コンソールに移動しました。</p>
+            <a href="/3_FirstSecurity/3-8-3.png" data-lightbox="3-8-3" data-title=""><img src="/3_FirstSecurity/3-8-3.png" alt=""></a>
+
+            <p>ナビゲーションペイン（画面左側にある操作対象を切り替える枠）から「アカウント設定」をクリックしてください。</p>
+
+            <a href="/3_FirstSecurity/3-9.png" data-lightbox="3-9" data-title=""><img src="/3_FirstSecurity/3-9.png" alt=""></a> 
+
+            <p>「パスワードポリシーを変更する」をクリックしてパスワードポリシーを変更してください。変更が完了したら「変更の保存」をクリックします。具体的なポリシーは任意ですが複雑であればあるほど強固なパスワードとなりセキュリティ対策としては望ましいです。</p>
+
+            <a href="/3_FirstSecurity/3-10.png" data-lightbox="3-10" data-title=""><img src="/3_FirstSecurity/3-10.png" alt=""></a>          
+            
+            <h3>ユーザグループを作成する</h3>
+
+            <p>ナビゲーションペインから「ユーザグループ」を選択します。「グループを作成」をクリックしてください。</p>
+
+            <a href="/3_FirstSecurity/3-11.png" data-lightbox="3-11" data-title=""><img src="/3_FirstSecurity/3-11.png" alt=""></a>
+
+            <p>「ユーザグループ名」に任意の名前をつけます。「アクセス許可ポリシー」ではまず「AdministratorAccess」でフィルタリングします。列「ポリシー名」がAdministratorAccessとなっている行を選択します。「グループを作成」をクリックしてください。</p>
+
+            <a href="/3_FirstSecurity/3-12.png" data-lightbox="3-12" data-title=""><img src="/3_FirstSecurity/3-12.png" alt=""></a>
+
+            <p>ユーザグループが作成されたことを確認してください。</p>
+
+            <a href="/3_FirstSecurity/3-13.png" data-lightbox="3-13" data-title=""><img src="/3_FirstSecurity/3-13.png" alt=""></a>
+            
+            <h3>ユーザを作成する</h3>
+
+            <p>Rootユーザを常用すると非常に危険です。そのためRootユーザは原則封印しておき、一般ユーザを使用してAWSを操作します。その一般ユーザをこれから作成していきます。</p>
+
+            <p>ナビゲーションペインからユーザを選択し、「ユーザを追加」をクリックします。</p>
+
+            <a href="/3_FirstSecurity/3-14.png" data-lightbox="3-14" data-title=""><img src="/3_FirstSecurity/3-13.png" alt=""></a>      
+            
+            <p>任意のユーザ名を入力し「AWS認証情報タイプの選択」にて「パスワード-AWSマネジメントコンソールへのアクセス」を選択します。コンソールのパスワードでは作成する一般ユーザのログインパスワードを設定します。「次のステップ：アクセス権限」をクリックします。
+            </p>
+
+            <a href="/3_FirstSecurity/3-15.png" data-lightbox="3-15" data-title=""><img src="/3_FirstSecurity/3-15.png" alt=""></a>        
+            
+            <p>「ユーザをグループに追加」で先ほど作成したユーザグループを選択します。「次のステップ：タグ」をクリックします。</p>
+            <a href="/3_FirstSecurity/3-16.png" data-lightbox="3-16" data-title=""><img src="/3_FirstSecurity/3-16.png" alt=""></a>    
+
+            <p>ここでは何も入力せずに「次のステップ：確認」をクリックします。</p>
+            <a href="/3_FirstSecurity/3-17.png" data-lightbox="3-17" data-title=""><img src="/3_FirstSecurity/3-17.png" alt=""></a>      
+
+            <p>内容に間違いがなければ「ユーザの作成」をクリックします。</p>
+            <a href="/3_FirstSecurity/3-18.png" data-lightbox="3-18" data-title=""><img src="/3_FirstSecurity/3-18.png" alt=""></a>      
+
+            <p>ユーザを作成すると認証情報をダウンロード出来る画面が表示されます。「.csvのダウンロード」ボタンを押し、認証情報をダウンロードしておきましょう。後述する手順「一般ユーザのMFA認証有効化」で使用します。ここでダウンロードしておかないと後でダウンロード出来ませんのでご注意ください。
+            </p>
+            <a href="/3_FirstSecurity/3-19.png" data-lightbox="3-19" data-title=""><img src="/3_FirstSecurity/3-19.png" alt=""></a>
+
+            <p>ユーザが作成されていることを確認してください。</p>
+            <a href="/3_FirstSecurity/3-20.png" data-lightbox="3-20" data-title=""><img src="/3_FirstSecurity/3-20.png" alt=""></a>   
+            
+            <h3>請求情報を確認出来るようにする</h3>
+            
+            <p>マイアカウントをクリックする。</p>
+            <a href="/3_FirstSecurity/3-21.png" data-lightbox="3-21" data-title=""><img src="/3_FirstSecurity/3-21.png" alt=""></a>  
+
+            <p>「IAMユーザ/ロールによる請求情報へのアクセス」の編集リンクをクリックする。</p>
+            <a href="/3_FirstSecurity/3-22.png" data-lightbox="3-22" data-title=""><img src="/3_FirstSecurity/3-22.png" alt=""></a>   
+
+            <p>「IAMアクセスのアクティブ化」にチェックを付け、更新ボタンをクリックする。</p>
+            <a href="/3_FirstSecurity/3-23.png" data-lightbox="3-23" data-title=""><img src="/3_FirstSecurity/3-23.png" alt=""></a>     
+
+            <p>続いてIAMのコンソール画面を開きます。サービス一覧よりIAMを選択します。</p>
+            <a href="/3_FirstSecurity/3-24.png" data-lightbox="3-24" data-title=""><img src="/3_FirstSecurity/3-24.png" alt=""></a>      
+            <a href="/3_FirstSecurity/3-24-1.png" data-lightbox="3-24-1" data-title=""><img src="/3_FirstSecurity/3-24-1.png" alt=""></a>   
+            
+            <p>IAM管理コンソールが表示されます。ナビゲーションペインよりポリシーを選択します。</p>
+            <a href="/3_FirstSecurity/3-24-2.png" data-lightbox="3-24-2" data-title=""><img src="/3_FirstSecurity/3-24-2.png" alt=""></a>
+
+            <p>「ポリシーの作成」をクリックします。</p>
+            <a href="/3_FirstSecurity/3-25.png" data-lightbox="3-25" data-title=""><img src="/3_FirstSecurity/3-25.png" alt=""></a>      
+
+            <p>サービスの検索欄に「Billing」と入力し、検索されたBillingを選択する。</p>
+            <a href="/3_FirstSecurity/3-26.png" data-lightbox="3-26" data-title=""><img src="/3_FirstSecurity/3-26.png" alt=""></a>  
+
+            <p>手動のアクションで「全てのBillingアクション」にチェックを付け、「次のステップ：タグ」をクリックする。</p>
+            <a href="/3_FirstSecurity/3-27.png" data-lightbox="3-27" data-title=""><img src="/3_FirstSecurity/3-27.png" alt=""></a>      
+
+            <p>タグのページでは何もしません。「次のステップ：確認」をクリックします。</p>
+            <a href="/3_FirstSecurity/3-28.png" data-lightbox="3-28" data-title=""><img src="/3_FirstSecurity/3-28.png" alt=""></a> 
+
+            <p>「名前」を「BillingFullAccess」と入力し、「ポリシーの作成」をクリックする。</p>
+            <a href="/3_FirstSecurity/3-29.png" data-lightbox="3-29" data-title=""><img src="/3_FirstSecurity/3-29.png" alt=""></a>      
+
+            <p>タイプ＝カスタマー管理のIAMポリシーが作成されたことを確認してください。</p>
+            <a href="/3_FirstSecurity/3-30.png" data-lightbox="3-30" data-title=""><img src="/3_FirstSecurity/3-30.png" alt=""></a>     
+
+            <p>ナビゲーションペインからユーザグループを選択し、「グループを作成」をクリックします。</p>
+            <a href="/3_FirstSecurity/3-31.png" data-lightbox="3-31" data-title=""><img src="/3_FirstSecurity/3-31.png" alt=""></a>  
+
+            <p>ユーザグループ名を「FinanceManager」とします。「アクセス許可ポリシーをアタッチ」の検索欄に「BillingFullAccess」でフィルタリングします。絞られたポリシーにチェックを付けます。「グループを作成」ボタンをクリックします。</p>
+            <a href="/3_FirstSecurity/3-32.png" data-lightbox="3-32" data-title=""><img src="/3_FirstSecurity/3-32.png" alt=""></a>   
+            
+            
+            <p>グループが作成されたことを確認してください。</p>
+            <a href="/3_FirstSecurity/3-33.png" data-lightbox="3-33" data-title=""><img src="/3_FirstSecurity/3-33.png" alt=""></a>      
+
+            <p>ナビゲーションペインから「ユーザ」を選択します。作成済みユーザをクリックします。</p>
+            <a href="/3_FirstSecurity/3-34.png" data-lightbox="3-34" data-title=""><img src="/3_FirstSecurity/3-34.png" alt=""></a>      
+
+            <p>ユーザ詳細画面にてグループタブを選択し「ユーザをグループに追加」をクリックします。</p>
+            <a href="/3_FirstSecurity/3-35.png" data-lightbox="3-35" data-title=""><img src="/3_FirstSecurity/3-35.png" alt=""></a>      
+
+            <p>先ほど作成したFinanceManagerを選択して「グループに追加」ボタンをクリックします。</p>
+            <a href="/3_FirstSecurity/3-36.png" data-lightbox="3-36" data-title=""><img src="/3_FirstSecurity/3-36.png" alt=""></a>      
+
+            <p>ユーザにグループが追加されたことを確認してください。</p>
+            <a href="/3_FirstSecurity/3-37.png" data-lightbox="3-37" data-title=""><img src="/3_FirstSecurity/3-37.png" alt=""></a>      
+
+            <h3>お支払い通貨をJPYに変更する</h3>
+
+            <p>マイ請求ダッシュボードをクリックします。「請求情報とコスト管理ダッシュボード」に移動したことを確認してください。</p>
+
+            <a href="/3_FirstSecurity/3-38.png" data-lightbox="3-38" data-title=""><img src="/3_FirstSecurity/3-38.png" alt=""></a>      
+
+            <a href="/3_FirstSecurity/3-39.png" data-lightbox="3-39" data-title=""><img src="/3_FirstSecurity/3-39.png" alt=""></a>      
+
+            <p>ナビゲーションペインから「お支払方法」選択し、USDをクリックします。</p>
+            <a href="/3_FirstSecurity/3-40.png" data-lightbox="3-40" data-title=""><img src="/3_FirstSecurity/3-40.png" alt=""></a>      
+
+            <p>「お支払い通貨の設定」の編集をクリックします。</p>
+            <a href="/3_FirstSecurity/3-41.png" data-lightbox="3-41" data-title=""><img src="/3_FirstSecurity/3-41.png" alt=""></a>      
+
+            <p>JPYを選択後、「更新」ボタンをクリックします。</p>
+            <a href="/3_FirstSecurity/3-42.png" data-lightbox="3-42" data-title=""><img src="/3_FirstSecurity/3-42.png" alt=""></a>     
+            
+            <h3>CloudTrailを有効化する</h3>
+            
+            <p>サービス一覧からCloudTrailを選択します。</p>
+            <a href="/3_FirstSecurity/3-43.png" data-lightbox="3-43" data-title=""><img src="/3_FirstSecurity/3-43.png" alt=""></a>      
+
+            <p>「証跡の作成」をクリックします。</p>
+            <a href="/3_FirstSecurity/3-44.png" data-lightbox="3-44" data-title=""><img src="/3_FirstSecurity/3-44.png" alt=""></a>      
+
+            <p>デフォルト値のまま「証跡の作成」をクリックします。</p>
+            <a href="/3_FirstSecurity/3-45.png" data-lightbox="3-45" data-title=""><img src="/3_FirstSecurity/3-45.png" alt=""></a>      
+
+            <p>証跡が作成されたことを確認してください。</p>
+            <a href="/3_FirstSecurity/3-46.png" data-lightbox="3-46" data-title=""><img src="/3_FirstSecurity/3-46.png" alt=""></a>      
+
+            <h3>一般ユーザのMFA認証有効化</h3>
+
+            <p>一度サインアウトします。</p>
+            <a href="/3_FirstSecurity/3-47.png" data-lightbox="3-47" data-title=""><img src="/3_FirstSecurity/3-47.png" alt=""></a>      
+
+            <p>「コンソールにサインイン」をクリックして、作成した一般ユーザでログインします。ログイン情報は作成時にダウンロードしておいた「new_user_credentials.csv」に記載があります。ダウンロードしたCSVファイルはそれぞれ次の意味を表します。<br>User name：IAMユーザ名<br>Password：サインイン時に求められるパスワード<br>Access key ID：プログラムからアクセスする際に必要な情報（今回は使用しません）<br>Secret access key：プログラムからアクセスする際に必要な情報（今回は使用しません）<br>Console login link：サインインURL（このリンクにアクセスするとサインインが求められます）
+            </p>
+            <a href="/3_FirstSecurity/3-48.png" data-lightbox="3-48" data-title=""><img src="/3_FirstSecurity/3-48.png" alt=""></a>      
+
+            <p>IAMを選択し、IAMのコンソールに移動します。</p>
+            <a href="/3_FirstSecurity/3-49.png" data-lightbox="3-49" data-title=""><img src="/3_FirstSecurity/3-49.png" alt=""></a>
+
+            <p>「MFAを追加」をクリックします。</p>
+            <a href="/3_FirstSecurity/3-50.png" data-lightbox="3-50" data-title=""><img src="/3_FirstSecurity/3-50.png" alt=""></a>  
+
+            <p>「他要素認証（MFA）」の「MFAデバイスの割り当て」をクリックします。<br>※MFAデバイスの割り当て手順は「RootユーザのMFA認証を登録する」で実施しているのでここでは省略いたします。</p>
+            <a href="/3_FirstSecurity/3-51.png" data-lightbox="3-51" data-title=""><img src="/3_FirstSecurity/3-51.png" alt=""></a>      
+
+            <h2>まとめ</h2>
+            <p>今回はAWSを始める際に必要なセキュリティ設定を実施しました。<br>しかし、今回実施したセキュリティは完璧ではありません。一般的にセキュリティ対策は際限なく実施できてしまいます。今回は入門者向け且つ個人利用のためここまでとさせて頂きました。個人でAWSについて調べていくうちに「この対策も必要そうだな...」というものがあれば実施してみてください。<br>自分で調べたことを自分で試してみることは非常に力になります。AWSに限らずこれからエンジニアリングに携わるならば必須の技術とも言えてきます。今からその力を磨いて行きましょう。
+            </p>
+
+            <h2>課題（余力のある方向け）</h2>
+            <h3>今回実施したセキュリティ対策以外にどのような対策方法があるのでしょうか？調べてみましょう。</h3>
+            
+        </div>
+        <div class="button">
+            <a href="2" class="btn btn--green btn--cubic btn--shadow">戻る</a>
+            <a href="4" class="btn btn--orange btn--cubic btn--shadow">次へ</a>
+        </div>        
+    </div>
+</div>
