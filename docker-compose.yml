@@ -40,4 +40,4 @@ networks:
     external:
       name: bridge
   container-link:
-    name: container_network
+    # name: container_network
