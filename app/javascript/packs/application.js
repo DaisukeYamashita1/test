@@ -7,6 +7,11 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
+<<<<<<< HEAD
+=======
+import 'bootstrap'
+import '../src/application.scss'
+>>>>>>> origin/main
 
 require('jquery')
 require('./password_hide')

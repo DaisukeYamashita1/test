@@ -1,4 +1,9 @@
 import $ from 'jquery';
+<<<<<<< HEAD
+=======
+window.$ = $;
+window.jQuery = $;
+>>>>>>> origin/main
 
 $(document).on('turbolinks:load', function() {
 

@@ -76,4 +76,9 @@ Rails.application.configure do
   config.force_ssl = false
   config.hosts.clear
 
+<<<<<<< HEAD
+=======
+  config.web_console.whitelisted_ips = '172.18.0.1' #追記
+
+>>>>>>> origin/main
 end

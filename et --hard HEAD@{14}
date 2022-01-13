@@ -1,0 +1,41 @@
+[33m66cde12[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m HEAD@{0}: checkout: moving from main to main
+[33m66cde12[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m HEAD@{1}: reset: moving to HEAD^
+[33ma3b6f25[m[33m ([m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{2}: reset: moving to HEAD^
+[33m183187a[m HEAD@{3}: reset: moving to HEAD^
+[33m5c90bb3[m HEAD@{4}: reset: moving to HEAD^
+[33m52bb1fd[m HEAD@{5}: reset: moving to HEAD^
+[33mf68e45a[m HEAD@{6}: reset: moving to HEAD^
+[33mfbf2fd0[m HEAD@{7}: reset: moving to HEAD^
+[33md37f1a9[m HEAD@{8}: reset: moving to HEAD^
+[33mfdaea89[m HEAD@{9}: reset: moving to HEAD^
+[33m4fbd4c7[m HEAD@{10}: reset: moving to HEAD^
+[33mbbc41bd[m HEAD@{11}: reset: moving to HEAD^
+[33mfc3a134[m HEAD@{12}: reset: moving to HEAD^
+[33m4e0249e[m HEAD@{13}: reset: moving to HEAD^
+[33m9a4dc17[m HEAD@{14}: reset: moving to HEAD^
+[33m3c6cd8b[m HEAD@{15}: reset: moving to HEAD^
+[33mac84a93[m HEAD@{16}: reset: moving to HEAD^
+[33maa8bb5d[m HEAD@{17}: revert: Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "比較用"""""""""""""""
+[33mac84a93[m HEAD@{18}: revert: Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "比較用""""""""""""""
+[33m3c6cd8b[m HEAD@{19}: revert: Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "比較用"""""""""""""
+[33m9a4dc17[m HEAD@{20}: revert: Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "比較用""""""""""""
+[33m4e0249e[m HEAD@{21}: revert: Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "比較用"""""""""""
+[33mfc3a134[m HEAD@{22}: revert: Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "比較用""""""""""
+[33mbbc41bd[m HEAD@{23}: revert: Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "比較用"""""""""
+[33m4fbd4c7[m HEAD@{24}: revert: Revert "Revert "Revert "Revert "Revert "Revert "Revert "Revert "比較用""""""""
+[33mfdaea89[m HEAD@{25}: revert: Revert "Revert "Revert "Revert "Revert "Revert "Revert "比較用"""""""
+[33md37f1a9[m HEAD@{26}: revert: Revert "Revert "Revert "Revert "Revert "Revert "比較用""""""
+[33mfbf2fd0[m HEAD@{27}: revert: Revert "Revert "Revert "Revert "Revert "比較用"""""
+[33mf68e45a[m HEAD@{28}: revert: Revert "Revert "Revert "Revert "比較用""""
+[33m52bb1fd[m HEAD@{29}: revert: Revert "Revert "Revert "比較用"""
+[33m5c90bb3[m HEAD@{30}: revert: Revert "Revert "比較用""
+[33m183187a[m HEAD@{31}: revert: Revert "比較用"
+[33ma3b6f25[m[33m ([m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{32}: checkout: moving from develop to main
+[33ma3b6f25[m[33m ([m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{33}: checkout: moving from main to develop
+[33ma3b6f25[m[33m ([m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{34}: Branch: renamed refs/heads/main to refs/heads/main
+[33ma3b6f25[m[33m ([m[1;31morigin/develop[m[33m, [m[1;32mdevelop[m[33m)[m HEAD@{36}: commit: 比較用
+[33m66cde12[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m HEAD@{37}: Branch: renamed refs/heads/main to refs/heads/main
+[33m66cde12[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m HEAD@{39}: reset: moving to HEAD
+[33m66cde12[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m HEAD@{40}: reset: moving to HEAD
+[33m66cde12[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m HEAD@{41}: Branch: renamed refs/heads/master to refs/heads/main
+[33m66cde12[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m HEAD@{43}: commit (initial): 比較用

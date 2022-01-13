@@ -28,5 +28,13 @@ Rails.application.routes.draw do
 
   # 上記どれにも引っかからない場合
   get '*path', controller: 'application', action: 'render_404'
+<<<<<<< HEAD
    
+=======
+
+  # 500等のエラーをログに出す処理を追加
+  get '*not_found' => 'application#routing_error'
+  post '*not_found' => 'application#routing_error'
+
+>>>>>>> origin/main
 end

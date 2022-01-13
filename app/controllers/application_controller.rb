@@ -9,8 +9,15 @@ class ApplicationController < ActionController::Base
     render template: 'errors/error_404', status: 404, layout: 'application', content_type: 'text/html'
   end
 
+<<<<<<< HEAD
   def render_500
     #render template: 'errors/error_500', status: 500, layout: 'application', content_type: 'text/html'
+=======
+  def render_500(e = nil)
+    # render template: 'errors/error_500', status: 500, layout: 'application', content_type: 'text/html'
+    logger.error "Rendering 500 with exception: #{e.message}" 
+    # Airbrake.notify(e) if e # Airbrake/Errbitを使う場合はこちら
+>>>>>>> origin/main
   end
 
 end
